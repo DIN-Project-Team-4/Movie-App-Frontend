@@ -1,4 +1,4 @@
-.App {
+/*.App {
   text-align: center;
 }
 
@@ -35,4 +35,109 @@
   to {
     transform: rotate(360deg);
   }
+}
+  */
+
+
+  .form-container{
+    margin: 50px;
+}
+
+.form-container input{
+    height: 37px;
+    border-radius: 8px;
+    margin-right: 2px;
+    background-color: rgb(234, 232, 232);
+    border-width: 2px;
+    border-color: black;
+    font-size: medium;
+}
+
+.form-container button{
+    height: 40px;
+    border-radius: 8px;
+    margin-right: 2px;
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: rgb(234, 232, 232);
+    border-width: 2px;
+    border-color: black;
+    font-size: medium;
+}
+
+.form-container #filter_methods{
+    height: 40px;
+    border-radius: 8px;
+    margin-right: 2px;
+    background-color: rgb(234, 232, 232);
+    border-width: 2px;
+    border-color: black;
+    font-size: medium;
+}
+
+.main-movieCard{
+    border: 2px solid rgb(181, 177, 177);
+    margin: 50px;
+    padding: 20px;
+    padding-top: 0px;
+    width: 90%;
+    border-radius: 15px;
+    align-items: center;
+    display: flex;
+    flex-direction: column; /* Ensure the movie list is stacked vertically */
+}
+
+h1 {
+    display: flex; /* Make the title display in a row */
+    justify-content: flex-start; /* Align items to the left */
+    margin: 50px; /* Remove margin */
+    color: rgb(0, 0, 0);
+}
+
+h1 span {
+    margin-left: 8px; /* Add a little space between "SEARCH :" and the actual text */
+}
+
+.main-movieCard ol{
+    padding: 0%;
+    width: 100%;
+}
+
+.movieLiTag{
+    display: flex;
+    padding: 2%;
+    border-bottom: solid 2px rgb(181, 177, 177);
+}
+
+.movieLiTag img{
+    width: 70px;
+    height: 105px;
+    border-radius: 15px;
+}
+
+.movieDetails{
+    margin-left: 40px;
+    color: rgb(181, 177, 177);
+}
+
+h3{
+    color: black;
+}
+
+.pageButtons{
+    margin: 50px;  
+}
+
+.pageButtons button{
+    border-radius: 8px;
+    padding: 10px;
+    width: 100px;
+}
+
+.pageButtons span{
+    font-weight: bold;
+}
+
+.dd{
+    display: flex;
 }

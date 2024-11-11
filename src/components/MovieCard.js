@@ -17,15 +17,12 @@ export default function MovieCard({movieName, poster, date, commonGenres, movieG
 
     return (
       <li className='movieLiTag'>
-        <div className='dd'>
-            <img src={poster == null ? posterPlaceholder : mainURL+poster}/>
-            <div className='movieDetails'>
-                <h3>{movieName}</h3>
-                {date}<br/>
-                {genreName.join(", ")}                             
-            </div>
-        </div>
-        
+        <img src={poster == null ? posterPlaceholder : mainURL+poster}/>
+        <div className='movieDetails'>
+            <h3>{movieName}</h3>
+            {date}<br/>
+            {genreName.join(", ")}                             
+        </div>        
       </li>
     )
 }
