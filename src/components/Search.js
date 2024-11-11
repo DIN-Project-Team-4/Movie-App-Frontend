@@ -94,7 +94,10 @@ export default function Search() {
           <MovieListCard searchText = {searchText} movieDetails = {results} genres = {genres}/>
         </div>
       ):<></>}
-   
+
+      {/* Add next and previous bottons with page number */}
+      <PageChangeButton prevPage={prevPage} nextPage = {nextPage} page = {page} totalPages ={totalPages}/>
+
     </div>
   )
 }
