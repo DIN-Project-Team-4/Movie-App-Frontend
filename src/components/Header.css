@@ -1,0 +1,160 @@
+/* Header Styles */
+
+.custom-navbar {
+    min-height: 15vh;
+    font-size: 125%;
+    display: flex;
+    justify-content: space-between; /* This will space out the navbar items */
+    align-items: center;
+    box-shadow: inset 0 -4px 6px rgba(139, 128, 68, 0.4), /* Inner shadow for emboss effect */
+                0 4px 6px rgba(0, 0, 0, 0.3); /* Outer shadow for depth */
+  }
+ 
+  
+.navbar-logo {
+    display: inline-block;
+    vertical-align: top;
+    width: 15vh;
+    height: 10vh;
+    box-shadow: 
+    2px 2px 5px rgba(194, 194, 33, 0.3), /* light shadow for the top-left */
+    -2px -2px 5px rgba(255, 255, 255, 0.5); /* highlight shadow for bottom-right */
+  }
+
+  
+.profile-container {
+    margin-left: 20px; /* You can adjust this value as needed */
+  }
+  
+.profile-dropdown {
+    display: inline-block;
+    vertical-align: middle;
+  }
+  
+.profile-icon {
+    font-size: calc(0.6 * 12vh);
+    color: #ffd700;
+    margin-right: 10px;
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  /* Add margin to the SignIn link */
+.navbar-profile .signIn-link {
+    margin-right: 20px; /* Adjust the space between SignIn and the profile container */
+  }
+
+  /* Add shadow to texts */
+.navbar-nav .nav-link {
+    text-shadow: 
+        1px 1px 2px rgba(0, 0, 0, 0.5), /* Darker shadow for depth */
+        0 0 5px rgba(237, 223, 147, 0.9), /* Golden glow effect */
+        0 0 10px rgba(196, 170, 54, 0.8), 
+        0 0 15px rgba(87, 75, 7, 0.7); /* Multiple layers for stronger effect */
+}
+  
+  /* Center the search bar in the navbar */
+.navbar-collapse {
+    display: flex;
+    justify-content: center; /* This will center the navbar content */
+  }
+  
+.navbar-nav {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+  
+.nav-link {
+    display: flex;
+    align-items: center;
+  }
+  
+.form-container {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Add some space between input and button */
+  }
+  
+.form-container select, 
+.form-container input,
+.form-container button {
+  border-radius: 5px !important;
+  border: 1px solid #cccccc !important;
+  height: 40px !important;
+  padding: 0 10px !important;
+}
+
+/* Reduce the margin between elements */
+.form-container select,
+.form-container input {
+  margin-right: 0px !important; /* Adjust this value to reduce the space */
+  margin-left: 0px !important; /* Adjust this value to reduce the space */
+}
+  
+  /* Adjust the search input field for better visibility */
+  .form-container input {
+    background-color: #565252; /* Dark background color for the input */
+    color: #333;
+    flex: 1;/* Make the input field flexible to take up remaining space */
+    width: 100%;      /* Takes up the full width of its container */
+    max-width: 800px;/* You can increase this value to make the input longer */
+    padding: 10px;    /* Adjust padding to give it more space */
+
+}
+
+.form-container select {
+    width: auto; /* Automatically adjust width based on content */
+  }
+  
+.form-container button {
+    background-color: #ffd700; /* Golden color for the button */
+    color: #fff; /* White text on the button */
+    border-radius: 25px;
+    border: none;
+    padding: 0 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Smooth transition for hover */
+  }
+  
+.form-container button:hover {
+    background-color: #ffbf00; /* Darker golden color on hover */
+  }
+  
+/* Add more style to improve search bar */
+.form-container select {
+    border: none; /* No border for the dropdown */
+    background-color: #333; /* Dark background for dropdown */
+    text-shadow: 
+        1px 1px 2px rgba(0, 0, 0, 0.5), /* Darker shadow for depth */
+        0 0 5px rgba(186, 160, 10, 0.9), /* Golden glow effect */
+        0 0 10px rgba(141, 117, 11, 0.8), 
+        0 0 15px rgba(46, 41, 9, 0.7); /* Multiple layers for stronger effect */
+}
+  
+.form-container input {
+    width: 100%;     /* Full width */
+    max-width: 800px; /* Adjust this value to make the input longer */
+    min-width: 500px;
+    padding: 10px;    /* Adjust padding to give it more space */
+    background-color: #f8f9fa;
+    border: 1px solid #ccc;
+    padding: 0 10px;
+    border-radius: 25px;
+  }
+  
+  .form-container select,
+  .form-container input,
+  .form-container button {
+    font-size: large;
+  }
+  
+  /* Ensure proper alignment of navbar and profile */
+.navbar-profile {
+    justify-content: flex-end; /* Aligns items to the right */
+    align-items: center; /* Ensures vertical alignment of items */
+    margin-right: 20px; /* Optional: Add some margin for spacing from the edge */
+  }
+
+
+  

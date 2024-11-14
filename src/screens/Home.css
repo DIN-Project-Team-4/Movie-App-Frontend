@@ -39,7 +39,7 @@
   */
 
 
-  .form-container{
+  /*.form-container{
     margin: 50px;
 }
 
@@ -73,7 +73,13 @@
     border-width: 2px;
     border-color: black;
     font-size: medium;
-}
+}*/
+
+
+
+
+
+
 
 .main-movieCard{
     border: 2px solid rgb(181, 177, 177);
@@ -91,7 +97,6 @@ h1 {
     display: flex; /* Make the title display in a row */
     justify-content: flex-start; /* Align items to the left */
     margin: 50px; /* Remove margin */
-    color: rgb(0, 0, 0);
 }
 
 h1 span {
@@ -121,7 +126,7 @@ h1 span {
 }
 
 h3{
-    color: black;
+    font-size: x-large;
 }
 
 .pageButtons{

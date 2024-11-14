@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './Home.css';
-import Search from '../components/Search';
 import SearchResults from '../components/SearchResults';
 import { getGenreName, searchByTitle, searchByYear, searchByGenre } from '../components/API_endpoints.js';
+import Header from '../components/Header.js';
 
 function Home() {
   const [filterMethod, setFilterMethod] = useState('title');
@@ -77,13 +77,12 @@ function Home() {
   return (
     <div>
       <div>
-        <Search
-          filterMethod={filterMethod}
+        <Header filterMethod={filterMethod}
           setFilterMethod={setFilterMethod}
           searchText={searchText}
           setSearchText={setSearchText}
-          newSearch={newSearch}
-        />
+          newSearch={newSearch}/>
+       
       </div>
       <div>
         <SearchResults

@@ -4,16 +4,16 @@ export default function Search({ filterMethod, setFilterMethod, searchText, setS
   return (
     <div>
       <form className='form-container'>
-        <select
+        <select 
           onChange={(e) => {
             setFilterMethod(e.target.value);
           }}
           id='filter_methods'
           value={filterMethod}
         >
-          <option value="title">Title</option>
-          <option value="release_year">Year</option>
-          <option value="genre">Genre</option>
+          <option class="dropdown-item" value="title">Title</option>
+          <option class="dropdown-item" value="release_year">Year</option>
+          <option class="dropdown-item" value="genre">Genre</option>
         </select>
         <input
           onChange={(e) => setSearchText(e.target.value)}
