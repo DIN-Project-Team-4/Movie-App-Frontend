@@ -1,76 +1,83 @@
-import React, { useState,useEffect } from 'react'
+import { useState,useEffect } from 'react'
 import MovieListCard from './MovieListCard'
 import PageChangeButton from './PageChangeButton'
+import {getGenreName, searchByTitle, searchByYear, searchByGenre} from './API_endpoints.js'
 
 export default function Search() {
-  const [filterMethod, setFilterMethod] = useState('all')
+  const [filterMethod, setFilterMethod] = useState('title')
   const [searchText, setSearchText] = useState('')
   const [page, setPage] = useState(1)
   const [results, setResults] = useState([])
   const [totalPages,setTotalPages] = useState(0)
   const [genres,setGenres] = useState([])
+  const [hasSearched, setHasSearched] = useState(false);
 
   //fetch genres details when first render and assign to variable
   useEffect(() => {
-    const options = {
-      method: 'GET',
-      headers: {
-        accept: 'application/json',
-        Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJlZDQ1ZjdkZTdjNGUzYmY5NzQ3MGM5MWYwYWE4ZWI2MyIsIm5iZiI6MTczMTE4ODEwNi45OTM1ODU2LCJzdWIiOiI2NzJiYjU5YmFkY2EzMDc5MjUxNDQ5NmQiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.RBOeIqSXtek2lgYSvqI6QsewM_GwhaToeeNRVLAYClc'
+    const fetchGenres = async () => {
+      const data = await getGenreName();
+      if (data) {
+        setGenres(data.genres);
       }
     };
-    
-    fetch('https://api.themoviedb.org/3/genre/movie/list?language=en', options)
-      .then(res => res.json())
-      .then(data => setGenres(data.genres))
-      .catch(err => console.error(err));
+    fetchGenres();
   }, []);
 
-  function searchMovies(e){
-      e.preventDefault()
-      const options = {
-        method: 'GET',
-        headers: {
-          accept: 'application/json',
-          Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJlZDQ1ZjdkZTdjNGUzYmY5NzQ3MGM5MWYwYWE4ZWI2MyIsIm5iZiI6MTczMTE4ODEwNi45OTM1ODU2LCJzdWIiOiI2NzJiYjU5YmFkY2EzMDc5MjUxNDQ5NmQiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.RBOeIqSXtek2lgYSvqI6QsewM_GwhaToeeNRVLAYClc'
-        }
-      };
+  async function searchMovies(e){
+    e.preventDefault()
+    console.log(filterMethod)
+    let data = []
+    switch (filterMethod){
+      case 'title': data = await searchByTitle(searchText, page)
+      break;
+
+      case 'release_year': data = await searchByYear(searchText, page)
+      break;
+
+      case 'genre': data = await searchByGenre(searchText, genres, page)
+      break;
+
+      default:data = { results: [], total_pages: 0 }; // Default action in case filterMethod has an unexpected value
+      break;
+    }
       
-      fetch(`https://api.themoviedb.org/3/search/movie?query=${searchText}&include_adult=false&language=en-US&page=${page}`, options)
-        .then(res => res.json())
-        .then(data => {
-          setTotalPages(data.total_pages)
-          setResults(data.results)
-          console.log(data.results)
-        })
-        .then(res => console.log(res))
-        .catch(err => console.error(err));
-        
+    if(data.results){
+      setTotalPages(data.total_pages)
+      setResults(data.results)
+    }
+    else {
+      setTotalPages(0);
+      setResults([]); // Set results to an empty array if no data or results
+    }
   }
+    
 
   //function for new search click. page number resets when it calls
   function newSearch(e){
     e.preventDefault();
+    setHasSearched(true); // Mark that a search has been performed
     setPage(1)
     searchMovies(e)
   }
 
   
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (searchText) {
         searchMovies({ preventDefault: () => {} });
     }
-  }, [page]);
+  },[page]);
 
   //function to go to next page
   function nextPage() {
     setPage(currentPage => Math.min(currentPage + 1, totalPages)) // Prevent going exceed total pages
+    window.scrollTo({ top: 0, behavior: 'smooth' }); // Smooth scroll to top
   }
 
   //function to go to previous page
   function prevPage() {
       setPage(currentPage => Math.max(currentPage - 1, 1)) // Prevent going below page 1
+      window.scrollTo({ top: 0, behavior: 'smooth' }); // Smooth scroll to top
   }
 
 
@@ -79,7 +86,9 @@ export default function Search() {
 
       {/* Search bar */}
       <form className='form-container'>
-          <select onChange={(e)=>setFilterMethod(e.target.value)} id='filter_methods'>
+          <select onChange={(e)=>{setFilterMethod(e.target.value)
+            console.log('Selected filter:', e.target.value);
+          }} id='filter_methods' value={filterMethod} >
               <option value="title"> Title </option>
               <option value="release_year"> Year </option>
               <option value="genre"> Genre </option>
@@ -89,14 +98,16 @@ export default function Search() {
       </form>
       
       {/* Conditionally render the MovieListCard component only after search result available*/}
-      {results.length>0 ? (
         <div>
-          <MovieListCard searchText = {searchText} movieDetails = {results} genres = {genres}/>
+          <MovieListCard searchText = {searchText} movieDetails = {results} genres = {genres} hasSearched={hasSearched}/>
         </div>
-      ):<></>}
 
       {/* Add next and previous bottons with page number */}
-      <PageChangeButton prevPage={prevPage} nextPage = {nextPage} page = {page} totalPages ={totalPages}/>
+      {results.length>0 ? (
+        <div>
+          <PageChangeButton prevPage={prevPage} nextPage = {nextPage} page = {page} totalPages ={totalPages}/>
+        </div>
+      ):<></>}     
 
     </div>
   )
