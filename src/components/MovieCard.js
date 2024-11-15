@@ -1,7 +1,7 @@
 import { useState,useEffect } from 'react';
 import posterPlaceholder from '../assets/image_unavailable.jpg'
 
-export default function MovieCard({movieName, poster, date, commonGenres, movieGenres}) {
+export default function MovieCard({movieName, poster, date, commonGenres, movieGenres, movieId}) {
     const mainURL = "https://image.tmdb.org/t/p/w500";
     const [genreName,setGenreName] = useState([])
 
@@ -18,14 +18,17 @@ export default function MovieCard({movieName, poster, date, commonGenres, movieG
 
 
     return (
-      <li className='movieLiTag'>
-        <img src={poster == null ? posterPlaceholder : mainURL+poster}/>
-        <div className='movieDetails'>
-            <h3>{movieName}</h3>
-            {year}<br/>
-            {genreName.join(", ")}                             
-        </div>        
-      </li>
+      <a href={`/movie/${movieId}`}>
+        <li className='movieLiTag'>
+          <img alt= 'movie_poster' src={poster == null ? posterPlaceholder : mainURL+poster}/>
+          <div className='movieDetails'>
+              <h3>{movieName}</h3>
+              {year}<br/>
+              {genreName.join(", ")}                             
+          </div>        
+        </li>
+      </a>
+      
     )
 }
 

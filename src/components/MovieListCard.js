@@ -16,7 +16,7 @@ export default function MovieListCard({searchText, movieDetails, genres, hasSear
       {movieDetails.length !== 0 && (
         <div className='main-movieCard'>
             <ol>
-                {movieDetails.map( movie => <MovieCard movieName={movie.title} poster={movie.poster_path} date={movie.release_date} commonGenres={genres} movieGenres={movie.genre_ids}/>)}
+                {movieDetails.map( movie => <MovieCard movieId ={movie.id} movieName={movie.title} poster={movie.poster_path} date={movie.release_date} commonGenres={genres} movieGenres={movie.genre_ids}/>)}
             </ol>
         </div>
       )}

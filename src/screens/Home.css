@@ -80,6 +80,13 @@
 
 
 
+a {
+  text-decoration: none; /* Removes the underline */
+}
+
+a:hover {
+  text-decoration: none; /* Optional: Removes underline on hover as well */
+}
 
 .main-movieCard{
     border: 2px solid rgb(181, 177, 177);
