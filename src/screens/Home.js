@@ -3,6 +3,7 @@ import './Home.css';
 import SearchResults from '../components/SearchResults';
 import { getGenreName, searchByTitle, searchByYear, searchByGenre } from '../components/API_endpoints.js';
 import Header from '../components/Header.js';
+import Carousel from '../components/Carousel.js';
 
 function Home() {
   const [filterMethod, setFilterMethod] = useState('title');
@@ -85,16 +86,21 @@ function Home() {
        
       </div>
       <div>
-        <SearchResults
-          searchText={searchText}
-          results={results}
-          genres={genres}
-          hasSearched={hasSearched}
-          prevPage={prevPage}
-          nextPage={nextPage}
-          page={page}
-          totalPages={totalPages}
-        />
+        {/* Conditionally render SearchResults or Carousel */}
+        {results.length > 0 ? (
+          <SearchResults
+            searchText={searchText}
+            results={results}
+            genres={genres}
+            hasSearched={hasSearched}
+            prevPage={prevPage}
+            nextPage={nextPage}
+            page={page}
+            totalPages={totalPages}
+          />
+        ) : (
+          <Carousel />
+        )}
       </div>
     </div>
   );
