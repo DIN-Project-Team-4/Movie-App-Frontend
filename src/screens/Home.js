@@ -1,7 +1,5 @@
-import React, { useState, useEffect } from 'react';
 import './Home.css';
 import SearchResults from '../components/SearchResults';
-import { getGenreName, searchByTitle, searchByYear, searchByGenre } from '../components/API_endpoints.js';
 import Header from '../components/Header.js';
 import Carousel from '../components/Carousel.js';
 import useMovieSearch from '../hooks/useMovieSearch.js';

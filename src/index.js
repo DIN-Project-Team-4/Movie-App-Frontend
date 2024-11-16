@@ -4,7 +4,6 @@ import './bootstrap.min.css';
 import './index.css';
 import Home from './screens/Home';
 import reportWebVitals from './reportWebVitals';
-import Carousel from './components/Carousel';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

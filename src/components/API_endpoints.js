@@ -101,7 +101,7 @@ async function searchByYear(searchText, page) {
 async function searchByGenre(searchText, genres, page) {
   const genreIds = [];
 
-  genres.filter((item) => {
+  genres.forEach((item) => {
     if (searchText.toLowerCase().includes(item.name.toLowerCase())) {
       genreIds.push(item.id); // Push matching genre IDs to the genreIds array
     }
