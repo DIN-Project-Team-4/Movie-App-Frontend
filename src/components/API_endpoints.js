@@ -1,5 +1,27 @@
 const API_KEY = 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJlZDQ1ZjdkZTdjNGUzYmY5NzQ3MGM5MWYwYWE4ZWI2MyIsIm5iZiI6MTczMTE4ODEwNi45OTM1ODU2LCJzdWIiOiI2NzJiYjU5YmFkY2EzMDc5MjUxNDQ5NmQiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.RBOeIqSXtek2lgYSvqI6QsewM_GwhaToeeNRVLAYClc';
 
+//to get trending movies API endpoint
+async function getTrendingMovies() {
+  const options = {
+      method: 'GET',
+      headers: {
+        accept: 'application/json',
+        Authorization: API_KEY
+      }
+    };
+    
+      try {
+          const response = await fetch(
+            `https://api.themoviedb.org/3/trending/movie/day?language=en-US`,
+            options
+          );
+          const data = await response.json();
+          return data;
+        } catch (error) {
+          console.error(error);
+          return null;
+        }
+}
 //to search by year API endpoint
 
 async function getGenreName() {
@@ -116,4 +138,4 @@ async function searchByGenre(searchText, genres, page) {
 
 
 
-export { getGenreName, searchByTitle, searchByYear, searchByGenre }
+export { getGenreName, searchByTitle, searchByYear, searchByGenre, getTrendingMovies }
