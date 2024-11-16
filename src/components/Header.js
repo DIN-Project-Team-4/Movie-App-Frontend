@@ -16,13 +16,13 @@ const Header = ({filterMethod,
     <header>
         <Navbar collapseOnSelect expand="lg" className="navbar navbar-expand-lg bg-dark custom-navbar" data-bs-theme="dark">
             <Container>
-                <Navbar.Brand href="#home">
+                <Navbar.Brand href="/">
                     <img src={Logo} alt='logo' className='navbar-logo'/>
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="me-auto">
-                        <Nav.Link href="#home">Home</Nav.Link>
+                        <Nav.Link href="/">Home</Nav.Link>
                         <Nav.Link href="#groups">Groups</Nav.Link>
                         
                     </Nav>
