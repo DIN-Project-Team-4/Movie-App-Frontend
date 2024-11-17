@@ -1,0 +1,12 @@
+.container {
+    height: 8vh;
+    display: flex;
+    justify-content: center; /* Horizontal alignment */
+    align-items: center; /* Vertical alignment */
+    text-shadow: 
+        1px 1px 2px rgba(0, 0, 0, 0.5), /* Darker shadow for depth */
+        0 0 5px rgba(237, 223, 147, 0.9), /* Golden glow effect */
+        0 0 10px rgba(196, 170, 54, 0.8), 
+        0 0 15px rgba(87, 75, 7, 0.7); /* Multiple layers for stronger effect */
+    color: rgb(221, 214, 169);   
+  }

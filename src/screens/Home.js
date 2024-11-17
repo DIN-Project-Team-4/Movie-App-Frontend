@@ -4,6 +4,7 @@ import Header from '../components/Header.js';
 import Carousel from '../components/Carousel.js';
 import useMovieSearch from '../hooks/useMovieSearch.js';
 import Celebrities from '../components/Celebrities.js'
+import Footer from '../components/Footer.js';
 
 
 function Home() {
@@ -47,11 +48,14 @@ function Home() {
             totalPages={totalPages}
           />
         ) : (
-          <div>
+          <div className='homepage_defaultbody'>
             <Carousel />
             <Celebrities/>
           </div>
         )}
+      </div>
+      <div>
+        <Footer/>
       </div>
     </div>
   );
