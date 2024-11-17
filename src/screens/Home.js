@@ -3,6 +3,8 @@ import SearchResults from '../components/SearchResults';
 import Header from '../components/Header.js';
 import Carousel from '../components/Carousel.js';
 import useMovieSearch from '../hooks/useMovieSearch.js';
+import Celebrities from '../components/Celebrities.js'
+
 
 function Home() {
   const {
@@ -45,7 +47,10 @@ function Home() {
             totalPages={totalPages}
           />
         ) : (
-          <Carousel />
+          <div>
+            <Carousel />
+            <Celebrities/>
+          </div>
         )}
       </div>
     </div>

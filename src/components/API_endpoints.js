@@ -135,7 +135,29 @@ async function searchByGenre(searchText, genres, page) {
         }
 }
 
+//to get trending people API endpoint
+async function getTrendingCelebrities() {
+  const options = {
+      method: 'GET',
+      headers: {
+        accept: 'application/json',
+        Authorization: API_KEY
+      }
+    };
+    
+      try {
+          const response = await fetch(
+            `https://api.themoviedb.org/3/trending/person/day?language=en-US`,
+            options
+          );
+          const data = await response.json();
+          return data;
+        } catch (error) {
+          console.error(error);
+          return null;
+        }
+}
 
 
 
-export { getGenreName, searchByTitle, searchByYear, searchByGenre, getTrendingMovies }
+export { getGenreName, searchByTitle, searchByYear, searchByGenre, getTrendingMovies, getTrendingCelebrities }
