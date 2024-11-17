@@ -24,7 +24,12 @@ export default function Carousel() {
 
     return (
         <div className="mx-4 mx-md-5" id= "carousel_main">
-            <h2>Trending Movies: </h2>
+            {/* Title Section */}
+            <div className="trendingContainer">
+                <div className="yellowLine"></div>
+                <h2>Trending Movies </h2>
+            </div>
+            
             {isLoading ? (
                 <p>Loading trending movies...</p>
             ) : (

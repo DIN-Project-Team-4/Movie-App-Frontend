@@ -6,13 +6,29 @@ h2{
         0 0 10px rgba(196, 170, 54, 0.8), 
         0 0 15px rgba(87, 75, 7, 0.7); /* Multiple layers for stronger effect */
     color: rgb(221, 214, 169);
-    padding: 2%;
+    padding: 0%;
     
 }
 
+.trendingContainer {
+  display: flex;
+  align-items: center;
+  padding: 0%;
+  margin-left: 2%;
+  margin-top: 1%;
+  margin-bottom: 1%;
+}
+.yellowLine {
+  width: 5px; /* Thickness of the yellow line*/
+  align-self: stretch;
+  background-color: #FFD700; /* Yellow color*/
+  margin-right: 10px; /* Space between the line and the text*/
+  box-shadow: inset 0 -8px 12px rgba(139, 128, 68, 0.5), /* inner shadow */
+              0 8px 12px rgba(0, 0, 0, 0.4); /* outer shadow */
+}
+
 div#carousel_main{
-  margin-top: 3vh;
-  
+  margin-top: 3vh;  
   box-shadow: inset 0 -4px 6px rgba(139, 128, 68, 0.4), /* Inner shadow for emboss effect */
                 0 4px 6px rgba(0, 0, 0, 0.3); /* Outer shadow for depth */
 }
