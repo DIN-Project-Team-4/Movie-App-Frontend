@@ -1,6 +1,7 @@
 import React from 'react'
 import MovieListCard from './MovieListCard'
 import PageChangeButton from './PageChangeButton'
+import './SearchResults.css'
 
 
 export default function SearchResults({searchText, results, genres, hasSearched, prevPage, nextPage, page, totalPages}) {
