@@ -20,8 +20,6 @@ export default function Carousel() {
         fetchTrendingMovies();
     }, []);
 
-    console.log(trendingMovies);
-
     return (
         <div className="mx-4 mx-md-5" id= "carousel_main">
             {/* Title Section */}
