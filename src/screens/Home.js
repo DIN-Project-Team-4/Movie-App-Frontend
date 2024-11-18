@@ -22,17 +22,16 @@ function Home() {
     nextPage,
     prevPage,
   } = useMovieSearch();
-  
 
   return (
     <div>
       <div>
         <Header filterMethod={filterMethod}
-          setFilterMethod={setFilterMethod}
-          searchText={searchText}
-          setSearchText={setSearchText}
-          newSearch={newSearch}/>
-       
+                setFilterMethod={setFilterMethod}
+                searchText={searchText}
+                setSearchText={setSearchText}
+                newSearch={newSearch}
+        />
       </div>
       <div>
         {/* Conditionally render SearchResults or Carousel */}

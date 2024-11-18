@@ -23,7 +23,7 @@ const Header = ({filterMethod,
                     </Navbar.Brand>
                     <Nav className="d-flex flex-row justify-content-center">
                             <Nav.Link href="/">Home</Nav.Link>
-                            <Nav.Link href="#groups">Groups</Nav.Link>
+                            <Nav.Link href="groups">Groups</Nav.Link>
                     </Nav>
                 
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />

@@ -5,11 +5,17 @@ import './index.css';
 import Home from './screens/Home';
 import reportWebVitals from './reportWebVitals';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import App from "./App";
+import GroupsPage from "./pages/GroupsPage";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Home/>
+  },
+  {
+    path: "/groups",
+    element: <GroupsPage/>
   }
 ])
 
