@@ -16,7 +16,7 @@ const GroupHeader = ({filterMethod,
         <header>
             <Navbar collapseOnSelect expand="lg" className="navbar navbar-expand-lg bg-dark custom-navbar" data-bs-theme="dark">
                 <Container fluid>
-                    {/* Flex container for logo and navigation */}
+                    {/* Flex container for logo and navigation }
                     /*<div className="d-flex justify-content-between w-100 align-items-center">
                         <Navbar.Brand href="/">
                             <img src={Logo} alt='logo' className='navbar-logo'/>
