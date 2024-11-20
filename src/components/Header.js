@@ -1,65 +1,93 @@
 import React from 'react';
 import { Navbar, Nav, NavDropdown, Container } from 'react-bootstrap';
-import Logo from '../assets/logo.webp';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
+import 'bootstrap-icons/font/bootstrap-icons.css';
+import Logo from '../assets/logo_full.png';
 import Search from './Search';
-import './Header.css';
 
+const Header = ({
+  filterMethod,
+  setFilterMethod,
+  searchText,
+  setSearchText,
+  newSearch,
+}) => {
 
-const Header = ({filterMethod,
-    setFilterMethod,
-    searchText,
-    setSearchText,
-    newSearch}) => {
+  /* THIS CONTROLS THE NAV LINKS, ONLY CHANGE THIS FOR ADDING A PAGE*/
+  const navLinks = [
+    { href: '/', label: 'Home' },
+    { href: '/test', label: 'Test' },
+    //{ href: '/', label: 'Test' }, //This is an example, uncomment to use
+    //{ href: '/', label: 'Test' }, //This is an example, uncomment to use
+    { href: '/groups', label: 'Groups' }
+    ,
+  ];
+
+  /* THIS CONTROLS THE USER SETTINGS MENU, ONLY CHANGE THIS FOR ADDING SETTINGS*/
+  const dropdownItems = [
+    { href: '/mygroups', label: 'My Groups' },
+    { href: '/profile', label: 'My Profile' },
+    { href: '/settings', label: 'Settings' },
+  ];
+
+  /* DO NOT TOUCH ANYTHING BELOW, UNLESS YOU KNOW WHAT YOU'RE DOING!!! */
   return (
-    <header>
-        <Navbar collapseOnSelect expand="lg" className="navbar navbar-expand-lg bg-dark custom-navbar" data-bs-theme="dark">
-            <Container fluid>
-                {/* Flex container for logo and navigation */}
-                <div className="d-flex justify-content-between w-100 align-items-center">
-                    <Navbar.Brand href="/">
-                        <img src={Logo} alt='logo' className='navbar-logo'/>
-                    </Navbar.Brand>
-                    <Nav className="d-flex flex-row justify-content-center">
-                            <Nav.Link href="/">Home</Nav.Link>
-                            <Nav.Link href="#groups">Groups</Nav.Link>
-                    </Nav>
-                
-                    <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-                </div>
+    <Navbar fixed="top" expand="md" style={{ fontSize: '1.2rem' }}>
+      <Container fluid>
+        {/*CineScope Logo always visible*/}
+        <Navbar.Brand href="/">
+          <img src={Logo} alt="logo" className="navbar-logo" />
+        </Navbar.Brand>
+        
+          <Nav variant="underline" className="w-100">
 
-                <Navbar.Collapse id="responsive-navbar-nav">                    
-                    <div className="d-flex flex-lg-row flex-column align-items-center justify-content-end w-auto search_div">
-                        <Nav className="w-100 mb-lg-0 mb-3 d-flex justify-content-end"> 
-                            <Nav.Link href="#search" className="w-100">
-                                {<Search 
-                                    filterMethod={filterMethod}
-                                    setFilterMethod={setFilterMethod}
-                                    searchText={searchText}
-                                    setSearchText={setSearchText}
-                                    newSearch={newSearch}/>}
-                            </Nav.Link>
-                        </Nav>
-                    
-                        <Nav className='navbar-profile d-flex flex-row align-items-center'>
-                            <Nav.Link eventKey={2} href="#login" className="signIn-link mb-lg-0 mb-2">SignIn</Nav.Link>
-                            <div className="d-flex align-items-center justify-content-center flex-row profile-container">
-                                <FontAwesomeIcon icon={faUserCircle}  className='profile-icon'/>
-                                <NavDropdown id="collapsible-nav-dropdown" className='profile-dropdown'>
-                                    <NavDropdown.Item href="#myGroups/3.1">My Groups</NavDropdown.Item>
-                                    <NavDropdown.Item href="#myProfile/3.2">My Profile</NavDropdown.Item>
-                                    <NavDropdown.Divider />
-                                    <NavDropdown.Item href="#settings/3.4">Settings</NavDropdown.Item>
-                                </NavDropdown>
-                            </div>               
-                        </Nav>
-                    </div>
-                </Navbar.Collapse>
-            </Container>
-        </Navbar>
-    </header>
-  )
-}
+            {/*When navbar gets small, this triggers*/}
+            <Navbar.Toggle aria-controls="cinescope-navbar" />
 
-export default Header
+            <Nav className="me-auto">
+              <Navbar.Collapse id="cinescope-navbar">
+              {/*Nav menu link*/}
+                {navLinks.map((link) => (
+                  <Nav.Link href={link.href}>
+                    {link.label}
+                  </Nav.Link>
+                ))}
+              </Navbar.Collapse>
+            </Nav>
+
+            {/*Searchbar*/}
+            <Nav className="mx-auto">
+              <Nav.Item>
+                <Search
+                  filterMethod={filterMethod}
+                  setFilterMethod={setFilterMethod}
+                  searchText={searchText}
+                  setSearchText={setSearchText}
+                  newSearch={newSearch}
+                />
+              </Nav.Item>
+            </Nav>
+
+            <Nav className="ms-auto">
+              <Nav.Item>
+                <Nav.Link href="/login">Sign In</Nav.Link>
+              </Nav.Item>
+
+              <NavDropdown align="end" title={<i className="bi bi-person-circle" />}>
+                {dropdownItems.map((item) => (
+                  <NavDropdown.Item href={item.href} key={item.href}>
+                    {item.label}
+                  </NavDropdown.Item>
+                ))}
+                <NavDropdown.Divider />
+                <NavDropdown.Item href="/logout" key="/logout">
+                  Logout
+                </NavDropdown.Item>
+              </NavDropdown>
+            </Nav>
+          </Nav>
+        </Container>
+    </Navbar>
+  );
+};
+
+export default Header;

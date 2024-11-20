@@ -1,28 +1,31 @@
 import React from 'react';
+import { Form, FormControl, Button, InputGroup, Dropdown, DropdownButton } from 'react-bootstrap';
 
 export default function Search({ filterMethod, setFilterMethod, searchText, setSearchText, newSearch }) {
   return (
-    <div>
-      <form className='form-container'>
-        <select 
-          onChange={(e) => {
-            setFilterMethod(e.target.value);
-          }}
-          id='filter_methods'
-          value={filterMethod}
+    <Form onSubmit={(e) => { e.preventDefault(); newSearch(e); }}>
+      <InputGroup>
+        <DropdownButton
+          as={InputGroup.Prepend}
+          title={filterMethod === "title" ? "Title" : filterMethod === "release_year" ? "Year" : "Genre"}
+          id="filter_methods"
+          onSelect={(eventKey) => setFilterMethod(eventKey)}
+          variant="outline-dark"
         >
-          <option class="dropdown-item" value="title">Title</option>
-          <option class="dropdown-item" value="release_year">Year</option>
-          <option class="dropdown-item" value="genre">Genre</option>
-        </select>
-        <input
-          onChange={(e) => setSearchText(e.target.value)}
+          <Dropdown.Item eventKey="title">Title</Dropdown.Item>
+          <Dropdown.Item eventKey="release_year">Year</Dropdown.Item>
+          <Dropdown.Item eventKey="genre">Genre</Dropdown.Item>
+        </DropdownButton>
+
+        <FormControl
+          type="text"
           value={searchText}
-          type='text'
-          placeholder='Search here'
+          onChange={(e) => setSearchText(e.target.value)}
+          placeholder="Search here"
         />
-        <button onClick={newSearch}>Search</button>
-      </form>
-    </div>
+
+        <Button type="submit" variant="outline-dark">Search</Button>
+      </InputGroup>
+    </Form>
   );
 }

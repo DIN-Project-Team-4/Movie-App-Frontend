@@ -1,18 +1,15 @@
 import React from 'react'
 import { Container,Row,Col } from 'react-bootstrap'
-import './Footer.css'
 
 const Footer = () => {
   return (
-    <footer>
-        <Container>
+        <Container fluid className="footer">
             <Row>
                 <Col className='text-center py-3'>
-                    CopyRight &copy; cineScope
+                    CopyRight &copy; CineScope
                 </Col>
             </Row>
         </Container>
-    </footer>
   )
 }
 

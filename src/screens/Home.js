@@ -1,4 +1,3 @@
-import './Home.css';
 import SearchResults from '../components/SearchResults';
 import Header from '../components/Header.js';
 import Carousel from '../components/Carousel.js';
@@ -26,14 +25,15 @@ function Home() {
 
   return (
     <div>
-      <div>
+      <div class="fixed-top">
         <Header filterMethod={filterMethod}
           setFilterMethod={setFilterMethod}
           searchText={searchText}
           setSearchText={setSearchText}
-          newSearch={newSearch}/>
-       
+          newSearch={newSearch}
+        />       
       </div>
+
       <div>
         {/* Conditionally render SearchResults or Carousel */}
         {results.length > 0 ? (
@@ -48,15 +48,15 @@ function Home() {
             totalPages={totalPages}
           />
         ) : (
-          <div className='homepage_defaultbody'>
+          <div className='main-div'>
             <Carousel />
             <Celebrities/>
           </div>
         )}
       </div>
-      <div>
-        <Footer/>
-      </div>
+
+      <Footer/>
+
     </div>
   );
 }

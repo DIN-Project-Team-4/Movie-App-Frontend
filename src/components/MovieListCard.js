@@ -7,17 +7,17 @@ export default function MovieListCard({searchText, movieDetails, genres, hasSear
   return (
     <div>
       {hasSearched && (
-        <h1>
+        <h2>
           SEARCH : <span>"{searchText.toUpperCase()}"</span>{' '}
           {movieDetails.length === 0 && 'NOT FOUND'}
-        </h1>
+        </h2>
       )}
       
       {movieDetails.length !== 0 && (
         <div className='main-movieCard'>
-            <ol>
+            <ul>
                 {movieDetails.map( movie => <MovieCard movieId ={movie.id} movieName={movie.title} poster={movie.poster_path} date={movie.release_date} commonGenres={genres} movieGenres={movie.genre_ids}/>)}
-            </ol>
+            </ul>
         </div>
       )}
 
