@@ -2,8 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './bootstrap.min.css';
 import './index.css';
-import Home from './screens/Home';
-import reportWebVitals from './reportWebVitals';
+import Home from './screens/Home.js';
+import reportWebVitals from './reportWebVitals.js';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 const router = createBrowserRouter([

@@ -22,8 +22,8 @@ async function getTrendingMovies() {
           return null;
         }
 }
-//to search by year API endpoint
 
+//to search by genre API endpoint
 async function getGenreName() {
   const options = {
       method: 'GET',
@@ -74,6 +74,19 @@ async function searchByTitle(searchText, page) {
 //to search by year API endpoint
 
 async function searchByYear(searchText, page) {
+  
+  const year = Number(searchText);
+
+  if (isNaN(year) || !Number.isInteger(year)) {
+      return { error: 'Invalid year: must be a valid number' };
+  }
+  
+  const currentYear = new Date().getFullYear();
+
+  if (searchText > currentYear || searchText < 1800) {
+      return { error: 'Invalid year' };
+  }
+
     const options = {
         method: 'GET',
         headers: {

@@ -1,6 +1,6 @@
 import React from 'react'
-import MovieListCard from './MovieListCard'
-import PageChangeButton from './PageChangeButton'
+import MovieListCard from './MovieListCard.js'
+import PageChangeButton from './PageChangeButton.js'
 import './SearchResults.css'
 
 

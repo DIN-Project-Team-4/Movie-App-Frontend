@@ -1,4 +1,4 @@
-import SearchResults from '../components/SearchResults';
+import SearchResults from '../components/SearchResults.js';
 import Header from '../components/Header.js';
 import Carousel from '../components/Carousel.js';
 import useMovieSearch from '../hooks/useMovieSearch.js';

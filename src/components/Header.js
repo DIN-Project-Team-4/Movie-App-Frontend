@@ -2,7 +2,7 @@ import React from 'react';
 import { Navbar, Nav, NavDropdown, Container } from 'react-bootstrap';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import Logo from '../assets/logo_full.png';
-import Search from './Search';
+import Search from './Search.js';
 
 const Header = ({
   filterMethod,
