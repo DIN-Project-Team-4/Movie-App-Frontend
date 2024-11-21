@@ -41,11 +41,11 @@ function useMovieSearch(){
         }
 
         if (data.results) {
-        setTotalPages(data.total_pages);
-        setResults(data.results);
+            setTotalPages(data.total_pages);
+            setResults(data.results);
         } else {
-        setTotalPages(0);
-        setResults([]);
+            setTotalPages(0);
+            setResults([]);
         }
 
         if (data.error) {

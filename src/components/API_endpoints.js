@@ -121,10 +121,7 @@ async function searchByGenre(searchText, genres, page) {
   });
 
   if (genreIds.length === 0) {
-    return {
-      total_pages: 0,
-      results: []
-    };
+    return { error: 'Invalid genre' }
   }
 
   const options = {
