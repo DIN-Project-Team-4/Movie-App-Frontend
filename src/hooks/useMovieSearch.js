@@ -6,6 +6,7 @@ function useMovieSearch(){
     const [searchText, setSearchText] = useState('');
     const [page, setPage] = useState(1);
     const [results, setResults] = useState([]);
+    const [error, setError] = useState(false)
     const [totalPages, setTotalPages] = useState(0);
     const [genres, setGenres] = useState([]);
     const [hasSearched, setHasSearched] = useState(false);
@@ -46,6 +47,12 @@ function useMovieSearch(){
         setTotalPages(0);
         setResults([]);
         }
+
+        if (data.error) {
+            setError(true)
+        } else {
+            setError(false)
+        }
     }
 
     function newSearch(e) {
@@ -77,6 +84,7 @@ function useMovieSearch(){
         searchText,
         setSearchText,
         results,
+        error,
         totalPages,
         page,
         genres,

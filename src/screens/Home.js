@@ -13,6 +13,7 @@ function Home() {
     searchText,
     setSearchText,
     results,
+    error,
     totalPages,
     page,
     genres,
@@ -36,7 +37,7 @@ function Home() {
 
       <div>
         {/* Conditionally render SearchResults or Carousel */}
-        {results.length > 0 ? (
+        {(results.length > 0 || error) ? (
           <SearchResults
             searchText={searchText}
             results={results}
