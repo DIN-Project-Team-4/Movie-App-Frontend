@@ -4,7 +4,7 @@ import { Navigation, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import { getTrendingCelebrities } from './API_endpoints.js';
+import { getTrendingCelebrities } from './searchApi.js';
 
 export default function Celebrities() {
   const [trendingCelebrities, setTrendingCelebrities] = useState([]);
@@ -32,7 +32,7 @@ export default function Celebrities() {
       </div>
 
       {isLoading ? (
-        <p>Loading trending movies...</p>
+        <p>Loading trending celebrities...</p>
       ) : (
 
         <Swiper

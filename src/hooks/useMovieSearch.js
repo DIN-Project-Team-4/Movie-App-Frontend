@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { getGenreName, searchByTitle, searchByYear, searchByGenre } from '../components/API_endpoints.js';
+import { getGenreName, searchByTitle, searchByYear, searchByGenre } from '../components/searchApi.js';
 
 function useMovieSearch(){
     const [filterMethod, setFilterMethod] = useState('title');
