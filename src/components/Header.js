@@ -10,12 +10,14 @@ const Header = ({
   searchText,
   setSearchText,
   newSearch,
+  showSearchBox = true,
+  showDropdownMenu = true,
 }) => {
 
   /* THIS CONTROLS THE NAV LINKS, ONLY CHANGE THIS FOR ADDING A PAGE*/
   const navLinks = [
     { href: '/', label: 'Home' },
-    { href: '/test', label: 'Test' },
+    { href: '/reviews', label: 'Reviews' },
     //{ href: '/', label: 'Test' }, //This is an example, uncomment to use
     //{ href: '/', label: 'Test' }, //This is an example, uncomment to use
     { href: '/groups', label: 'Groups' }
@@ -55,34 +57,38 @@ const Header = ({
             </Nav>
 
             {/*Searchbar*/}
-            <Nav className="mx-auto">
-              <Nav.Item>
-                <Search
-                  filterMethod={filterMethod}
-                  setFilterMethod={setFilterMethod}
-                  searchText={searchText}
-                  setSearchText={setSearchText}
-                  newSearch={newSearch}
-                />
-              </Nav.Item>
-            </Nav>
+            {showSearchBox && (
+              <Nav className="mx-auto">
+                <Nav.Item>
+                  <Search
+                    filterMethod={filterMethod}
+                    setFilterMethod={setFilterMethod}
+                    searchText={searchText}
+                    setSearchText={setSearchText}
+                    newSearch={newSearch}
+                  />
+                </Nav.Item>
+              </Nav>
+            )}
 
             <Nav className="ms-auto">
               <Nav.Item>
                 <Nav.Link href="/login">Sign In</Nav.Link>
               </Nav.Item>
 
-              <NavDropdown align="end" title={<i className="bi bi-person-circle" />}>
-                {dropdownItems.map((item) => (
-                  <NavDropdown.Item href={item.href} key={item.href}>
-                    {item.label}
+              {showDropdownMenu && (
+                <NavDropdown align="end" title={<i className="bi bi-person-circle" />}>
+                  {dropdownItems.map((item) => (
+                    <NavDropdown.Item href={item.href} key={item.href}>
+                      {item.label}
+                    </NavDropdown.Item>
+                  ))}
+                  <NavDropdown.Divider />
+                  <NavDropdown.Item href="/logout" key="/logout">
+                    Logout
                   </NavDropdown.Item>
-                ))}
-                <NavDropdown.Divider />
-                <NavDropdown.Item href="/logout" key="/logout">
-                  Logout
-                </NavDropdown.Item>
-              </NavDropdown>
+                </NavDropdown>
+              )}
             </Nav>
           </Nav>
         </Container>
