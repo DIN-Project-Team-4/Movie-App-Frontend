@@ -15,23 +15,23 @@ const Chat = () => {
 
     return (
         <div><h2>Chat</h2>
-    <div className="chat-container">
-            <h2>Chat</h2>
-            <ListGroup className="chat-messages">
-                {messages.map((msg, index) => (
-                    <ListGroup.Item key={index}>{msg}</ListGroup.Item>
-                ))}
-            </ListGroup>
-            <Form className="chat-form">
-                <Form.Control
-                    type="text"
-                    value={message}
-                    onChange={(e) => setMessage(e.target.value)}
-                    placeholder="Type a message"
-                />
-                <Button onClick={handleSendMessage}>Send</Button>
-            </Form>
-        </div>
+            <div className="chat-container">
+                <h2>Chat</h2>
+                <ListGroup className="chat-messages">
+                    {messages.map((msg, index) => (
+                        <ListGroup.Item key={index}>{msg}</ListGroup.Item>
+                    ))}
+                </ListGroup>
+                <Form className="chat-form">
+                    <Form.Control
+                        type="text"
+                        value={message}
+                        onChange={(e) => setMessage(e.target.value)}
+                        placeholder="Type a message"
+                    />
+                    <Button onClick={handleSendMessage}>Send</Button>
+                </Form>
+            </div>
         </div>
     );
 };

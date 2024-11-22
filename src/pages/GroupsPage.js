@@ -13,7 +13,7 @@ const GroupsPage = () => {
 
     useEffect(() => {
         // Fetch groups from the backend
-        fetch('/groups')
+        fetch('http://localhost:3001/groups/all')
             .then((response) => response.json())
             .then((data) => setGroups(data));
         // Fetch members from the backend
@@ -25,7 +25,7 @@ const GroupsPage = () => {
     return (
         <div>
             <Header />
-            <Container>
+            <Container fluid>
                 <Row className="d-flex justify-content-between align-items-center">
                     <Col>
                         <h1 className="my-4">Groups</h1>
@@ -54,9 +54,8 @@ const GroupsPage = () => {
                     </Col>
                 </Row>
 
-                <Row
-                    className="d-flex justify-content-between align-items-center">
-                    <Col>
+                <Row>
+                    <Col md={4} className="text-start">
                         <GroupJoin />
                     </Col>
                 </Row>
