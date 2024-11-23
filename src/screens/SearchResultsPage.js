@@ -70,8 +70,7 @@ const SearchResultsPage = () => {
       </div>
 
       <div>
-        {hasSearched ? (
-          results.length > 0 || error ? (
+        {results.length > 0 || error ? (
             <SearchResults
               searchText={searchText}
               results={results}
@@ -88,9 +87,7 @@ const SearchResultsPage = () => {
           ) : (
             <h2 className="text-center mt-5">No Results Found</h2>
           )
-        ) : (
-          <h2 className="text-center mt-5">Searching...</h2>
-        )}
+        }
           
       </div>
 

@@ -6,6 +6,7 @@ import Home from './screens/Home.js';
 import reportWebVitals from './reportWebVitals.js';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import SearchResultsPage from './screens/SearchResultsPage.js';
+import AdvancedSearch from './screens/AdvancedSearch.js';
 
 const router = createBrowserRouter([
   {
@@ -16,6 +17,10 @@ const router = createBrowserRouter([
     path: '/search',
     element: <SearchResultsPage />,
   },
+  {
+    path: '/advanced-search',
+    element: <AdvancedSearch/>,
+  }
 ])
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

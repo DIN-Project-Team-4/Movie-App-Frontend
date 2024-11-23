@@ -1,6 +1,8 @@
 import React from 'react';
 import { Form, FormControl, Button, InputGroup, Dropdown, DropdownButton } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import '@fortawesome/fontawesome-free/css/all.min.css'; 
+
 
 export default function Search({ filterMethod, setFilterMethod, searchText, setSearchText, newSearch }) {
   const navigate = useNavigate();
@@ -17,6 +19,11 @@ export default function Search({ filterMethod, setFilterMethod, searchText, setS
     }
   };
 
+  //Handle advanced search dropdown option
+  const handleAdvancedSearch = () => {    
+    navigate('/advanced-search');// Navigate to the advanced search page
+  };
+
   return (
     <Form onSubmit={handleSearch}>
       <InputGroup>
@@ -27,9 +34,23 @@ export default function Search({ filterMethod, setFilterMethod, searchText, setS
           onSelect={(eventKey) => setFilterMethod(eventKey)}
           variant="outline-dark"
         >
-          <Dropdown.Item eventKey="title">Title</Dropdown.Item>
-          <Dropdown.Item eventKey="release_year">Year</Dropdown.Item>
-          <Dropdown.Item eventKey="genre">Genre</Dropdown.Item>
+          <Dropdown.Item eventKey="title">
+            <i className="fas fa-film" style={{ marginRight: '9px' }}></i>
+            Title
+          </Dropdown.Item>
+          <Dropdown.Item eventKey="release_year">
+            <i className="fas fa-calendar-alt" style={{ marginRight: '9px' }}></i>
+            Year
+          </Dropdown.Item>
+          <Dropdown.Item eventKey="genre">
+            <i className="fas fa-theater-masks" style={{ marginRight: '8px' }}></i>
+            Genre
+          </Dropdown.Item>
+          <Dropdown.Item onClick={handleAdvancedSearch}>
+            <i className="fas fa-search" style={{ marginRight: '9px' }}></i>
+            Advanced Search 
+            <span className="arrow" style={{ marginLeft: '8px' }}>›</span>
+          </Dropdown.Item> 
         </DropdownButton>
 
         <FormControl
