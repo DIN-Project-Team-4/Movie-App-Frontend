@@ -25,48 +25,56 @@ function useMovieSearch(){
     async function searchMovies(e) {
         e.preventDefault();
         let data = [];
-        switch (filterMethod) {
-        case 'title':
-            data = await searchByTitle(searchText, page);
-            break;
-        case 'release_year':
-            data = await searchByYear(searchText, page);
-            break;
-        case 'genre':
-            data = await searchByGenre(searchText, genres, page);
-            break;
-        default:
-            data = { results: [], total_pages: 0 };
-            break;
-        }
+        try {
+            switch (filterMethod) {
+                case 'title':
+                    data = await searchByTitle(searchText, page);
+                    break;
+                case 'release_year':
+                    data = await searchByYear(searchText, page);
+                    break;
+                case 'genre':
+                    data = await searchByGenre(searchText, genres, page);
+                    break;
+                default:
+                    data = { results: [], total_pages: 0 };
+                    break;
+            }
 
-        if (data.results) {
-            setTotalPages(data.total_pages);
-            setResults(data.results);
-        } else {
-            setTotalPages(0);
+            if (data.results) {
+                setTotalPages(data.total_pages);
+                setResults(data.results);
+            } else {
+                setTotalPages(0);
+                setResults([]);
+            }
+
+            if (data.error) {
+                setError(true)
+            } else {
+                setError(false)
+            }
+        } catch (err) {
             setResults([]);
-        }
-
-        if (data.error) {
-            setError(true)
-        } else {
-            setError(false)
+            setTotalPages(0);
+            setError(true);
+        } finally {
+            setHasSearched(true);
         }
     }
 
     function newSearch(e) {
         e.preventDefault();
-        setHasSearched(true);
+        //setHasSearched(true);
         setPage(1);
         searchMovies(e);
     }
 
     useEffect(() => {
-        if (searchText) {
-        searchMovies({ preventDefault: () => {} });
+        if (hasSearched && searchText) {
+            searchMovies({ preventDefault: () => {} });
         }
-    }, [page]);
+    }, [hasSearched, page, searchText]);
 
     function nextPage() {
         setPage((currentPage) => Math.min(currentPage + 1, totalPages));

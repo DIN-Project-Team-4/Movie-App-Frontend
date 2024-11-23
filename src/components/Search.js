@@ -1,9 +1,24 @@
 import React from 'react';
 import { Form, FormControl, Button, InputGroup, Dropdown, DropdownButton } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 
 export default function Search({ filterMethod, setFilterMethod, searchText, setSearchText, newSearch }) {
+  const navigate = useNavigate();
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    newSearch(e);
+    if (searchText.trim() === '') {
+      // If search text is empty, navigate without the query parameter
+      navigate('/search');
+    } else {
+      // Otherwise, include the search term and filter method in the query parameter
+      navigate(`/search?query=${encodeURIComponent(searchText)}&filter=${encodeURIComponent(filterMethod)}`);
+    }
+  };
+
   return (
-    <Form onSubmit={(e) => { e.preventDefault(); newSearch(e); }}>
+    <Form onSubmit={handleSearch}>
       <InputGroup>
         <DropdownButton
           as={InputGroup.Prepend}

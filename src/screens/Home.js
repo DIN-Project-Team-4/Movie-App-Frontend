@@ -1,4 +1,3 @@
-import SearchResults from '../components/SearchResults.js';
 import Header from '../components/Header.js';
 import Carousel from '../components/Carousel.js';
 import useMovieSearch from '../hooks/useMovieSearch.js';
@@ -12,15 +11,7 @@ function Home() {
     setFilterMethod,
     searchText,
     setSearchText,
-    results,
-    error,
-    totalPages,
-    page,
-    genres,
-    hasSearched,
     newSearch,
-    nextPage,
-    prevPage,
   } = useMovieSearch();
   
 
@@ -34,26 +25,14 @@ function Home() {
           newSearch={newSearch}
         />       
       </div>
-
+      
       <div>
-        {/* Conditionally render SearchResults or Carousel */}
-        {(results.length > 0 || error) ? (
-          <SearchResults
-            searchText={searchText}
-            results={results}
-            genres={genres}
-            hasSearched={hasSearched}
-            prevPage={prevPage}
-            nextPage={nextPage}
-            page={page}
-            totalPages={totalPages}
-          />
-        ) : (
-          <div className='main-div'>
-            <Carousel />
-            <Celebrities/>
-          </div>
-        )}
+      {(
+        <div className='main-div'>
+          <Carousel />
+          <Celebrities/>
+        </div>
+      )}
       </div>
 
       <Footer/>

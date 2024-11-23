@@ -5,12 +5,17 @@ import './index.css';
 import Home from './screens/Home.js';
 import reportWebVitals from './reportWebVitals.js';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import SearchResultsPage from './screens/SearchResultsPage.js';
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Home/>
-  }
+  },
+  {
+    path: '/search',
+    element: <SearchResultsPage />,
+  },
 ])
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
