@@ -7,141 +7,49 @@ a {
   }
   
   .main-movieCard{
-    border: 2px solid rgb(236, 234, 194);
-    box-shadow: 
-      2px 2px 5px rgba(194, 194, 33, 0.3), /* light shadow for the top-left */
-      -2px -2px 5px rgba(255, 255, 255, 0.5); /* highlight shadow for bottom-right */
-    margin-left: 4%;
-    margin-right: 4%;
-    padding: 20px;
-    padding-top: 0px;
-    width: 92%;
     border-radius: 15px;
-    align-items: center;
-    display: flex;
-    flex-direction: column; /* Stack movie list vertically */
-    margin-bottom: 20px; /* Add some space at the bottom between cards */
+    border: solid 2px;
+    width:100%;
   }
   
-  h1 {
-      display: flex; /* Make the title display in a row */
-      justify-content: flex-start; /* Align items to the left */
-      margin: 4%; /* Remove margin */
-      font-size: 180%;
-      color: rgb(231, 233, 211);
-      text-shadow: 
-          1px 1px 2px rgba(0, 0, 0, 0.5), /* Darker shadow for depth */
-          0 0 5px rgba(237, 223, 147, 0.9), /* Golden glow effect */
-          0 0 10px rgba(196, 170, 54, 0.8), 
-          0 0 15px rgba(87, 75, 7, 0.7); /* Multiple layers for stronger effect */
+  .main-movieCard ul{
+    padding: 0%;
+    list-style-type: none;
+    padding-left: 0;
   }
-  
-  h1 span {
-      margin-left: 8px; /* Add a little space between "SEARCH :" and the actual text */
-  }
-  
-  .main-movieCard ol{
-      padding: 0%;
-      width: 100%;
+
+  .main-movieCard li{
+    width: 100%;
   }
   
   .movieLiTag{
-      display: flex;
-      padding: 2%;
-      border-bottom: solid 2px rgb(236, 234, 194);
+    display: flex;
+    margin: auto;
+    padding: 4%;
+    border-bottom: solid 2px;
+    width: 90%;
   }
   
   .movieLiTag img{
       width: 70px;
       height: 105px;
-      border-radius: 15px;
   }
   
   .movieDetails{
-      margin-left: 40px;
-      color: rgb(181, 177, 177);
+    margin-left: 1rem;
+    width: 100%;
   }
   
-  h3{
-      font-size: 150%;
+  .pagination {
+      --bs-pagination-hover-bg: none;
+      --bs-pagination-hover-border-color: initial;
   }
-  
-  .pageButtons{
-      margin: 4%;  
-  }
-  
-  .pageButtons button{
-      border-radius: 8px;
-      padding: 10px;
-      width: 100px;
-  }
-  
-  .pageButtons span{
-      font-weight: bold;
-  }
-  
-  
-  
-  
-  /* Mobile devices */
-  @media (max-width: 600px) {
-    .main-movieCard {
-      margin-left: 4%;
-      margin-right: 4%;
-      max-width: 92%; /* Allow card to occupy more space on small screens */
-    }
-  
-    .movieLiTag img{
-      width: 20%;
-      height: 20%;
-      border-radius: 15px;
-    }
-  
-    h3{
-      font-size: 120%;
-    }
-  
-    h1{
-      font-size: 120%;
-    }
-  
-    .movieDetails{
-      font-size: 75%;
-      padding-top: 2%;
-    }
-  
-    .pageButtons button{
-      border-radius: 8px;
-      padding: 1%;
-      width: 15%;
-      font-size: 70%;
-    }
-  
-    .pageButtons span{
-      font-size: 70%;
-  }
-  }
-  
-  /* Tablets and medium screens */
-  @media (min-width: 601px) and (max-width: 1024px) {
-    .main-movieCard {
-      margin-left: 4%;
-      margin-right: 4%;
-      max-width: 92%; 
-    }
-  
-    .movieLiTag img{
-      width: 12%;
-      height: 12%;
-      border-radius: 15px;
-    }
-  }
-  
-  /* Desktop and larger screens */
-  @media (min-width: 1025px) {
-    .main-movieCard {
-      margin-left: 4%;
-      margin-right: 4%;
-      max-width: 92%; /* Card should not stretch too wide on large screens */
-    }
-  }
+  .page-change {
+    padding: 1rem;
+    justify-content: center;
+    font-weight: bold;
+  } 
+
+  .page-change .page-link{
+    padding: 1rem;
+  } 

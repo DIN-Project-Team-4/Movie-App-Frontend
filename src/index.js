@@ -2,12 +2,16 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './bootstrap.min.css';
 import './index.css';
-import Home from './screens/Home';
-import reportWebVitals from './reportWebVitals';
+import Home from './screens/Home.js';
+import reportWebVitals from './reportWebVitals.js';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+
 import App from "./App";
 import GroupsPage from "./pages/GroupsPage";
 import GroupPage from "./pages/GroupPage";
+
+import SearchResultsPage from './screens/SearchResultsPage.js';
+
 
 const router = createBrowserRouter([
   {
@@ -15,6 +19,7 @@ const router = createBrowserRouter([
     element: <Home/>
   },
   {
+
     path: "/groups",
     element: <GroupsPage/>
   },
@@ -22,6 +27,11 @@ const router = createBrowserRouter([
     path: "/groups/:groupId",
     element: <GroupPage/>
   }
+
+    path: '/search',
+    element: <SearchResultsPage />,
+  },
+
 ])
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

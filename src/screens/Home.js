@@ -1,5 +1,3 @@
-import './Home.css';
-import SearchResults from '../components/SearchResults';
 import Header from '../components/Header.js';
 import Carousel from '../components/Carousel.js';
 import useMovieSearch from '../hooks/useMovieSearch.js';
@@ -13,20 +11,14 @@ function Home() {
     setFilterMethod,
     searchText,
     setSearchText,
-    results,
-    totalPages,
-    page,
-    genres,
-    hasSearched,
     newSearch,
-    nextPage,
-    prevPage,
   } = useMovieSearch();
 
   return (
     <div>
-      <div>
+      <div class="fixed-top">
         <Header filterMethod={filterMethod}
+
                 setFilterMethod={setFilterMethod}
                 searchText={searchText}
                 setSearchText={setSearchText}
@@ -52,10 +44,20 @@ function Home() {
             <Celebrities/>
           </div>
         )}
+
       </div>
+      
       <div>
-        <Footer/>
+      {(
+        <div className='main-div'>
+          <Carousel />
+          <Celebrities/>
+        </div>
+      )}
       </div>
+
+      <Footer/>
+
     </div>
   );
 }

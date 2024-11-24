@@ -1,12 +1,18 @@
 import React from 'react'
+import { Pagination } from 'react-bootstrap'
 
 export default function PageChangeButton({prevPage,nextPage,page,totalPages}) {
-    
   return (
-    <div className='pageButtons' style={{ display: totalPages > 0 ? 'flex' : 'none', alignItems: 'center', gap: '10px' }}>
-        <button onClick={prevPage} disabled={page === 1}>Previous</button>
-        <span> Page {page}/{totalPages} </span>
-        <button onClick={nextPage} disabled={page === totalPages}>Next</button>
-    </div>
+    <Pagination className="page-change">
+      <Pagination.Prev onClick={prevPage} disabled={page === 1}>
+        Previous
+      </Pagination.Prev>
+      <Pagination.Item disabled>
+        Page {page} of {totalPages}
+      </Pagination.Item>
+      <Pagination.Next onClick={nextPage} disabled={page === totalPages}>
+        Next
+      </Pagination.Next>
+    </Pagination>
   )
 }
