@@ -7,6 +7,7 @@ import reportWebVitals from './reportWebVitals';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import App from "./App";
 import GroupsPage from "./pages/GroupsPage";
+import GroupPage from "./pages/GroupPage";
 
 const router = createBrowserRouter([
   {
@@ -16,6 +17,10 @@ const router = createBrowserRouter([
   {
     path: "/groups",
     element: <GroupsPage/>
+  },
+  {
+    path: "/groups/:groupId",
+    element: <GroupPage/>
   }
 ])
 
