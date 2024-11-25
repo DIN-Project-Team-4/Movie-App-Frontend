@@ -1,15 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './bootstrap.min.css';
 import './index.css';
+import './bootstrap.min.css';
+import reportWebVitals from './reportWebVitals.js';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+
 import IndexLayout from './IndexLayout.js';
 import Home from './screens/Home.js';
 import SearchResultsPage from './screens/SearchResultsPage.js';
 import AdvancedSearch from './screens/AdvancedSearch.js';
 import GroupsPage from './screens/GroupsPage.js';
+import MovieDetails from './screens/MovieDetails.js';
 import { MovieSearchProvider } from './context/MovieSearchContext.js';
-import reportWebVitals from './reportWebVitals.js';
+
 
 const router = createBrowserRouter([
   {
@@ -31,6 +34,10 @@ const router = createBrowserRouter([
       {
         path: '/groups',
         element: <GroupsPage />,
+      },
+      {
+        path: '/movie/:id',
+        element: <MovieDetails />,
       },
     ],
   },
