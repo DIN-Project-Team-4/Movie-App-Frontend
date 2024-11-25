@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Card, Form, Button, ListGroup } from 'react-bootstrap';
 import './GroupsPage.css';
-import GroupCreation from '../components/groups/GroupCreation.js';
-import GroupJoin from '../components/groups/GroupJoin.js';
+import GroupCreation from '../components/Groups/GroupCreation.js';
+import GroupJoin from '../components/Groups/GroupJoin.js';
 
 
 const GroupsPage = ({ groupId }) => {

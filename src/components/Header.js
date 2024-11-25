@@ -2,7 +2,7 @@ import React from 'react';
 import { Navbar, Nav, NavDropdown, Container } from 'react-bootstrap';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import Logo from '../assets/logo_full.png';
-import Search from './Search.js';
+import Search from './Search/Search.js';
 import { useMovieSearchContext } from '../context/MovieSearchContext.js'; 
 
 const Header = ({ showSearchBox = true, showDropdownMenu = true }) => {

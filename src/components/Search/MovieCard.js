@@ -1,5 +1,5 @@
 import { useState,useEffect } from 'react';
-import posterPlaceholder from '../assets/image_unavailable.jpg'
+import posterPlaceholder from '../../assets/image_unavailable.jpg'
 
 export default function MovieCard({movieName, poster, date, commonGenres, movieGenres, movieId}) {
     const mainURL = "https://image.tmdb.org/t/p/w500";

@@ -1,6 +1,6 @@
 import React from 'react';
-import Carousel from '../components/Carousel.js';
-import Celebrities from '../components/Celebrities.js';
+import Carousel from '../components/Home/Carousel.js';
+import Celebrities from '../components/Home/Celebrities.js';
 
 function Home() {
   return (

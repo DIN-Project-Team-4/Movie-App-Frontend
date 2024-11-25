@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import { getGenreName } from '../components/searchApi.js';
-import { getLanguageName, getCastIDs, searchAdvanced } from '../components/Advance_search/AdvanceSearchApi.js';
+import { getGenreName } from '../components/Search/searchApi.js';
+import { getLanguageName, getCastIDs, searchAdvanced } from '../components/AdvancedSearch/AdvanceSearchApi.js';
 
 function useAdvanceMovieSearch(){
     const [genres, setGenres] = useState([]);

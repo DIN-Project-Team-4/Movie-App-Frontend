@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import SearchResults from '../components/SearchResults.js';
+import SearchResults from '../components/Search/SearchResults.js';
 import { useMovieSearchContext } from '../context/MovieSearchContext.js';
 
 const SearchResultsPage = () => {
@@ -39,7 +39,7 @@ const SearchResultsPage = () => {
     if (searchText && filterSelection) {
       newSearch({ preventDefault: () => {} });
     }
-  }, [location.search, newSearch]);
+  }, [location.search]);
 
   useEffect(() => {
     if (searchText === '') {

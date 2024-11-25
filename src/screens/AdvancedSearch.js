@@ -1,6 +1,6 @@
 import React from 'react';
 import './AdvancedSearch.css';
-import AdvancedSearchFilters from '../components/Advance_search/AdvancedSearchFilters.js';
+import AdvancedSearchFilters from '../components/AdvancedSearch/AdvancedSearchFilters.js';
 
 export default function AdvancedSearch() {
   return (

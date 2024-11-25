@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { MDBCarousel, MDBCarouselItem } from 'mdb-react-ui-kit';
-import { getTrendingMovies } from './searchApi.js';
+import { getTrendingMovies } from '../Search/searchApi.js';
 
 export default function Carousel() {
     const [trendingMovies, setTrendingMovies] = useState([]);
