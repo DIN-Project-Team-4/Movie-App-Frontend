@@ -1,83 +1,137 @@
 /* Main Container Styling */
 .advanced-search-container {
-    display: flex;
-    flex-direction: row; /* Side by side for larger screens */
-    gap: 20px; /* Space between form and image */
-    border-style: solid;
-    border-color: rgb(102, 102, 39);
-    box-shadow: 
-    2px 2px 5px rgba(194, 194, 33, 0.3), /* light shadow for the top-left */
-    -2px -2px 5px rgba(255, 255, 255, 0.5); /* highlight shadow for bottom-right */
-    border-radius: 15px;
-    padding: 2%;
-    margin-top: 5%;
-  }
-  
-  /* Form Section Styling */
-  .form-section {
-    flex: 1;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    background-color: #37352b;
-    overflow-y: auto; /* Allows scrolling if form content overflows */
-  }
-  
-  /* Image Section Styling */
-  .image-section {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #37352b;
-  }
-  
-  /* Styling for the Popcorn image */
-  .image-section img {
-    max-width: 90%;
-    height: auto;
-    border-radius: 8px;
-    object-fit: contain;
-  }
-  
-  /* Media Query for tablets and below (max-width: 1200px) */
-  @media (max-width: 1200px) {
-    .advanced-search-container {
+  display: flex;
+  flex-direction: row; /* Side by side for larger screens */
+  gap: 20px; /* Space between form and results */
+  border-style: solid;
+  border-color: rgb(102, 102, 39);
+  box-shadow: 
+      2px 2px 5px rgba(194, 194, 33, 0.3), /* light shadow for the top-left */
+      -2px -2px 5px rgba(255, 255, 255, 0.5); /* highlight shadow for bottom-right */
+  border-radius: 15px;
+  padding: 2%;
+  margin-top: 5%;
+  width: 100%;
+}
+
+/* Form Section Styling (takes 40% minimum width on large screens) */
+.form-section {
+  flex: 0 0 40%; /* Form takes at least 40% of the width */
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  background-color: #37352b;
+  overflow-y: auto; /* Allows scrolling if form content overflows */
+}
+
+/* Styling for the No Results Message */
+.no-results-message {
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #fff;
+  margin-bottom: 20px; /* Space between message and popcorn image */
+  padding-top: 2%;
+}
+
+/* Results Section Styling (occupies the remaining space) */
+.results-section {
+  flex: 1; /* Takes the remaining space */
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+}
+
+/* Image Section Styling (for Popcorn image when no results) */
+.image-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column; /* Stack message and image vertically */
+  justify-content: center;
+  align-items: center;
+  background-color: #37352b;
+}
+
+/* Styling for the Popcorn image */
+.image-section img {
+  max-width: 90%;
+  height: auto;
+  border-radius: 8px;
+  object-fit: contain;
+}
+
+/* Movie Card Styles */
+.movie-card {
+  display: flex;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 1rem 0;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.movie-image {
+  width: 120px;
+  height: auto;
+  object-fit: cover;
+}
+
+.movie-details {
+  padding: 1rem;
+  flex: 1;
+}
+
+.movie-title {
+  font-size: 1.2rem;
+  margin: 0 0 0.5rem;
+}
+
+.movie-year,
+.movie-duration,
+.movie-rating,
+.movie-description {
+  font-size: 0.9rem;
+  margin: 0.2rem 0;
+}
+
+/* Media Query for tablets and below (max-width: 1200px) */
+@media (max-width: 1200px) {
+  .advanced-search-container {
       flex-direction: column; /* Stack form and image */
-    }
-  
-    .form-section,
-    .image-section {
+  }
+
+  .form-section,
+  .results-section {
       width: 100%; /* Take full width on smaller screens */
-      margin-bottom: 20px; /* Add space between sections */
-    }
   }
-  
-  /* Media Query for mobile screens (max-width: 768px) */
-  @media (max-width: 768px) {
-    .advanced-search-container {
-      flex-direction: column; /* Stack form and image */
+}
+
+/* Media Query for mobile screens (max-width: 768px) */
+@media (max-width: 768px) {
+  .advanced-search-container {
+      flex-direction: column; /* Stack form and results */
       gap: 10px; /* Reduce gap between sections */
-    }
-  
-    .form-section {
+  }
+
+  .form-section {
       padding: 10px; /* Reduce padding on mobile */
-    }
-  
-    .image-section img {
+  }
+
+  .image-section img {
       max-width: 100%; /* Allow image to take full width */
       margin-top: 20px; /* Add space between the form and image */
-    }
   }
-  
-  /* Media Query for small mobile screens (max-width: 480px) */
-  @media (max-width: 480px) {
-    .advanced-search-container {
+}
+
+/* Media Query for small mobile screens (max-width: 480px) */
+@media (max-width: 480px) {
+  .advanced-search-container {
       gap: 5px; /* Even smaller gap on small mobile devices */
-    }
-  
-    .form-section {
-      padding: 5px; /* Minimized padding */
-    }
   }
+
+  .form-section {
+      padding: 5px; /* Minimized padding */
+  }
+}

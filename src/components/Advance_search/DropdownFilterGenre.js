@@ -1,14 +1,14 @@
 import React from 'react';
 
-const DropdownFilter = ({ label, options }) => {
+const DropdownFilterGenre = ({ label, options, onChange }) => {
   return (
     <div style={{ marginBottom: '10px' }}>
       <label>
         <strong>{label}</strong>
-        <select style={{ marginLeft: '10px', padding: '5px' }}>
+        <select onChange={onChange} style={{ marginLeft: '10px', padding: '5px' }}>
           {options.map((option, index) => (
-            <option key={index} value={option}>
-              {option}
+            <option key={index} value={option.id}>
+              {option.name}
             </option>
           ))}
         </select>
@@ -17,4 +17,4 @@ const DropdownFilter = ({ label, options }) => {
   );
 };
 
-export default DropdownFilter;
+export default DropdownFilterGenre;

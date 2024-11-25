@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { getGenreName } from '../components/searchApi.js';
-import { getLanguageName } from '../components/Advance_search/AdvanceSearchApi.js';
+import { getLanguageName, getCastIDs, searchAdvanced } from '../components/Advance_search/AdvanceSearchApi.js';
 
 function useAdvanceMovieSearch(){
     const [genres, setGenres] = useState([]);
@@ -28,11 +28,47 @@ function useAdvanceMovieSearch(){
         fetchLanguage();
     }, []);
 
+    //
+    async function searchForResults(title, genre, cast, year, language) {
+        const data = await getCastIDs(cast)
+        const castIds = data.castIds
+        const castIdstring = castIds.join('|')
+
+        const genreNames = await getGenreName()
+        const movieData = await searchAdvanced(title, genre, castIdstring, year, language, 1)
+        const totalPages = movieData.total_pages
+        const movies = movieData.results
+        
+        let matchingMovies = filterMoviesByName(title, movies)
+
+        for (let page=2; page<totalPages; page++) {
+            const pageData = await searchAdvanced(title, genre, castIdstring, year, language, page)
+            const pageMovies = pageData.results
+            const movies = filterMoviesByName(title, pageMovies)
+            matchingMovies.push(...movies)
+        }
+
+        return matchingMovies
+    }
+
+    function filterMoviesByName(name, movies) {
+        let matchingMovies = []
+        for (let movie=0; movie<movies.length; movie++) {
+            let movieName = movies[movie].original_title
+            if (movieName.toLowerCase().includes(name.toLowerCase())) {
+                matchingMovies.push(movies[movie])
+            }
+        }
+        return matchingMovies
+    }
 
     return {        
         genres,
-        language        
+        language,
+        searchForResults,        
       };
 }
+
+
 
 export default useAdvanceMovieSearch;
