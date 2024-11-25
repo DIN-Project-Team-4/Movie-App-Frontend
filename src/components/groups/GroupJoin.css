@@ -1,0 +1,47 @@
+/* Example custom styles */
+/* .group-name {
+    font-weight: bold;
+  }
+  #new-group-btn {
+    font-size: 1.1em;
+  }
+   */
+
+   /* GroupJoin.css */
+
+/* Container for the GroupJoin component */
+.group-join-container {
+  width: 100%; /* Full width of the parent container */
+  max-width: 400px; /* Adjust width as needed */
+  margin: 0 auto;
+  background-color: #222; /* Optional: Add a background color */
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  color: #f0f0f0;
+}
+
+/* Title */
+.group-join-container h2 {
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 1.5em;
+}
+
+/* Group item styling */
+.group-item {
+  padding: 15px;
+  font-size: 1em;
+  width: 100%;
+  background-color: #333; /* Optional: Add a background color to items */
+  border-radius: 6px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Button styling */
+.group-item button {
+  width: 120px; /* Make the button a bit wider */
+}
