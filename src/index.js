@@ -12,6 +12,7 @@ import AdvancedSearch from './screens/AdvancedSearch.js';
 import GroupsPage from './screens/GroupsPage.js';
 import MovieDetails from './screens/MovieDetails.js';
 import { MovieSearchProvider } from './context/MovieSearchContext.js';
+import GroupPage from './screens/GroupPage.js';
 
 
 const router = createBrowserRouter([
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
       {
         path: '/groups',
         element: <GroupsPage />,
+      },
+      {
+        path: '/groups/:groupId',
+        element: <GroupPage />,
       },
       {
         path: '/movie/:id',
