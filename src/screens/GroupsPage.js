@@ -17,11 +17,11 @@ const GroupsPage = ({ groupId }) => {
         fetch(`/groups/${groupId}`)
 
         // Fetch groups from the backend
-        fetch('/groups/all')
+        fetch(`${process.env.REACT_APP_API_URL}/groups/all`)
             .then((response) => response.json())
             .then((data) => setGroup(data));
         // Fetch members from the backend
-        fetch(`/groups/${groupId}/members`)
+        fetch(`${process.env.REACT_APP_API_URL}/groups/${groupId}/members`)
             .then((response) => response.json())
             .then((data) => setMembers(data));
         // Fetch posts from the backend
@@ -48,7 +48,7 @@ const GroupsPage = ({ groupId }) => {
                 <Row className="d-flex justify-content-between align-items-center">
 
                         <Col>
-                            <h2 className="my-4">Suggested Groups</h2>
+                            <h2 className="my-4">All Groups</h2>
                         </Col>
 
                     <Col className="text-end">
