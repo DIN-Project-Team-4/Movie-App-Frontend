@@ -17,11 +17,11 @@ const GroupsPage = ({ groupId }) => {
         fetch(`/groups/${groupId}`)
 
         // Fetch groups from the backend
-        fetch('/groups/all')
+        fetch(`${process.env.REACT_APP_API_URL}/groups/all`)
             .then((response) => response.json())
             .then((data) => setGroup(data));
         // Fetch members from the backend
-        fetch(`/groups/${groupId}/members`)
+        fetch(`${process.env.REACT_APP_API_URL}/groups/${groupId}/members`)
             .then((response) => response.json())
             .then((data) => setMembers(data));
         // Fetch posts from the backend
