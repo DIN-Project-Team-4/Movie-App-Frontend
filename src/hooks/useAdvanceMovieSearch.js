@@ -36,7 +36,7 @@ function useAdvanceMovieSearch(){
 
         const genreNames = await getGenreName()
         const movieData = await searchAdvanced(title, genre, castIdstring, year, language, 1)
-        const totalPages = movieData.total_pages
+        const totalPages = (movieData.total_pages > 500) ? 500 : movieData.total_pages // tmdb only provides 10000 results (500 pages) from any given endpoint
         const movies = movieData.results
         
         let matchingMovies = filterMoviesByName(title, movies)
@@ -54,7 +54,7 @@ function useAdvanceMovieSearch(){
     function filterMoviesByName(name, movies) {
         let matchingMovies = []
         for (let movie=0; movie<movies.length; movie++) {
-            let movieName = movies[movie].original_title
+            let movieName = movies[movie].title
             if (movieName.toLowerCase().includes(name.toLowerCase())) {
                 matchingMovies.push(movies[movie])
             }
