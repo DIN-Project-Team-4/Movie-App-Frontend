@@ -48,7 +48,7 @@ const GroupsPage = ({ groupId }) => {
                 <Row className="d-flex justify-content-between align-items-center">
 
                         <Col>
-                            <h2 className="my-4">Suggested Groups</h2>
+                            <h2 className="my-4">All Groups</h2>
                         </Col>
 
                     <Col className="text-end">
