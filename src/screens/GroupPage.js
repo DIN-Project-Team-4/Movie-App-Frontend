@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import './GroupPage.css';
-import MemberList from '../components/Groups/MemberList.js'
+import MemberList from '../components/groups/MemberList.js'
 import Chat from '../components/groups/Chat.js'
 
 const GroupPage = ({ groupId }) => {
