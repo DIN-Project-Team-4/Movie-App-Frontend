@@ -1,0 +1,44 @@
+.carousel-control-prev-icon {
+    width: 3rem;
+    height: 3rem;
+    background-image: url("data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 16 16%27 fill=%27%23bf9b30%27%3e%3cpath d=%27M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z%27/%3e%3c/svg%3e");
+}
+
+.carousel-control-next-icon {
+    width: 3rem;
+    height: 3rem;
+    background-image: url("data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 16 16%27 fill=%27%23bf9b30%27%3e%3cpath d=%27M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z%27/%3e%3c/svg%3e");
+}
+
+.carousel-indicators [data-bs-target] {
+    background-color: #bf9b30;
+    margin-bottom: -2rem;
+}
+
+.carousel-item img {
+    max-width: 50%;
+    height: auto;
+    object-fit: cover;
+}
+
+.carousel-item .carousel-caption {
+    max-width: 50%;
+    height: stretch;
+    text-align: left;
+    margin: 0% 0% 0% 25%;
+}
+
+.carousel-caption h3 {
+    display: inline;
+    margin-right: 10px;
+}
+
+.carousel-caption h6.release-date {
+    display: inline;
+    opacity: 0.5;
+}
+
+.carousel-caption p.carousel-summary {
+    text-align: left;
+    opacity: 0.6;
+}

@@ -1,3 +1,9 @@
+/*
+
+ONLY PUT GLOBAL VARIABLES HERE
+
+*/
+
 body {
   display: flex;
   flex-direction: column;
@@ -11,20 +17,14 @@ body {
   background-attachment: fixed;
 }
 
-/* GLOBAL TEXT COLOUR */
+/* TEXT COLOUR */
 * {
   color: #bf9b30 !important;
 }
 
-/* NAVIGATION BAR LOGO SIZE*/
-.navbar-logo {
-  max-height: 4rem;
-  width: auto;
-}
-
-/* MAIN WINDOW */
-.main-div {
-  padding: 4rem;
+/* IMG ROUNDED CORNERS */
+img {
+  border-radius: 15px;
 }
 
 /* TITLE FOR ANY CONTAINER */
@@ -32,116 +32,5 @@ body {
   width: 100%;
   border-left: solid 5px #FFD700;
   padding-left: 1rem;
+  margin-bottom: 1rem;
 }
-
-/* -------------- CAROUSEL CSS START -------------- */
-.carousel-main {
-  height: 25rem;
-}
-
-.carousel-inner {
-  height: 100%;
-}
-
-.movie-info-container {
-  display: flex;
-  padding: 2%;
-}
-
-.img-container {
-  width: 100%;
-}
-
-.img-container img {
-  width: 100%;
-  height: auto;
-  border-radius: 15px;
-}
-
-.description-container {
-  padding: 1rem;
-  width: 100%;
-}
-
-.release-date {
-  display: inline;
-  opacity: 0.3;
-  margin-left: 5px;
-}
-
-.carousel-summary {
-  opacity: 0.8;
-}
-
-.carousel-control-next-icon,
-.carousel-control-prev-icon {
-  background-image: none;
-  border: solid #bf9b30;
-  border-width: 0 6px 6px 0;
-}
-
-.carousel-control-next-icon {
-  transform: rotate(-45deg);
-}
-
-.carousel-control-prev-icon {
-  transform: rotate(135deg);
-}
-
-/* --------------- CAROUSEL CSS END --------------- */
-
-/* ------------ CELEBRITIES CSS START ------------- */
-.celebrities-main {
-  margin: 5rem auto;
-}
-
-.swiper-container {
-  padding: 2rem;
-}
-
-.swiper-slide img {
-  border-radius: 50%;
-  width: 100px;
-  height: 100px;
-  object-fit: cover;
-}
-
-.swiper-slide {
-  text-align: center;
-}
-
-.celebrity-name {
-  margin-top: 1rem;
-  font-weight: bold;
-}
-
-.rank {
-  font-size: 12px;
-  color: gray;
-}
-
-.swiper-pagination-bullet {
-  background-color: #bf9b30 !important;
-}
-
-.swiper-pagination-bullet-active {
-  transform: scale(1.3); 
-}
-
-.swiper-pagination-bullet:hover {
-  transform: scale(1.3);
-}
-
-/* ------------- CELEBRITIES CSS END -------------- */
-
-
-/* --------------- FOOTER CSS START --------------- */
-
-.footer {
-  height: 8rem;
-  display: flex;
-  justify-content: center; 
-  align-items: center;
-}
-
-/* ---------------- FOOTER CSS END ---------------- */

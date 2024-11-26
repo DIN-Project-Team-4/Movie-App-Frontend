@@ -7,7 +7,7 @@ const IndexLayout = () => {
   return (
     <>
       <Header />
-      <main style={{ marginTop: '5rem' }}>
+      <main style={{ marginTop: '4rem', padding: '5%' }}>
         <Outlet />
       </main>
       <Footer />

@@ -1,9 +1,11 @@
-
 import React, { useState, useEffect } from 'react';
-import { MDBCarousel, MDBCarouselItem } from 'mdb-react-ui-kit';
+import { Carousel } from 'react-bootstrap';
+import { Link } from 'react-router-dom'
 import { getTrendingMovies } from '../Search/searchApi.js';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './Carousel.css'
 
-export default function Carousel() {
+export default function ImageCarousel() {
     const [trendingMovies, setTrendingMovies] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
@@ -29,32 +31,28 @@ export default function Carousel() {
             {isLoading ? (
                 <p>Loading trending movies...</p>
             ) : (
-                <MDBCarousel showControls showIndicators={false} interval={5000}>
+                <Carousel interval={6000}>
                     {
-                        trendingMovies.map((movie, index) => (
-                            <MDBCarouselItem itemId={index + 1} key={movie.id}>
-                                <div className='movie-info-container'>
+                        trendingMovies.map((movie) => (
+                            <Carousel.Item key={movie.id}>
+                                <Link to={`/movie/${movie.id}`}>
                                     {/* Image Section */}
-                                    <div className="img-container">
-                                        <img
-                                            src={`https://image.tmdb.org/t/p/w500${movie.backdrop_path}`}
-                                            className="img-fluid"
-                                            alt={movie.title}
-                                        />
-                                    </div>
+                                    <img
+                                        src={`https://image.tmdb.org/t/p/w500${movie.backdrop_path}`}
+                                        alt={movie.title}
+                                    />
 
                                     {/* Description Section */}
-                                    <div className="description-container">
-                                        <h3>{movie.title} <h6 className="release-date">({new Date(movie.release_date).getFullYear()})</h6></h3>
+                                    <Carousel.Caption>
+                                        <h3>{movie.title}</h3> <h6 className="release-date">({new Date(movie.release_date).getFullYear()})</h6>
                                         <p className="carousel-summary">{movie.overview}</p>
-                                    </div>
-                                </div>
-                            </MDBCarouselItem>
+                                    </Carousel.Caption>
+                                </Link>
+                            </Carousel.Item>
                         ))
                     }
-                </MDBCarousel>
-            )
-            }
+                </Carousel>
+            )}
         </div>
     );
 }

@@ -6,6 +6,7 @@ import Search from './Search/Search.js';
 import SignInModal from './Sign-In/SignInModal.js';
 import { useMovieSearchContext } from '../context/MovieSearchContext.js';
 import { useState } from 'react';
+import './Header.css'
 
 const Header = ({ showSearchBox = true, showDropdownMenu = true }) => {
   const {

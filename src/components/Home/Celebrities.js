@@ -5,6 +5,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { getTrendingCelebrities } from '../Search/searchApi.js';
+import './Celebrities.css'
 
 export default function Celebrities() {
   const [trendingCelebrities, setTrendingCelebrities] = useState([]);
