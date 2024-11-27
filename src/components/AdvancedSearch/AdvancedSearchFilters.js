@@ -5,9 +5,18 @@ import useMovieSearch from '../../hooks/useMovieSearch.js';
 import useAdvanceMovieSearch from '../../hooks/useAdvanceMovieSearch.js';
 import Popcorn from '../../assets/Advanced-search.webp'
 import AdvancedResultList from './AdvancedResultList.js';
+import PageChangeButton from '../Search/PageChangeButton.js';
 
 const AdvancedSearchFilters = () => {
-  const {genres,language,searchForResults} = useAdvanceMovieSearch();
+  const {
+    genres,
+    language,
+    searchForResults,
+    prevPage,
+    nextPage,
+    page,
+    totalPages,
+  } = useAdvanceMovieSearch();
 
   const [movieTitle,setMovieTitle] = useState("")
   const [movieYear,setMovieYear] = useState("")
@@ -148,6 +157,8 @@ const AdvancedSearchFilters = () => {
   <div className="results-section">
     <h2>Matching Movies</h2>
     <AdvancedResultList movies={searchResults} />
+    {/* Add next and previous bottons with page number */}
+    <PageChangeButton prevPage={prevPage} nextPage = {nextPage} page = {page} totalPages ={totalPages}/>
   </div>
 )}
     </div>
