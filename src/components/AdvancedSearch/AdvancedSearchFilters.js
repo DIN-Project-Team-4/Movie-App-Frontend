@@ -37,9 +37,7 @@ const AdvancedSearchFilters = () => {
   }, [genres]);
 
   useEffect(() => {
-    if (results.length > 0) {
-      setSearchResults(results); // Extract names into genreList
-    }
+    setSearchResults(results); // Extract names into genreList
   }, [results]);
 
   // Update language List when language are fetched

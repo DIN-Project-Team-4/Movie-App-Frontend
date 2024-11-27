@@ -41,6 +41,7 @@ function useAdvanceMovieSearch(){
         setTitle(title)
         setCast(cast)
         setYear(year)
+        setPage(1)
         await searchForResults(title, genre, cast, year, language)
     }
 
@@ -52,7 +53,7 @@ function useAdvanceMovieSearch(){
         setGenre(genre)
         setLang(lang)
 
-        const resultsPerPage = 20
+        const resultsPerPage = 10
         const data = await getCastIDs(cast)
         const castIds = data.castIds
         const castIdstring = castIds.join('|')
@@ -86,14 +87,8 @@ function useAdvanceMovieSearch(){
     }
 
     function filterMoviesByName(name, movies) {
-        let matchingMovies = []
-        for (let movie=0; movie<movies.length; movie++) {
-            let movieName = movies[movie].title
-            if (movieName.toLowerCase().includes(name.toLowerCase())) {
-                matchingMovies.push(movies[movie])
-            }
-        }
-        return matchingMovies
+        const query = name.toLowerCase();
+        return movies.filter(movie => movie.title.toLowerCase().includes(query));
     }
 
     useEffect(() => {
