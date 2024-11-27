@@ -7,6 +7,7 @@ import '../index.css';
 import './MovieDetails.css';
 
 import { Button } from 'react-bootstrap';
+import MovieReviewForm from '../components/Reviews/MovieReviewForm.js';
 const backendUrl = process.env.REACT_APP_API_URL;
 
 const MovieDetails = () => {
@@ -110,7 +111,7 @@ const MovieDetails = () => {
               <h2>Reviews</h2>
             </div>
             <div className="reviews">
-              test test
+              <MovieReviewForm/>
 
             </div>
           </div>
