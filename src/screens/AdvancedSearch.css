@@ -83,14 +83,12 @@
   flex: 1;
 }
 
-.movie-title {
-  font-size: 1.2rem;
+.movie-title-advanced-search {
+  font-size: 1.3rem;
   margin: 0 0 0.5rem;
 }
 
 .movie-year,
-.movie-duration,
-.movie-rating,
 .movie-description {
   font-size: 0.9rem;
   margin: 0.2rem 0;

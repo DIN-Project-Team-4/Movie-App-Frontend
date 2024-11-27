@@ -48,4 +48,22 @@ async function searchAdvanced(title, genre, cast, year, language, page) {
   }
 }
 
-export { getLanguageName, getCastIDs, searchAdvanced }
+// Function to search movies by title, year and language
+async function searchByTitleYearLanguage(title, year, language, page) {
+  try {
+    const response = await axios.get(`${url}/api/tmdb/search/bytitleyearlang`, {
+      params: {
+        title,
+        year,
+        language,
+        page,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching movies by title, year and language:', error.message);
+    return null;
+  }
+}
+
+export { getLanguageName, getCastIDs, searchAdvanced, searchByTitleYearLanguage }

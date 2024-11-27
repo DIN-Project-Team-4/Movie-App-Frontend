@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { getGenreName } from '../components/Search/searchApi.js';
-import { getLanguageName, getCastIDs, searchAdvanced } from '../components/AdvancedSearch/AdvanceSearchApi.js';
+import { getLanguageName, getCastIDs, searchAdvanced, searchByTitleYearLanguage } from '../components/AdvancedSearch/AdvanceSearchApi.js';
 
 function useAdvanceMovieSearch(){
     const [genres, setGenres] = useState([]);
@@ -37,21 +37,21 @@ function useAdvanceMovieSearch(){
         fetchLanguage();
     }, []);
 
-    async function newAdvancedSearch(title, genre, cast, year, language) {
-        setTitle(title)
-        setCast(cast)
-        setYear(year)
-        setPage(1)
-        await searchForResults(title, genre, cast, year, language)
-    }
-
-    //
-    async function searchForResults(title, genre, cast, year, lang) {
+    async function newAdvancedSearch(title, genre, cast, year, lang) {
         setTitle(title)
         setCast(cast)
         setYear(year)
         setGenre(genre)
         setLang(lang)
+        setPage(1)
+        if (title != "" && genre === "" && cast === "") {
+            await searchForResultsTitleYearGenre(title, year, lang)
+        } else {
+            await searchForResults(title, genre, cast, year, lang)
+        }
+    }
+
+    async function searchForResults(title, genre, cast, year, lang) {
 
         const resultsPerPage = 10
         const data = await getCastIDs(cast)
@@ -86,6 +86,12 @@ function useAdvanceMovieSearch(){
         return displayMovies
     }
 
+    async function searchForResultsTitleYearGenre(title, year, lang) {
+        const data = await searchByTitleYearLanguage(title, year, lang, page)
+        setTotalPages(data.total_pages)
+        setResults(data.results)
+    }
+
     function filterMoviesByName(name, movies) {
         const query = name.toLowerCase();
         return movies.filter(movie => movie.title.toLowerCase().includes(query));
@@ -94,7 +100,11 @@ function useAdvanceMovieSearch(){
     useEffect(() => {
         // Refetch results when the page changes
         if (title || genre || cast || year || lang) {
-            searchForResults(title, genre, cast, year, lang);
+            if (title != "" && genre === "" && cast === "") {
+                searchForResultsTitleYearGenre(title, year, lang)
+            } else {
+                searchForResults(title, genre, cast, year, lang)
+            }
         }
     }, [page]);
 
