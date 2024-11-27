@@ -44,7 +44,7 @@ function useAdvanceMovieSearch(){
         setGenre(genre)
         setLang(lang)
         setPage(1)
-        if (genre === "" && cast === "") {
+        if (title != "" && genre === "" && cast === "") {
             await searchForResultsTitleYearGenre(title, year, lang)
         } else {
             await searchForResults(title, genre, cast, year, lang)
@@ -100,7 +100,7 @@ function useAdvanceMovieSearch(){
     useEffect(() => {
         // Refetch results when the page changes
         if (title || genre || cast || year || lang) {
-            if (genre === "" && cast === "") {
+            if (title != "" && genre === "" && cast === "") {
                 searchForResultsTitleYearGenre(title, year, lang)
             } else {
                 searchForResults(title, genre, cast, year, lang)
