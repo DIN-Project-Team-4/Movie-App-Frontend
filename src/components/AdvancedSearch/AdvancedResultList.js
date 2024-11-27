@@ -1,6 +1,5 @@
 import React from 'react'
 import AdvancedResultMovieCard from './AdvancedResultMovieCard.js'
-import './AdvancedResultList.css'
 
 export default function AdvancedResultList({movies}) {
     if (!Array.isArray(movies)) {

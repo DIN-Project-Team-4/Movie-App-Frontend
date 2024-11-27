@@ -9,7 +9,7 @@ export default function AdvancedResultMovieCard({movie}) {
         <div className="movie-card">
           <img src={movie.poster_path == null ? posterPlaceholder :mainURL + movie.poster_path} alt={movie.title} className="movie-image" />
           <div className="movie-details">
-            <h5 className="movie-title">{movie.title}</h5>
+            <h8 className="movie-title-advanced-search">{movie.title}</h8>
             <p className="movie-year">{year}</p>
             <p className="movie-description">{movie.overview}</p>
           </div>
