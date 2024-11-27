@@ -61,7 +61,7 @@ const AdvancedSearchFilters = () => {
     });
     */
     newAdvancedSearch(movieTitle, selectedGenre, cast, movieYear, selectedLanguage)
-    setSearchResults(results)
+    //setSearchResults(results)
   }
 
 

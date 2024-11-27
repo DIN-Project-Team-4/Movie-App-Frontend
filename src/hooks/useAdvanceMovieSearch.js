@@ -70,7 +70,7 @@ function useAdvanceMovieSearch(){
 
         while (matchingMovies.length < page*resultsPerPage && tmdbPage < totalPagesNow) {
             tmdbPage++
-            const pageData = await searchAdvanced(title, genre, castIdstring, year, lang, page)
+            const pageData = await searchAdvanced(title, genre, castIdstring, year, lang, tmdbPage)
             const pageMovies = pageData.results
             const movies = filterMoviesByName(title, pageMovies)
             matchingMovies.push(...movies)
