@@ -35,7 +35,7 @@ const Header = ({ showSearchBox = true, showDropdownMenu = true }) => {
 
   return (
     <>
-      <Navbar fixed="top" expand="md" style={{ fontSize: '1.2rem' }}>
+      <Navbar className="navbar-style" fixed="top" expand="md" style={{ fontSize: '1.2rem' }}>
         <Container fluid>
           <Navbar.Brand href="/">
             <img src={Logo} alt="logo" className="navbar-logo" />

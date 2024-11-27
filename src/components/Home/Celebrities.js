@@ -28,7 +28,7 @@ export default function Celebrities() {
   return (
     <div className="celebrities-main">
       {/* Title Section */}
-      <div className="container-title">
+      <div className="div-title">
         <h2>Most Popular Celebrities </h2>
       </div>
 

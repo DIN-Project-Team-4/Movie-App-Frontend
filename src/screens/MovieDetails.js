@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { Card } from 'react-bootstrap';
 import axios from 'axios';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import '../index.css';
+import './MovieDetails.css';
 
+import { Button } from 'react-bootstrap';
 const backendUrl = process.env.REACT_APP_API_URL;
 
 const MovieDetails = () => {
@@ -48,40 +53,56 @@ const MovieDetails = () => {
   const trailer = videos.find(video => video.type === 'Trailer' && video.site === 'YouTube');
 
   return (
-    <div className="movie-details">
+    <div className="main-div">
+      <div className="div-title">
+        <span className="movie-title">{movie.title}</span> <span className="release-year">({new Date(movie.release_date).getFullYear()})</span>
+      </div>
       {movie && (
         <>
-          <h1>{movie.title} ({new Date(movie.release_date).getFullYear()})</h1>
-          <div className="details-header">
-            <img src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt={`${movie.title} Poster`} />
-            <div className="details-info">
-              <p><strong>Genre:</strong> {movie.genres.map(genre => genre.name).join(', ')}</p>
-              <p><strong>Duration:</strong> {movie.runtime} minutes</p>
-              <p><strong>Summary:</strong> {movie.overview}</p>
+          <div className="details-trailer-container">
+            <div className="details-container">
+              <div className="poster-container">
+                <img src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt={`${movie.title} Poster`} className="movie-poster" />
+              </div>
+              <div className="details-info">
+
+                <div className="genres">
+                  {movie.genres.map(genre => (
+                    <Button key={genre.id} variant="outline-*" className="genre-button" disabled>{genre.name}</Button>
+                  ))}
+                </div>
+                <p><strong>Duration:</strong> {movie.runtime} minutes</p>
+                <p className="movie-summary">{movie.overview}</p>
+              </div>
             </div>
+            {trailer && (
+              <div className="trailer">
+                <iframe
+                  src={`https://www.youtube-nocookie.com/embed/${trailer.key}`}
+                  title="Trailer"
+                  allowFullScreen
+                ></iframe>
+              </div>
+            )}
           </div>
-          {trailer && (
-            <div className="trailer">
-              <h2>Trailer</h2>
-              <iframe
-                width="560"
-                height="315"
-                src={`https://www.youtube.com/embed/${trailer.key}`}
-                title="Trailer"
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              ></iframe>
-            </div>
-          )}
           {movie.credits && movie.credits.cast && (
             <div className="cast">
-              <h2>Actors</h2>
-              <ul>
+              <div className="cast-container">
                 {movie.credits.cast.slice(0, 10).map(actor => (
-                  <li key={actor.id}>{actor.name} as {actor.character}</li>
+                  <Card key={actor.id}>
+                    <Card.Img variant='top'
+                      src={actor.profile_path ? `https://image.tmdb.org/t/p/w185/${actor.profile_path}` : 'https://via.placeholder.com/185x278?text=No+Image'}
+                      alt={`${actor.name}`}
+                    />
+                    <Card.ImgOverlay>
+                      <Card.Title>{actor.name}</Card.Title>
+                    </Card.ImgOverlay>
+                    <Card.Body>
+                      <Card.Text>as {actor.character}</Card.Text>
+                    </Card.Body>
+                  </Card>
                 ))}
-              </ul>
+              </div>
             </div>
           )}
         </>

@@ -24,7 +24,7 @@ export default function ImageCarousel() {
     return (
         <div className="carousel-main">
             {/* Title Section */}
-            <div className="container-title">
+            <div className="div-title">
                 <h2>Trending Movies</h2>
             </div>
 

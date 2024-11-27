@@ -1,7 +1,6 @@
 import React from 'react';
 import { Form, FormControl, Button, InputGroup, Dropdown, DropdownButton } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-import '@fortawesome/fontawesome-free/css/all.min.css'; 
 
 
 export default function Search({ filterMethod, setFilterMethod, searchText, setSearchText, newSearch }) {
@@ -32,7 +31,7 @@ export default function Search({ filterMethod, setFilterMethod, searchText, setS
           title={filterMethod === "title" ? "Title" : filterMethod === "release_year" ? "Year" : "Genre"}
           id="filter_methods"
           onSelect={(eventKey) => setFilterMethod(eventKey)}
-          variant="outline-dark"
+          variant="outline-*"
         >
           <Dropdown.Item eventKey="title">
             <i className="fas fa-film" style={{ marginRight: '9px' }}></i>
@@ -60,7 +59,7 @@ export default function Search({ filterMethod, setFilterMethod, searchText, setS
           placeholder="Search here"
         />
 
-        <Button type="submit" variant="outline-dark">Search</Button>
+        <Button type="submit" variant="outline-*">Search</Button>
       </InputGroup>
     </Form>
   );
