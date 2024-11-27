@@ -1,12 +1,11 @@
-import React from 'react';
-import { Navbar, Nav, NavDropdown, Container } from 'react-bootstrap';
 import 'bootstrap-icons/font/bootstrap-icons.css';
+import React, { useState } from 'react';
+import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import Logo from '../assets/logo_full.png';
+import { useMovieSearchContext } from '../context/MovieSearchContext.js';
+import './Header.css';
 import Search from './Search/Search.js';
 import SignInModal from './Sign-In/SignInModal.js';
-import { useMovieSearchContext } from '../context/MovieSearchContext.js';
-import { useState } from 'react';
-import './Header.css'
 
 const Header = ({ showSearchBox = true, showDropdownMenu = true }) => {
   const {
@@ -32,6 +31,20 @@ const Header = ({ showSearchBox = true, showDropdownMenu = true }) => {
     { href: '/profile', label: 'My Profile' },
     { href: '/settings', label: 'Settings' },
   ];
+
+  //handle LogOut.
+  const handleLogout = () => {
+    // Clear local storage
+    localStorage.clear();
+    
+     // Delete all cookies
+    document.cookie.split(";").forEach(cookie => {
+    const accessToken = cookie.split("=");
+    window.alert(accessToken);
+    document.cookie = `${accessToken}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+  }); 
+   
+  };
 
   return (
     <>
@@ -76,7 +89,7 @@ const Header = ({ showSearchBox = true, showDropdownMenu = true }) => {
                     </NavDropdown.Item>
                   ))}
                   <NavDropdown.Divider />
-                  <NavDropdown.Item href="/logout" key="/logout">
+                  <NavDropdown.Item  onClick={handleLogout}>
                     Logout
                   </NavDropdown.Item>
                 </NavDropdown>

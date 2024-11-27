@@ -240,7 +240,7 @@ const SignIn = ({ setSignInOpen }) => {
                                         </div>
                                         <div className='signin-modal-footer'>
                                             <button className='btn' disabled={signDisabled}>
-                                                Sign Up
+                                                Sign In
                                             </button>
                                         </div>
                                     </form>

@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import React, { useState } from 'react';
 
 function MovieReviewForm() {
+  const baseUrl = process.env.REACT_APP_API_BASE_URL; //for the URL
   const [rating, setRating] = useState(0); // Default no rating
   const [review, setReview] = useState('');
   const [error, setError] = useState('');
+
 
   const handleRatingChange = (value) => {
     setRating(value);
@@ -22,6 +24,13 @@ function MovieReviewForm() {
       setError('Please provide a rating.');
       return;
     }
+
+    //Review backend connection
+    const userData = JSON.parse(localStorage.getItem('userData'));
+    if (!userData || !userData.userId ){
+      setError('Please Login before you enter review.');
+      return;
+    }   
 
     // Alert form submission
     alert(`Review Submitted!\nRating: ${rating} Stars\nReview: ${review || 'No review provided'}`);
