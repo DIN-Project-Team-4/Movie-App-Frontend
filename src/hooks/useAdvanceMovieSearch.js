@@ -13,6 +13,7 @@ function useAdvanceMovieSearch(){
     const [cast, setCast] = useState("")
     const [year, setYear] = useState("")
     const [genre, setGenre] = useState("")
+    const [lang, setLang] = useState("")
 
     // Fetch genres on first render
     useEffect(() => {
@@ -44,11 +45,13 @@ function useAdvanceMovieSearch(){
     }
 
     //
-    async function searchForResults(title, genre, cast, year, language) {
+    async function searchForResults(title, genre, cast, year, lang) {
         setTitle(title)
         setCast(cast)
         setYear(year)
         setGenre(genre)
+        setLang(lang)
+
         const resultsPerPage = 20
         const data = await getCastIDs(cast)
         const castIds = data.castIds
@@ -57,7 +60,7 @@ function useAdvanceMovieSearch(){
 
         const genreNames = await getGenreName()
         let tmdbPage = 1
-        const movieData = await searchAdvanced(title, genre, castIdstring, year, language, tmdbPage)
+        const movieData = await searchAdvanced(title, genre, castIdstring, year, lang, tmdbPage)
         const totalPagesNow = (movieData.total_pages > 500) ? 500 : movieData.total_pages // tmdb only provides 10000 results (500 pages) from any given endpoint
         setTotalPages(totalPagesNow)
         const movies = movieData.results
@@ -67,7 +70,7 @@ function useAdvanceMovieSearch(){
 
         while (matchingMovies.length < page*resultsPerPage && tmdbPage < totalPagesNow) {
             tmdbPage++
-            const pageData = await searchAdvanced(title, genre, castIdstring, year, language, page)
+            const pageData = await searchAdvanced(title, genre, castIdstring, year, lang, page)
             const pageMovies = pageData.results
             const movies = filterMoviesByName(title, pageMovies)
             matchingMovies.push(...movies)
@@ -76,15 +79,6 @@ function useAdvanceMovieSearch(){
         const displayStartIndex = (page-1)*resultsPerPage
         const displayEndIndex = Math.min(matchingMovies.length, page*resultsPerPage)
         displayMovies = matchingMovies.slice(displayStartIndex, displayEndIndex)
-
-        /*
-        for (let page=2; page<totalPages; page++) {
-            const pageData = await searchAdvanced(title, genre, castIdstring, year, language, page)
-            const pageMovies = pageData.results
-            const movies = filterMoviesByName(title, pageMovies)
-            matchingMovies.push(...movies)
-        }
-        */
         
         setResults(displayMovies)
 
@@ -103,7 +97,10 @@ function useAdvanceMovieSearch(){
     }
 
     useEffect(() => {
-        //searchForResults(title, genre, cast, year, language)
+        // Refetch results when the page changes
+        if (title || genre || cast || year || lang) {
+            searchForResults(title, genre, cast, year, lang);
+        }
     }, [page]);
 
     function nextPage() {
@@ -119,14 +116,14 @@ function useAdvanceMovieSearch(){
     return {        
         genres,
         language,
+        newAdvancedSearch,
         searchForResults,
+        results,
         prevPage,
         nextPage,
         page,
         totalPages,
       };
 }
-
-
 
 export default useAdvanceMovieSearch;

@@ -11,7 +11,9 @@ const AdvancedSearchFilters = () => {
   const {
     genres,
     language,
+    newAdvancedSearch,
     searchForResults,
+    results,
     prevPage,
     nextPage,
     page,
@@ -34,6 +36,12 @@ const AdvancedSearchFilters = () => {
     }
   }, [genres]);
 
+  useEffect(() => {
+    if (results.length > 0) {
+      setSearchResults(results); // Extract names into genreList
+    }
+  }, [results]);
+
   // Update language List when language are fetched
   useEffect(() => {
     if (language.length > 0) {
@@ -45,11 +53,15 @@ const AdvancedSearchFilters = () => {
   function handleAdvanceSearchSubmit(e){
     e.preventDefault()
     // Call searchForResults and update searchResults
+    /*
     searchForResults(movieTitle, selectedGenre, cast, movieYear, selectedLanguage).then((results) => {
       setSearchResults(results);
     }).catch((error) => {
       console.error('Error fetching search results:', error);
     });
+    */
+    newAdvancedSearch(movieTitle, selectedGenre, cast, movieYear, selectedLanguage)
+    setSearchResults(results)
   }
 
 
@@ -137,7 +149,7 @@ const AdvancedSearchFilters = () => {
         </form>
       </div>
       
-      {searchResults?.length === 0 ? (
+  {searchResults?.length === 0 ? (
   <div className="image-section">
     <div className="no-results-message">
     <p>No search performed or no results found. Try adjusting the filters.</p>
