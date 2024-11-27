@@ -110,7 +110,7 @@ const MovieDetails = () => {
               <h2>Reviews</h2>
             </div>
             <div className="reviews">
-test test
+              test test
 
             </div>
           </div>

@@ -1,77 +1,86 @@
-  .details-container {
-      display: flex;
-      flex-wrap: wrap;
-      padding: 3%;
-      border: solid 2px black;
-      border-radius: 15px;
-      margin-bottom: 20px;
-  }
+.details-container {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 3%;
+    border: solid 2px black;
+    border-radius: 15px;
+    margin-bottom: 20px;
+}
 
-  .details-trailer-container {
-      display: flex;
-      gap: 20px;
-  }
+.details-trailer-container {
+    display: flex;
+    gap: 20px;
+}
 
-  .poster-container {
-      flex: 1;
-      max-width: 300px;
-      margin-right: 20px;
-  }
+.poster-container {
+    flex: 1;
+    max-width: 300px;
+    margin-right: 20px;
+}
 
-  .movie-poster {
-      width: 100%;
-  }
+.movie-poster {
+    width: 100%;
+}
 
-  .details-info {
-      flex: 2;
-  }
+.details-info {
+    flex: 2;
+}
 
-  .movie-title {
-      font-weight: bold;
-      font-size: 3rem;
-      margin-right: 1%;
-  }
+.movie-title {
+    font-weight: bold;
+    font-size: 3rem;
+    margin-right: 1%;
+}
 
-  .release-year {
-      font-size: 1.5rem;
-      opacity: 0.5;
-  }
+.release-year {
+    font-size: 1.5rem;
+    opacity: 0.5;
+}
 
-  .genre-button {
-      margin-right: 10px;
-      margin-bottom: 10px;
-      padding: 5px 10px;
-      cursor: not-allowed;
-      border-radius: 20px;
-  }
+.genre-button {
+    margin-right: 10px;
+    margin-bottom: 10px;
+    padding: 5px 10px;
+    cursor: not-allowed;
+    border-radius: 20px;
+}
 
-  .trailer {
-      border-radius: 15px;
-      margin: 0;
-  }
+.trailer {
+    border-radius: 15px;
+    margin: 0;
+}
 
-  .cast {
-      margin-top: 1rem;
-  }
+.cast {
+    margin-top: 1rem;
+}
 
-  .cast-container {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 1rem;
-      text-align: center;
-  }
+.cast-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    text-align: center;
+}
 
-  .card {
+.card {
     width: 10rem;
     background: rgba(0, 0, 0, 0.0);
     border-radius: 15px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
-  }
+}
 
-  .card-title {
+.card-title {
     text-transform: uppercase;
     text-shadow: 0 0 5px black, 0 0 15px black;
     font-size: 1.1rem;
     font-weight: bold;
-  }
+}
+
+.review-main {
+    margin: 1rem auto;
+    padding: 4%;
+    width: 90%;
+    background: rgba(0, 0, 0, 0.0);
+    border-radius: 15px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+}
