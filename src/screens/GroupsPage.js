@@ -63,9 +63,9 @@ const GroupsPage = ({ groupId }) => {
             .then((response) => response.json())
             .then((data) => setGroup(data));
         // Fetch members from the backend
-        fetch(`${process.env.REACT_APP_API_URL}/groups/${groupId}/members`)
-            .then((response) => response.json())
-            .then((data) => setMembers(data));
+        // fetch(`${process.env.REACT_APP_API_URL}/groups/${groupId}/members`)
+        //     .then((response) => response.json())
+        //     .then((data) => setMembers(data));
         // Fetch posts from the backend
         fetch(`/groups/${groupId}/posts`)
             .then((response) => response.json())
