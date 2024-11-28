@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { Card } from 'react-bootstrap';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import React, { useEffect, useState } from 'react';
+import { Card } from 'react-bootstrap';
+import { useParams } from 'react-router-dom';
 import '../index.css';
 import './MovieDetails.css';
 
@@ -111,7 +111,7 @@ const MovieDetails = () => {
               <h2>Reviews</h2>
             </div>
             <div className="reviews">
-              <MovieReviewForm/>
+              <MovieReviewForm movieID ={ id }/>
 
             </div>
           </div>

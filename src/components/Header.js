@@ -39,8 +39,7 @@ const Header = ({ showSearchBox = true, showDropdownMenu = true }) => {
     
      // Delete all cookies
     document.cookie.split(";").forEach(cookie => {
-    const accessToken = cookie.split("=");
-    window.alert(accessToken);
+    const accessToken = cookie.split("=");    
     document.cookie = `${accessToken}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
   }); 
    

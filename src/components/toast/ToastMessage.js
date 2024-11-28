@@ -1,7 +1,7 @@
 export const ToastMessage = ({ toastMessage, toastType }) => {
   return (
     <div style={{
-      position: 'absolute',
+      position: 'fixed',
       bottom: '170px',
       left: '50%',
       transform: 'translateX(-50%)',
