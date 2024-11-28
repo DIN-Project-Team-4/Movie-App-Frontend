@@ -44,6 +44,21 @@ function useAdvanceMovieSearch(){
         setGenre(genre)
         setLang(lang)
         setPage(1)
+        
+        if (year != "") {
+            const releaseYear = Number(year);
+
+            if (isNaN(releaseYear) || !Number.isInteger(releaseYear)) {
+                setResults([])
+                return { error: 'Invalid year: must be a valid number' };
+            }
+            
+            if (releaseYear < 1885) {
+                setResults([])
+                return { error: 'Invalid year' };
+            }
+        }
+
         if (title != "" && genre === "" && cast === "") {
             await searchForResultsTitleYearGenre(title, year, lang)
         } else {
