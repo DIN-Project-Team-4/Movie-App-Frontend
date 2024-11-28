@@ -1,11 +1,10 @@
-import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { useState } from 'react';
 import { ToastMessage } from '../toast/ToastMessage.js';
 
-function MovieReviewForm(movieID) {
-  const baseUrl = process.env.REACT_APP_API_BASE_URL; //for the URL
-  const movie_ID = movieID;
+function MovieReviewForm(movieId) {
+  const baseUrl = process.env.REACT_APP_API_URL; //for the URL
+  
   const [rating, setRating] = useState(0); // Default no rating
   const [review, setReview] = useState('');
   const [error, setError] = useState('');
@@ -42,26 +41,41 @@ function MovieReviewForm(movieID) {
       showToast('Please Login before you enter review.' ,'warning', false);
       return;
     }   
-
+    console.log(movieId);
+    
     //send the data to backend
-    try {
-      const response = await axios.post(
-          `${baseUrl}/movie/createReview`,
-          { "movieId": movie_ID, "description": {review},"rating":{rating},"reviewedAt":Date(),"userId":userData.userId },
-          { withCredentials: true }
-      );
+    try { console.log("front1");
+    
+        // Send POST request to the backend
+        const response = await fetch(`${baseUrl}/movie/createReview`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          credentials: 'include', // Ensure credentials (cookies) are sent
+          body: JSON.stringify({
+            movieId: movieId.movieId,
+            description: review,
+            rating: rating,
+            reviewedAt: new Date(),
+            userId: userData.userId
+          })
+        });
+        console.log(response.status);
+        // Parse the response
+      const data = await response.json();
+
       
       if (response.status === 200) {          
           showToast('Reviews successfully submited', 'success', true);
+          setRating(0); // Reset the form
+          setReview('');
       } else {
-          showToast('Internal Error', 'warning', false);          
+          showToast(data.message || 'An error occurred.', 'warning', false);          
       }
   } catch (error) {
-      showToast('Error, please try again!', 'warning', false);}
-      // Alert form submission
-    //alert(`Review Submitted!\nRating: ${rating} Stars\nReview: ${review || 'No review provided'}`);
-    setRating(0); // Reset the form
-    setReview('');
+      showToast(error.message ||'Error, please try again!', 'warning', false);}      
   };
 
   //Show toast

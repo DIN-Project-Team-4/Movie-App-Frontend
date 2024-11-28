@@ -111,7 +111,7 @@ const MovieDetails = () => {
               <h2>Reviews</h2>
             </div>
             <div className="reviews">
-              <MovieReviewForm movieID ={ id }/>
+              <MovieReviewForm movieId ={ id }/>
 
             </div>
           </div>
