@@ -8,6 +8,7 @@ function GroupCreation() {
   // Form state to handle input values
   const [groupName, setGroupName] = useState('');
   const [ownerId, setOwnerId] = useState('');
+  const [groupDescription, setGroupDescription] = useState('');
 
   // State to track loading or errors during API call
   const [isLoading, setIsLoading] = useState(false);
@@ -35,6 +36,7 @@ function GroupCreation() {
         body: JSON.stringify({
           name: groupName,
           ownerId: ownerId, // Send owner_id along with group name
+          group_description: groupDescription // Send group description along with group name
         }),
       });
 
@@ -51,6 +53,7 @@ function GroupCreation() {
       setShowModal(false);
       setGroupName(''); // Reset group name
       setOwnerId('');   // Reset owner ID
+      setGroupDescription(''); // Reset group description
     } catch (err) {
       console.error('Error creating group:', err);
       setError('Error creating group. Please try again.');
@@ -62,16 +65,16 @@ function GroupCreation() {
   return (
     <div>
       {/* Button to trigger the modal */}
-      <Button variant="primary" onClick={handleShow}>
+      <Button variant="outline-light" onClick={handleShow}>
         Create Group
       </Button>
 
       {/* Modal for group creation */}
       <Modal show={showModal} onHide={handleClose}>
-        <Modal.Header closeButton>
+        <Modal.Header className='bg-dark text-white' closeButton>
           <Modal.Title>Create a New Group</Modal.Title>
         </Modal.Header>
-        <Modal.Body>
+        <Modal.Body className='bg-dark text-white'>
           <Form onSubmit={handleCreateGroup}>
             <Form.Group controlId="formGroupName">
               <Form.Label>Group Name</Form.Label>
@@ -93,8 +96,18 @@ function GroupCreation() {
                 required
               />
             </Form.Group>
+            <Form.Group controlId="formGroupDescription">
+              <Form.Label>Group Description</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Enter group dwescription"
+                value={groupDescription}
+                onChange={(e) => setGroupDescription(e.target.value)}
+                required
+              />
+            </Form.Group>
             {error && <div className="text-danger mt-3">{error}</div>}
-            <Button variant="primary" type="submit" className="mt-3" disabled={isLoading}>
+            <Button variant="outline-light" type="submit" className="mt-3" disabled={isLoading}>
               {isLoading ? 'Creating...' : 'Create'}
             </Button>
           </Form>

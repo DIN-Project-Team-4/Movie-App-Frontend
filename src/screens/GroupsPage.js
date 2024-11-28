@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Row, Col, Card, Form, Button, ListGroup } from 'react-bootstrap';
+import { Container, Row, Col, Card, Modal, Form, Button, ListGroup } from 'react-bootstrap';
 import './GroupsPage.css';
 import GroupCreation from '../components/groups/GroupCreation.js';
 import GroupJoin from '../components/groups/GroupJoin.js';
@@ -11,6 +11,44 @@ const GroupsPage = ({ groupId }) => {
     const [movie, setMovie] = useState('');
     const [showtime, setShowtime] = useState('');
     const [posts, setPosts] = useState([]);
+    const [selectedGroup, setSelectedGroup] = useState(null); // Holds the currently selected group
+    const [showModal, setShowModal] = useState(false); // Controls modal visibility
+
+    const handleCardClick = (group) => {
+        setSelectedGroup(group);
+        setShowModal(true);
+    };
+
+    // Function to close the modal
+    const handleCloseModal = () => {
+        setSelectedGroup(null);
+        setShowModal(false);
+    }; 
+
+    // Function to handle joining a group
+    const handleJoinGroup = () => {
+        if (selectedGroup) {
+            fetch(`http://localhost:3001/groups/join`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ groupId: selectedGroup.id }),
+            })
+                .then((response) => {
+                    if (response.ok) {
+                        alert(`Successfully joined group: ${selectedGroup.name}`);
+                    } else {
+                        alert('Failed to join group');
+                    }
+                })
+                .catch((error) => {
+                    console.error('Error joining group:', error);
+                    alert('An error occurred while joining the group.');
+                });
+        }
+        handleCloseModal();
+    };
 
     useEffect(() => {
         // Fetch group details from the backend
@@ -59,23 +97,36 @@ const GroupsPage = ({ groupId }) => {
                 <Row>
                     {group.map((group) => (
                         <Col md={4} key={group.id} className="mb-4">
-                            <Card>
+                            <Card onClick={() => handleCardClick(group)} style={{ cursor: 'pointer' }}>
                                 <Card.Body>
                                     <Card.Title>{group.name}</Card.Title>
-                                    <Card.Text>{group.description}</Card.Text>
+                                    <Card.Text>{group.group_description}</Card.Text>
                                 </Card.Body>
                             </Card>
                         </Col>
                     ))}
                 </Row>
 
+                {/* Modal for group details */}
+            {selectedGroup && (
+                <Modal show={showModal} onHide={handleCloseModal} className='dark_modal'>
+                    <Modal.Header className='bg-dark text-white' closeButton>
+                        <Modal.Title>{selectedGroup.name}</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body className='bg-dark text-white'>
+                        <p>{selectedGroup.description}</p>
+                        <Button variant="outline-light" onClick={handleJoinGroup}>
+                            Join Group
+                        </Button>
+                    </Modal.Body>
+                </Modal>
+            )}
 
-
-                <Row>
+                {/* <Row>
                     <Col md={4} className="text-start">
                         <GroupJoin />
                     </Col>
-                </Row>
+                </Row> */}
 
             </Container>
         </div>
