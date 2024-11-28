@@ -28,12 +28,16 @@ const GroupsPage = ({ groupId }) => {
     // Function to handle joining a group
     const handleJoinGroup = () => {
         if (selectedGroup) {
-            fetch(`http://localhost:3001/groups/join`, {
+            fetch(`http://localhost:3001/groups/addMember`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ groupId: selectedGroup.id }),
+                body: JSON.stringify({ 
+                    groupId: selectedGroup.group_id,
+                    userId: 16,
+                    membershipId: "member"
+                 }),
             })
                 .then((response) => {
                     if (response.ok) {
