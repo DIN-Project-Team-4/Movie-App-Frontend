@@ -77,7 +77,7 @@ const MovieDetails = () => {
                 <Card.Body>
                     {activeTab === 'details' && <MovieDetailsTab movieData={{ ...movie, trailer }} />}
                     {activeTab === 'cast' && <MovieCastTab cast={movie.credits?.cast || []} />}
-                    {activeTab === 'showtimes' && <MovieShowtimesTab showtimes={[]} />}
+                    {activeTab === 'showtimes' && <MovieShowtimesTab movieTitle={movie.title} />}
                     {activeTab === 'reviews' && (
                         <div className="reviews">
                             <MovieReviewForm movieId={id} />
