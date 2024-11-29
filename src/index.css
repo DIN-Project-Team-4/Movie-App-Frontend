@@ -38,6 +38,8 @@ img {
 .div-title {
   width: 100%;
   border-left: solid 5px #FFD700;
-  padding-left: 1rem;
-  margin-bottom: 1rem;
+  padding-left: 2rem;
+  margin-bottom: 2rem;
+  font-size: 3rem;
+  font-weight: bold;
 }
