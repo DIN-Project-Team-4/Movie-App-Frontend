@@ -3,12 +3,13 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { useEffect, useState } from 'react';
 import { Card, Nav } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
+import MovieCastTab from '../components/MovieTabs/MovieCastTab.js';
+import MovieDetailsTab from '../components/MovieTabs/MovieDetailsTab.js';
+import MovieShowtimesTab from '../components/MovieTabs/MovieShowtimeTab.js';
+import DisplayReview from '../components/Reviews/DisplayReview.js';
+import MovieReviewForm from '../components/Reviews/MovieReviewForm.js';
 import '../index.css';
 import './MovieDetails.css';
-import MovieDetailsTab from '../components/MovieTabs/MovieDetailsTab.js';
-import MovieCastTab from '../components/MovieTabs/MovieCastTab.js';
-import MovieShowtimesTab from '../components/MovieTabs/MovieShowtimeTab.js';
-import MovieReviewForm from '../components/Reviews/MovieReviewForm.js';
 
 const backendUrl = process.env.REACT_APP_API_URL;
 
@@ -82,6 +83,7 @@ const MovieDetails = () => {
                     {activeTab === 'showtimes' && <MovieShowtimesTab movieTitle={movie.title} />}
                     {activeTab === 'reviews' && (
                         <div className="reviews">
+                            <DisplayReview  movieId={id} />
                             <MovieReviewForm movieId={id} />
                         </div>
                     )}
