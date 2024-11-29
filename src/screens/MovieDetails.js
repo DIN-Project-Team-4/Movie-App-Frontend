@@ -58,7 +58,9 @@ const MovieDetails = () => {
 
     return (
         <div className="main-div">
-            <div className='div-title'>{movie.title}</div>
+            <div 
+            className='div-title'>{movie.title} <span className='movie-details-release-year'>({new Date(movie.release_date).getFullYear()})</span>
+            </div>
             <Nav className="custom-nav" justify variant="tabs" activeKey={activeTab} onSelect={(selectedKey) => setActiveTab(selectedKey)}>
                 <Nav.Item>
                     <Nav.Link eventKey="details">Details</Nav.Link>

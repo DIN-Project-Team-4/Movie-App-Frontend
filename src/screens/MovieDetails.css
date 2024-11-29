@@ -1,3 +1,8 @@
+.movie-details-release-year {
+    font-size: 2rem;
+    opacity: 0.5;
+}
+
 .custom-nav {
     --bs-nav-tabs-border-color: #bf9b30;
     --bs-nav-tabs-link-hover-border-color: #bf9b30;
