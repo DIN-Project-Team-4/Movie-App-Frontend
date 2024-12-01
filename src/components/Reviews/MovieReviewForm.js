@@ -2,7 +2,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { useState } from 'react';
 import { ToastMessage } from '../toast/ToastMessage.js';
 
-function MovieReviewForm(movieId) {
+function MovieReviewForm({movieId, movieTitle, moviePosterUrl}) {
   const baseUrl = process.env.REACT_APP_API_URL; //for the URL
   
   const [rating, setRating] = useState(0); // Default no rating
@@ -41,11 +41,20 @@ function MovieReviewForm(movieId) {
       showToast('Please Login before you enter review.' ,'warning', false);
       return;
     }   
-    console.log(movieId);
     
     //send the data to backend
-    try { console.log("front1");
-    
+    try { 
+        const saveDate = {
+          movieId: movieId,
+          description: review,
+          rating: rating,
+          reviewedAt: new Date(),
+          movieTitle: movieTitle,
+          moviePosterUrl: moviePosterUrl,
+          userId: userData.userId
+        }
+
+        console.log(saveDate)
         // Send POST request to the backend
         const response = await fetch(`${baseUrl}/movie/createReview`, {
           method: 'POST',
@@ -55,10 +64,12 @@ function MovieReviewForm(movieId) {
           },
           credentials: 'include', // Ensure credentials (cookies) are sent
           body: JSON.stringify({
-            movieId: movieId.movieId,
+            movieId: movieId,
             description: review,
             rating: rating,
             reviewedAt: new Date(),
+            movieTitle: movieTitle,
+            moviePosterUrl: moviePosterUrl,
             userId: userData.userId
           })
         });
@@ -72,7 +83,7 @@ function MovieReviewForm(movieId) {
           setRating(0); // Reset the form
           setReview('');
       } else {
-          showToast(data.message || 'An error occurred.', 'warning', false);          
+          showToast(data.error || 'An error occurred ().', 'warning', false);          
       }
   } catch (error) {
       showToast(error.message ||'Error, please try again!', 'warning', false);}      

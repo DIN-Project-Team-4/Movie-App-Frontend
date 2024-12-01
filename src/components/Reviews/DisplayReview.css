@@ -1,0 +1,20 @@
+.review-item {
+    display: flex;
+    align-items: center; 
+    margin-bottom: 1rem; 
+  }
+  
+  .movie-poster {
+    width: 80px; 
+    height: 120px; 
+    margin-right: 1rem; 
+  }
+  
+  .star-rating {    
+    display: inline-block;
+    margin-right: 1rem; 
+  }
+  
+  .review-item div {
+    flex-grow: 1; 
+  }

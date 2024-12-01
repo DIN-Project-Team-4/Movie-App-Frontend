@@ -83,8 +83,8 @@ const MovieDetails = () => {
                     {activeTab === 'showtimes' && <MovieShowtimesTab movieTitle={movie.title} />}
                     {activeTab === 'reviews' && (
                         <div className="reviews">
+                            <MovieReviewForm movieId={id} movieTitle={movie.title} moviePosterUrl={movie.poster_path} />
                             <DisplayReview  movieId={id} />
-                            <MovieReviewForm movieId={id} />
                         </div>
                     )}
                 </Card.Body>

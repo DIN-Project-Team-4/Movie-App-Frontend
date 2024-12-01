@@ -1,84 +1,98 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useEffect, useState } from 'react';
 import { ToastMessage } from '../toast/ToastMessage.js';
-
+import "./DisplayReview.css";
 function DisplayReview({ movieId }) {
-  const baseUrl = process.env.REACT_APP_API_URL; // Backend API URL
+	const baseUrl = process.env.REACT_APP_API_URL; // Backend API URL
 
-  // Toast message state
-  const [toastMessage, setToastMessage] = useState('');
-  const [toastType, setToastType] = useState('');
-  const [isToastVisible, setIsToastVisible] = useState(false);
+	// Toast message state
+	const [toastMessage, setToastMessage] = useState('');
+	const [toastType, setToastType] = useState('');
+	const [isToastVisible, setIsToastVisible] = useState(false);
 
-  // Review state
-  const [enteredReviews, setEnteredReviews] = useState([]);
+	// Review state
+	const [enteredReviews, setEnteredReviews] = useState([]);
 
-  // Fetch all reviews
-  const handleDisplayReview = async () => {
-    try {
-      const response = await fetch(`${baseUrl}/reviews/${movieId}`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
+	movieId = !movieId ? "" : movieId
 
-      const data = await response.json();
+	// Fetch all reviews
+	const handleDisplayReview = async () => {
+		try {
+			console.log("movieId : " + movieId)
+			const response = await fetch(`${baseUrl}/reviews/${movieId?.trim() !== "" ? movieId : ""}`, {
+				method: 'GET',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+			});
 
-      if (response.ok) {
-        setEnteredReviews(data);
-      } else {
-        showToast(data.message || 'Failed to load movie reviews.', 'warning');
-      }
-    } catch (error) {
-      showToast('Error loading movie reviews.', 'error');
-    }
-  };
+			const data = await response.json();
 
-  // Show toast message
-  const showToast = (message, type) => {
-    setToastMessage(message);
-    setToastType(type);
-    setIsToastVisible(true);
+			if (response.ok) {
+				setEnteredReviews(data);
+			} else {
+				showToast(data.message || 'Failed to load movie reviews.', 'warning');
+			}
+		} catch (error) {
+			showToast('Error loading movie reviews.', 'error');
+		}
+	};
 
-    setTimeout(() => {
-      setIsToastVisible(false);
-      setToastMessage('');
-    }, 3000);
-  };
+	// Show toast message
+	const showToast = (message, type) => {
+		setToastMessage(message);
+		setToastType(type);
+		setIsToastVisible(true);
 
-  // Fetch reviews on component mount
-  useEffect(() => {
-    handleDisplayReview();
-  }, [movieId]);
+		setTimeout(() => {
+			setIsToastVisible(false);
+			setToastMessage('');
+		}, 3000);
+	};
 
-  return (
-    <>
-      {/* Display reviews */}
-      <div className="mt-3">
-        {enteredReviews.length > 0 ? (
-          enteredReviews.map((r) => (
-            <div key={r.id} className="review-item">
-              <div className="star-rating" style={{ fontSize: '2rem', color: '#FFD700' }}>
-                {[1, 2, 3, 4, 5].map((num) => (
-                  <span key={num} style={{ color: num <= r.rating ? '#FFD700' : '#ccc' }}>
-                    {num <= r.rating ? '★' : '☆'}
-                  </span>
-                ))}
-              </div>
-              <strong>Reviewed By:</strong> {r.username}
-              <p>{r.description}</p>
-            </div>
-          ))
-        ) : (
-          <p>No reviews available for this movie.</p>
-        )}
-      </div>
+	// Fetch reviews on component mount
+	useEffect(() => {
+		handleDisplayReview();
+	}, [movieId]);
 
-      {/* TOAST MESSAGE */}
-      {isToastVisible && <ToastMessage toastMessage={toastMessage} toastType={toastType} />}
-    </>
-  );
+	
+	return (
+		<>
+			{/* Display reviews */}
+			<div className="mt-3">
+				{enteredReviews.length > 0 ? (
+					enteredReviews.map((r) => (					
+							<div key={r.id} className="review-item">
+								
+								
+								{!movieId && ( <img
+									className="movie-poster"
+									src={`https://image.tmdb.org/t/p/w500${r.movie_poster_url}`}
+									alt={r.movie_title}
+								/>)}
+								<div>
+									<div className="star-rating" style={{ fontSize: '1.5rem', color: '#FFD700' }}>
+										{!movieId && r.movie_title + " "}
+										{[1, 2, 3, 4, 5].map((num) => (
+											<span key={num} style={{ color: num <= r.rating ? '#FFD700' : '#ccc' }}>
+												{num <= r.rating ? '★' : '☆'}
+											</span>
+										))}
+									</div>
+									<strong>Reviewed By:</strong> {r.username}
+									<p>{r.description}</p>
+								</div>
+							</div>
+					))
+				) : (
+					<p>No reviews available.</p>
+				)}
+			</div>
+
+			{/* TOAST MESSAGE */}
+			{isToastVisible && <ToastMessage toastMessage={toastMessage} toastType={toastType} />}
+		</>
+	);
 }
 
 export default DisplayReview;
