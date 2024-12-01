@@ -1,10 +1,9 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useState } from 'react';
-import "./SignIn.css";
-import logo from '../../assets/logo.jpg';
 import axios from 'axios';
+import React, { useState } from 'react';
+import logo from '../../assets/logo.jpg';
 import { ToastMessage } from '../toast/ToastMessage.js';
-import DeleteAccount from './DeleteAccount.js';
+import "./SignIn.css";
 
 const SignIn = ({ setSignInOpen }) => {
 
@@ -247,10 +246,10 @@ const SignIn = ({ setSignInOpen }) => {
                                         </div>
                                     </form>
                                 )}
-                                {/* If the user is logged in, the Delete account component is displayed */}
+                                {/* If the user is logged in, the Delete account component is displayed 
                                 {localStorage.getItem('userData') && (
                                     <DeleteAccount setSignInOpen={setSignInOpen} />
-                                )}
+                                )}*/}
                             </div>
                         </div>
                     </div>
