@@ -8,7 +8,7 @@ function DeleteButton({ groupId, onDelete }) {
     // Confirm before sending the delete request
     if (window.confirm('Are you sure you want to delete this group?')) {
       try {
-        const response = await fetch(`http://localhost:3001/groups/delete/${groupId}`, {
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/groups/${groupId}`, {
           method: 'DELETE',
         });
 

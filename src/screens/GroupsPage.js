@@ -2,17 +2,19 @@ import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Card, Modal, Form, Button, ListGroup } from 'react-bootstrap';
 import './GroupsPage.css';
 import GroupCreation from '../components/groups/GroupCreation.js';
-import GroupJoin from '../components/groups/GroupJoin.js';
-
+import GroupManagement from '../components/groups/GroupUserManagement.js';
 
 const GroupsPage = ({ groupId }) => {
     const [group, setGroup] = useState([]);
+    const [joinedGroups, setJoinedGroups] = useState([]);
     const [members, setMembers] = useState([]);
     const [movie, setMovie] = useState('');
     const [showtime, setShowtime] = useState('');
     const [posts, setPosts] = useState([]);
     const [selectedGroup, setSelectedGroup] = useState(null); // Holds the currently selected group
     const [showModal, setShowModal] = useState(false); // Controls modal visibility
+
+    const userData = JSON.parse(localStorage.getItem('userData')); 
 
     const handleCardClick = (group) => {
         setSelectedGroup(group);
@@ -28,14 +30,12 @@ const GroupsPage = ({ groupId }) => {
     // Function to handle joining a group
     const handleJoinGroup = () => {
         if (selectedGroup) {
-            fetch(`http://localhost:3001/groups/addMember`, {
+            fetch(`http://localhost:3001/groups/${selectedGroup.group_id}/addMember/${userData.userId}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({ 
-                    groupId: selectedGroup.group_id,
-                    userId: 16,
                     membershipId: "member"
                  }),
             })
@@ -62,6 +62,10 @@ const GroupsPage = ({ groupId }) => {
         fetch(`${process.env.REACT_APP_API_URL}/groups/all`)
             .then((response) => response.json())
             .then((data) => setGroup(data));
+        // Fetch joined groups from the backend
+        fetch(`${process.env.REACT_APP_API_URL}/groups/users/${userData.userId}/yourgroups`)
+            .then((response) => response.json())
+            .then((data) => setJoinedGroups(data));
         // Fetch members from the backend
         // fetch(`${process.env.REACT_APP_API_URL}/groups/${groupId}/members`)
         //     .then((response) => response.json())
@@ -88,13 +92,31 @@ const GroupsPage = ({ groupId }) => {
         <div>
             <Container fluid>
                 <Row className="d-flex justify-content-between align-items-center">
-
-                        <Col>
-                            <h2 className="my-4">All Groups</h2>
-                        </Col>
-
+                    <Col>
+                        <h2 className="my-4">Your Groups</h2>
+                    </Col>
                     <Col className="text-end">
                         <GroupCreation />
+                    </Col>
+                </Row>
+
+                <Row>
+                    {joinedGroups.map((group) => (
+                        <Col md={4} key={group.id} className="mb-4">
+                            <Card style={{ cursor: 'pointer' }}>
+                                <Card.Body>
+                                    <Card.Title>{group.name}</Card.Title>
+                                    <Card.Text>{group.group_description}</Card.Text>
+                                </Card.Body>
+                            </Card>
+                        </Col>
+                    ))}
+                </Row>
+
+                <Row className="d-flex justify-content-between align-items-center">
+
+                    <Col>
+                        <h2 className="my-4">All Groups</h2>
                     </Col>
                 </Row>
 
@@ -111,6 +133,12 @@ const GroupsPage = ({ groupId }) => {
                     ))}
                 </Row>
 
+                <Row>
+                    <Col>
+                        <GroupManagement/>
+                    </Col>
+                </Row>
+
                 {/* Modal for group details */}
             {selectedGroup && (
                 <Modal show={showModal} onHide={handleCloseModal} className='dark_modal'>
@@ -125,12 +153,6 @@ const GroupsPage = ({ groupId }) => {
                     </Modal.Body>
                 </Modal>
             )}
-
-                {/* <Row>
-                    <Col md={4} className="text-start">
-                        <GroupJoin />
-                    </Col>
-                </Row> */}
 
             </Container>
         </div>
