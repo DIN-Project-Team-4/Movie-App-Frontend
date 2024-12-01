@@ -1,7 +1,9 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { ToastMessage } from '../toast/ToastMessage.js';
 import "./DisplayReview.css";
+
 function DisplayReview({ movieId }) {
 	const baseUrl = process.env.REACT_APP_API_URL; // Backend API URL
 
@@ -63,13 +65,12 @@ function DisplayReview({ movieId }) {
 				{enteredReviews.length > 0 ? (
 					enteredReviews.map((r) => (					
 							<div key={r.id} className="review-item">
-								
-								
+								<Link to={`/movie/${r.movie_id}`} className="review-item">								
 								{!movieId && ( <img
 									className="movie-poster"
 									src={`https://image.tmdb.org/t/p/w500${r.movie_poster_url}`}
 									alt={r.movie_title}
-								/>)}
+								/>)}</Link>
 								<div>
 									<div className="star-rating" style={{ fontSize: '1.5rem', color: '#FFD700' }}>
 										{!movieId && r.movie_title + " "}
