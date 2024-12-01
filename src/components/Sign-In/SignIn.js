@@ -4,6 +4,7 @@ import "./SignIn.css";
 import logo from '../../assets/logo.jpg';
 import axios from 'axios';
 import { ToastMessage } from '../toast/ToastMessage.js';
+import DeleteAccount from './DeleteAccount.js';
 
 const SignIn = ({ setSignInOpen }) => {
 
@@ -245,6 +246,10 @@ const SignIn = ({ setSignInOpen }) => {
                                             </button>
                                         </div>
                                     </form>
+                                )}
+                                {/* If the user is logged in, the Delete account component is displayed */}
+                                {localStorage.getItem('userData') && (
+                                    <DeleteAccount setSignInOpen={setSignInOpen} />
                                 )}
                             </div>
                         </div>
