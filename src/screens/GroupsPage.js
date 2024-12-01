@@ -133,11 +133,11 @@ const GroupsPage = ({ groupId }) => {
                     ))}
                 </Row>
 
-                <Row>
+                {/* <Row>
                     <Col>
                         <GroupManagement/>
                     </Col>
-                </Row>
+                </Row> */}
 
                 {/* Modal for group details */}
             {selectedGroup && (
