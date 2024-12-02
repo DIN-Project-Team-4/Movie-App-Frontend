@@ -14,7 +14,7 @@ const GroupsPage = ({ groupId }) => {
     const [selectedGroup, setSelectedGroup] = useState(null); // Holds the currently selected group
     const [showModal, setShowModal] = useState(false); // Controls modal visibility
 
-    const userData = JSON.parse(localStorage.getItem('userData')); 
+    const userData = JSON.parse(localStorage.getItem('userData'));  
 
     const handleCardClick = (group) => {
         setSelectedGroup(group);
@@ -55,9 +55,6 @@ const GroupsPage = ({ groupId }) => {
     };
 
     useEffect(() => {
-        // Fetch group details from the backend
-        fetch(`/groups/${groupId}`)
-
         // Fetch groups from the backend
         fetch(`${process.env.REACT_APP_API_URL}/groups/all`)
             .then((response) => response.json())
@@ -66,14 +63,6 @@ const GroupsPage = ({ groupId }) => {
         fetch(`${process.env.REACT_APP_API_URL}/groups/users/${userData.userId}/yourgroups`)
             .then((response) => response.json())
             .then((data) => setJoinedGroups(data));
-        // Fetch members from the backend
-        // fetch(`${process.env.REACT_APP_API_URL}/groups/${groupId}/members`)
-        //     .then((response) => response.json())
-        //     .then((data) => setMembers(data));
-        // Fetch posts from the backend
-        fetch(`/groups/${groupId}/posts`)
-            .then((response) => response.json())
-            .then((data) => setPosts(data));
     }, [groupId]);
 
     const handlePost = () => {
