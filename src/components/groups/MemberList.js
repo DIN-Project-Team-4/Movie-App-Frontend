@@ -4,17 +4,16 @@ import './MemberList.css';
 
 const MemberList = ({ members }) => {
     return (
-        <div><h2>Members</h2>
-
-    <div className="member-list-container">
-
-            <ListGroup>
-                {members.map((member, index) => (
-                    <ListGroup.Item key={index}>{member.name}</ListGroup.Item>
-                ))}
-            </ListGroup>
+        <div>
+            <h2>Members</h2>
+            <div className="member-list-container">
+                <ListGroup>
+                    {members.map((member, index) => (
+                        <ListGroup.Item key={index}>{member.username}</ListGroup.Item>
+                    ))}
+                </ListGroup>
+            </div>
         </div>
-</div>
     );
 };
 
