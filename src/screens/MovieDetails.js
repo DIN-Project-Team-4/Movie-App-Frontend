@@ -1,6 +1,5 @@
-import axios from 'axios';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import { Card, Nav } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import MovieCastTab from '../components/MovieTabs/MovieCastTab.js';
@@ -20,6 +19,7 @@ const MovieDetails = () => {
     const [error, setError] = useState(null);
     const [videos, setVideos] = useState([]);
     const [activeTab, setActiveTab] = useState('details');
+    const [isFavourite, setIsFavourite] = useState(false); // Track if the movie is a favorite
 
     useEffect(() => {
         const fetchMovieDetails = async () => {
@@ -43,8 +43,24 @@ const MovieDetails = () => {
             }
         };
 
+        const fetchFavourites = async () => {
+            try {
+                const response = await axios.get(`${backendUrl}/favourites`, { withCredentials: true });
+                const favourites = response.data;
+                console.log("Favourites array:", favourites); // Log fetched favourites
+
+                const isMovieFavourite = favourites.some((fav) => fav.movie_id === parseInt(id));
+                setIsFavourite(isMovieFavourite);
+                console.log("Is current movie a favourite?", isMovieFavourite); // Log result
+            } catch (error) {
+                console.error('Error fetching favorites:', error.message);
+            }
+        };
+
+
         fetchMovieDetails();
         fetchMovieVideos();
+        fetchFavourites();
     }, [id]);
 
     if (loading) {
@@ -59,8 +75,11 @@ const MovieDetails = () => {
 
     return (
         <div className="main-div">
-            <div 
-            className='div-title'>{movie.title} <span className='movie-details-release-year'>({new Date(movie.release_date).getFullYear()})</span>
+            <div className="div-title">
+                {movie.title}
+                <span className="movie-details-release-year">
+                    ({new Date(movie.release_date).getFullYear()})
+                </span>
             </div>
             <Nav className="custom-nav" justify variant="tabs" activeKey={activeTab} onSelect={(selectedKey) => setActiveTab(selectedKey)}>
                 <Nav.Item>
@@ -78,13 +97,20 @@ const MovieDetails = () => {
             </Nav>
             <Card className="mt-3 movie-details-card">
                 <Card.Body>
-                    {activeTab === 'details' && <MovieDetailsTab movieData={{ ...movie, trailer }} />}
+                    {activeTab === 'details' && (
+                        <MovieDetailsTab
+                            movieData={{ ...movie, trailer }}
+                            isFavourite={isFavourite}
+                            setIsFavourite={setIsFavourite}
+                        />
+
+                    )}
                     {activeTab === 'cast' && <MovieCastTab cast={movie.credits?.cast || []} />}
                     {activeTab === 'showtimes' && <MovieShowtimesTab movieTitle={movie.title} />}
                     {activeTab === 'reviews' && (
                         <div className="reviews">
                             <MovieReviewForm movieId={id} movieTitle={movie.title} moviePosterUrl={movie.poster_path} />
-                            <DisplayReview  movieId={id} />
+                            <DisplayReview movieId={id} />
                         </div>
                     )}
                 </Card.Body>
