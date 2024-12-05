@@ -15,6 +15,7 @@ import MyGroupsPage from './screens/MyGroupsPage.js';
 import Home from './screens/Home.js';
 import MovieDetails from './screens/MovieDetails.js';
 import SearchResultsPage from './screens/SearchResultsPage.js';
+import ProfilePage from './screens/ProfilePage.js';
 
 
 const router = createBrowserRouter([
@@ -53,7 +54,11 @@ const router = createBrowserRouter([
       {
         path: '/reviews',
         element: <DisplayReview />
-      }, 
+      },
+      {
+        path: '/profile',
+        element: <ProfilePage />
+      },
     ],
   },
 ]);
