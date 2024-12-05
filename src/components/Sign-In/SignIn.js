@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import axios from 'axios';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { useState } from 'react';
 import logo from '../../assets/logo.jpg';
 import { ToastMessage } from '../toast/ToastMessage.js';

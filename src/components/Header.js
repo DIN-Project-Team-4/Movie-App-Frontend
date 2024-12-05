@@ -42,8 +42,10 @@ const Header = ({ showSearchBox = true, showDropdownMenu = true }) => {
     setLoginstatus(true);
      // Delete all cookies
     document.cookie.split(";").forEach(cookie => {
-    const accessToken = cookie.split("=");    
+    const accessToken = cookie.split("=");  
+    const refreshToken = cookie.split("=");  
     document.cookie = `${accessToken}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+    document.cookie = `${refreshToken}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
   }); 
       // Redirect to the home page
       navigate('/');
