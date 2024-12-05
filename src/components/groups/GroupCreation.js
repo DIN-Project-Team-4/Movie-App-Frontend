@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import { Button, Modal, Form } from 'react-bootstrap';
 
 function GroupCreation() {
+  const userData = JSON.parse(localStorage.getItem('userData'));  
   // State to control the visibility of the modal
   const [showModal, setShowModal] = useState(false);
 
   // Form state to handle input values
   const [groupName, setGroupName] = useState('');
-  const [ownerId, setOwnerId] = useState('');
   const [groupDescription, setGroupDescription] = useState('');
 
   // State to track loading or errors during API call
@@ -35,7 +35,7 @@ function GroupCreation() {
         },
         body: JSON.stringify({
           name: groupName,
-          ownerId: ownerId, // Send owner_id along with group name
+          ownerId: userData.userId, // Send owner_id along with group name
           group_description: groupDescription // Send group description along with group name
         }),
       });
@@ -52,7 +52,6 @@ function GroupCreation() {
       // Close the modal after submission
       setShowModal(false);
       setGroupName(''); // Reset group name
-      setOwnerId('');   // Reset owner ID
       setGroupDescription(''); // Reset group description
     } catch (err) {
       console.error('Error creating group:', err);
@@ -83,16 +82,6 @@ function GroupCreation() {
                 placeholder="Enter group name"
                 value={groupName}
                 onChange={(e) => setGroupName(e.target.value)}
-                required
-              />
-            </Form.Group>
-            <Form.Group controlId="formOwnerId" className="mt-3">
-              <Form.Label>Owner ID</Form.Label>
-              <Form.Control
-                type="number"
-                placeholder="Enter owner ID"
-                value={ownerId}
-                onChange={(e) => setOwnerId(e.target.value)}
                 required
               />
             </Form.Group>
