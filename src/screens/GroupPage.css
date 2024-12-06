@@ -4,3 +4,32 @@
     color: #fff; /* Weiße Schrift für den dunklen Hintergrund */
     margin-bottom: 20px; /* Abstand zum darunterliegenden Chat */
 }
+.group-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.group-name {
+    margin: 0;
+}
+.group-header button {
+    color: #000; /* Black text for better readability */
+    border: 1px solid #333; /* Light gray border */
+    font-weight: bold;
+}
+
+.group-header button:hover {
+    background-color: #f8f9fa; /* Slightly darker background on hover */
+}
+
+.group-header .btn-danger:hover {
+    background-color: #ff4d4d; /* Slightly lighter red on hover */
+}
+.group-header .btn-warning {
+    background-color: #ffc107; /* Lighter yellow background */
+}
+
+.group-header .btn-warning:hover {
+    background-color: #ffcd38; /* Slightly darker yellow on hover */
+}

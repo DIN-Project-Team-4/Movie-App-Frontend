@@ -1,39 +1,55 @@
 import React, { useState, useEffect } from 'react';
 import { ListGroup, Form, Button, Modal } from 'react-bootstrap';
 import './Chat.css';
+import { searchByTitle } from '../Search/searchApi.js'; // Adjust the import path as necessary
 
-const Chat = ({ groupId, userId, username }) => {
+const Chat = ({ groupId }) => {
     const [messages, setMessages] = useState([]);
     const [newMessage, setNewMessage] = useState('');
-    const [votes, setVotes] = useState({});
     const [showModal, setShowModal] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
     const [movieResults, setMovieResults] = useState([]);
+    const userData = JSON.parse(localStorage.getItem('userData'));
 
     useEffect(() => {
-        const fetchMessages = async () => {
-            try {
-                const response = await fetch(`http://localhost:3001/groups/${groupId}/messages`);
-                const contentType = response.headers.get('content-type');
-                if (!contentType || !contentType.includes('application/json')) {
-                    throw new Error(`Expected JSON, but received: ${contentType}`);
-                }
-                const data = await response.json();
-                console.log('Received messages:', data);
-                setMessages(Array.isArray(data) ? data : []);
-            } catch (error) {
-                console.error('Error fetching messages:', error);
-            }
-        };
-
         fetchMessages();
+        fetchMovieSuggestion();
     }, [groupId]);
+
+    const fetchMessages = async () => {
+        try {
+            const response = await fetch(`http://localhost:3001/groups/${groupId}/messages`);
+            const contentType = response.headers.get('content-type');
+            if (!contentType || !contentType.includes('application/json')) {
+                throw new Error(`Expected JSON, but received: ${contentType}`);
+            }
+            const data = await response.json();
+            console.log('Received messages:', data);
+            setMessages(Array.isArray(data) ? data : []);
+        } catch (error) {
+            console.error('Error fetching messages:', error);
+        }
+    };
+    const fetchMovieSuggestion= async () => {
+        try {
+            const response = await fetch(`http://localhost:3001/groups/${groupId}/movies`);
+            const contentType = response.headers.get('content-type');
+            if (!contentType || !contentType.includes('application/json')) {
+                throw new Error(`Expected JSON, but received: ${contentType}`);
+            }
+            const data = await response.json();
+            console.log('Received Movie messages:', data);
+            setMessages(Array.isArray(data) ? data : []);
+        } catch (error) {
+            console.error('Error fetching messages:', error);
+        }
+    };
 
     const sendMessage = async () => {
         if (newMessage.trim()) {
             const messagePayload = {
-                senderId: userId,
-                senderName: username,
+                groupId: groupId,
+                senderId: userData.userId,
                 message: newMessage,
             };
 
@@ -55,11 +71,14 @@ const Chat = ({ groupId, userId, username }) => {
                 const savedMessage = await response.json();
                 setMessages([...messages, savedMessage]);
                 setNewMessage('');
+                fetchMessages();// Fetch the latest messages after sending a new message
+                fetchMovieSuggestion();
             } catch (error) {
                 console.error('Error sending message:', error);
             }
         }
     };
+
 
     const searchMovies = async () => {
         if (!searchQuery.trim()) {
@@ -67,51 +86,77 @@ const Chat = ({ groupId, userId, username }) => {
             return;
         }
         try {
-            const url = `/search?query=${encodeURIComponent(searchQuery)}&filter=title`;
-            const response = await fetch(url);
-
-            const contentType = response.headers.get("content-type");
-            if (!contentType || !contentType.includes("application/json")) {
-                throw new Error(`Expected JSON, but received: ${contentType}`);
+            const data = await searchByTitle(searchQuery, 1); // Assuming page 1 for simplicity
+            if (data) {
+                setMovieResults(data.results || []);
+            } else {
+                throw new Error('No data returned from search');
             }
-
-            if (!response.ok) {
-                const errorText = await response.text();
-                console.error('Search failed:', response.status, errorText);
-                throw new Error(`Failed to search for movies: ${response.statusText}`);
-            }
-
-            const data = await response.json();
-            setMovieResults(data.results || []);
         } catch (error) {
             console.error('Error searching movies:', error);
             alert(`Failed to search for movies. Error: ${error.message}`);
         }
     };
 
-    const selectMovie = (movie) => {
+    const selectMovie = async (movie) => {
         const movieSuggestion = {
-            text: movie.title,
-            type: 'movie',
-            votes: 0,
+            groupId: groupId,
+            senderId: userData.userId,
+            movieId: movie.id,
+            movieTitle: movie.title,
             posterPath: `https://image.tmdb.org/t/p/w200${movie.poster_path}`,
         };
-        setMessages([...messages, movieSuggestion]);
-        setVotes({ ...votes, [movie.title]: [] });
-        setShowModal(false);
+
+        try {
+            const response = await fetch(`http://localhost:3001/groups/${groupId}/movies`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(movieSuggestion),
+            });
+
+            if (!response.ok) {
+                const errorText = await response.text();
+                console.error('Failed to save movie suggestion:', response.status, errorText);
+                throw new Error(`Failed to save movie suggestion: ${response.statusText}`);
+            }
+
+            const savedSuggestion = await response.json();
+            setMessages([...messages, savedSuggestion.suggestion]);
+            setShowModal(false);
+        } catch (error) {
+            console.error('Error saving movie suggestion:', error);
+        }
     };
 
-    const voteForMovie = (movieName) => {
-        if (!votes[movieName]?.includes(userId)) {
-            setVotes({
-                ...votes,
-                [movieName]: [...(votes[movieName] || []), userId],
+    const voteForMessage = async (messageId, currentVote) => {
+        const newVote = currentVote === 1 ? 0 : 1; // Toggle vote
+        try {
+            const response = await fetch(`http://localhost:3001/groups/${groupId}/messages/update`, {
+                method: 'PATCH',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ groupId, messageId, userId: userData.userId, vote: newVote }),
             });
-        } else {
-            setVotes({
-                ...votes,
-                [movieName]: votes[movieName].filter(id => id !== userId),
-            });
+
+            if (!response.ok) {
+                const errorText = await response.text();
+                console.error('Failed to update vote:', response.status, errorText);
+                throw new Error(`Failed to update vote: ${response.statusText}`);
+            }
+
+            const { updatedVote, totalVotes } = await response.json();
+
+            setMessages(messages.map(msg =>
+                msg.message_id === messageId
+                    ? { ...msg, votes: updatedVote.votes, total_votes: totalVotes }
+                    : msg
+            ));
+
+            // Fetch all messages again to update the state
+            fetchMessages();
+            fetchMovieSuggestion();
+
+        } catch (error) {
+            console.error('Error updating vote:', error);
         }
     };
 
@@ -124,17 +169,16 @@ const Chat = ({ groupId, userId, username }) => {
                             <div>
                                 <img
                                     src={msg.posterPath}
-                                    alt={msg.text}
+                                    alt={msg.movieTitle}
                                     style={{ width: '50px', marginRight: '10px' }}
                                 />
-                                <strong>🎥 {msg.text}</strong>
+                                <strong>{msg.posterPath}</strong>: {msg.movieTitle || msg.text}
                                 <Button
                                     className="vote-button"
                                     size="sm"
-                                    onClick={() => voteForMovie(msg.text)}
-                                    disabled={votes[msg.text]?.includes(userId)}
+                                    onClick={() => voteForMessage(msg.message_id, msg.votes)}
                                 >
-                                    👍 {votes[msg.text]?.length || 0}
+                                    👍 {msg.total_votes || 0}
                                 </Button>
                             </div>
                         ) : (
@@ -143,10 +187,9 @@ const Chat = ({ groupId, userId, username }) => {
                                 <Button
                                     className="vote-button"
                                     size="sm"
-                                    onClick={() => voteForMovie(msg.message || msg.text)}
-                                    disabled={votes[msg.message || msg.text]?.includes(userId)}
+                                    onClick={() => voteForMessage(msg.message_id, msg.votes)}
                                 >
-                                    👍 {votes[msg.message || msg.text]?.length || 0}
+                                    👍 {msg.total_votes || 0}
                                 </Button>
                             </span>
                         )}
