@@ -1,3 +1,4 @@
+// src/pages/GroupPage.js
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Container, Row, Col, Button, Modal } from 'react-bootstrap';
@@ -23,29 +24,34 @@ const GroupPage = () => {
             return;
         }
 
+        // Fetch group members and check if user is in the group
+        fetch(`http://localhost:3001/groups/${groupId}/members`)
+            .then((response) => response.json())
+            .then((data) => {
+                const isMember = data.some(member => member.user_id === userData.userId);
+                if (!isMember) {
+                    navigate('/groups');
+                } else {
+                    const owner = data.find(member => member.is_owner);
+                    const members = data.filter(member => !member.is_owner);
+                    setOwner(owner);
+                    setMembers(members);
+                }
+            })
+            .catch((error) => console.error('Error fetching group members:', error));
+
         // Fetch group name
         fetch(`http://localhost:3001/groups/${groupId}/name`)
             .then((response) => response.json())
             .then((data) => setGroupName(data.name))
             .catch((error) => console.error('Error fetching group details:', error));
 
-        // Fetch group members
-        fetch(`http://localhost:3001/groups/${groupId}/members`)
-            .then((response) => response.json())
-            .then((data) => {
-                const owner = data.find(member => member.is_owner);
-                const members = data.filter(member => !member.is_owner);
-                setOwner(owner);
-                setMembers(members);
-            })
-            .catch((error) => console.error('Error fetching group members:', error));
-
         // Fetch group messages
         fetch(`http://localhost:3001/groups/${groupId}/messages`)
             .then((response) => response.json())
             .then((data) => setMessages(data))
             .catch((error) => console.error('Error fetching group messages:', error));
-    }, [groupId]);
+    }, [groupId, navigate, userData.userId]);
 
     const handleDeleteGroup = async () => {
         try {
@@ -77,6 +83,21 @@ const GroupPage = () => {
         }
     };
 
+    const handleRemoveMember = async (memberId) => {
+        try {
+            const response = await fetch(`http://localhost:3001/groups/${groupId}/leave/${memberId}`, {
+                method: 'DELETE',
+            });
+            if (response.ok) {
+                setMembers(members.filter(member => member.id !== memberId));
+            } else {
+                console.error('Failed to remove member');
+            }
+        } catch (error) {
+            console.error('Error removing member:', error);
+        }
+    };
+
     return (
         <div>
             <Container fluid>
@@ -102,7 +123,7 @@ const GroupPage = () => {
                         <Chat groupId={groupId} messages={messages} />
                     </Col>
                     <Col md={4}>
-                        <MemberList owner={owner} members={members} />
+                        <MemberList owner={owner} members={members} currentUser={userData} onRemoveMember={handleRemoveMember} />
                     </Col>
                 </Row>
                 <Row>

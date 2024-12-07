@@ -13,7 +13,7 @@ const Chat = ({ groupId }) => {
 
     useEffect(() => {
         fetchMessages();
-        fetchMovieSuggestion();
+
     }, [groupId]);
 
     const fetchMessages = async () => {
@@ -25,20 +25,6 @@ const Chat = ({ groupId }) => {
             }
             const data = await response.json();
             console.log('Received messages:', data);
-            setMessages(Array.isArray(data) ? data : []);
-        } catch (error) {
-            console.error('Error fetching messages:', error);
-        }
-    };
-    const fetchMovieSuggestion= async () => {
-        try {
-            const response = await fetch(`http://localhost:3001/groups/${groupId}/movies`);
-            const contentType = response.headers.get('content-type');
-            if (!contentType || !contentType.includes('application/json')) {
-                throw new Error(`Expected JSON, but received: ${contentType}`);
-            }
-            const data = await response.json();
-            console.log('Received Movie messages:', data);
             setMessages(Array.isArray(data) ? data : []);
         } catch (error) {
             console.error('Error fetching messages:', error);
@@ -71,14 +57,13 @@ const Chat = ({ groupId }) => {
                 const savedMessage = await response.json();
                 setMessages([...messages, savedMessage]);
                 setNewMessage('');
-                fetchMessages();// Fetch the latest messages after sending a new message
-                fetchMovieSuggestion();
+                fetchMessages(); // Fetch the latest messages after sending a new message
+
             } catch (error) {
                 console.error('Error sending message:', error);
             }
         }
     };
-
 
     const searchMovies = async () => {
         if (!searchQuery.trim()) {
@@ -153,7 +138,7 @@ const Chat = ({ groupId }) => {
 
             // Fetch all messages again to update the state
             fetchMessages();
-            fetchMovieSuggestion();
+
 
         } catch (error) {
             console.error('Error updating vote:', error);
@@ -168,11 +153,11 @@ const Chat = ({ groupId }) => {
                         {msg.type === 'movie' ? (
                             <div>
                                 <img
-                                    src={msg.posterPath}
+                                    src={`https://image.tmdb.org/t/p/w200${msg.poster_path}`}
                                     alt={msg.movieTitle}
                                     style={{ width: '50px', marginRight: '10px' }}
                                 />
-                                <strong>{msg.posterPath}</strong>: {msg.movieTitle || msg.text}
+                                <strong>{msg.message}</strong>
                                 <Button
                                     className="vote-button"
                                     size="sm"

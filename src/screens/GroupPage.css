@@ -1,8 +1,8 @@
 .group-name {
-    font-size: 24px; /* Größere Schrift für die Gruppennamen */
+    font-size: 24px;
     font-weight: bold;
-    color: #fff; /* Weiße Schrift für den dunklen Hintergrund */
-    margin-bottom: 20px; /* Abstand zum darunterliegenden Chat */
+    color: #fff;
+    margin-bottom: 20px;
 }
 .group-header {
     display: flex;
@@ -14,8 +14,8 @@
     margin: 0;
 }
 .group-header button {
-    color: #000; /* Black text for better readability */
-    border: 1px solid #333; /* Light gray border */
+    color: #000;
+    border: 1px solid #333;
     font-weight: bold;
 }
 
