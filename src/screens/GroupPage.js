@@ -4,6 +4,7 @@ import { Container, Row, Col, Button, Modal } from 'react-bootstrap';
 import './GroupPage.css';
 import MemberList from '../components/groups/MemberList.js';
 import Chat from '../components/groups/Chat.js';
+import GroupManagement from '../components/groups/GroupUserManagement.js';
 
 const GroupPage = () => {
     const { groupId } = useParams();
@@ -102,6 +103,11 @@ const GroupPage = () => {
                     </Col>
                     <Col md={4}>
                         <MemberList owner={owner} members={members} />
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        <GroupManagement groupId={groupId} />
                     </Col>
                 </Row>
             </Container>

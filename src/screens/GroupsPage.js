@@ -7,7 +7,8 @@ const GroupsPage = ({ groupId }) => {
     const [selectedGroup, setSelectedGroup] = useState(null); // Holds the currently selected group
     const [showModal, setShowModal] = useState(false); // Controls modal visibility
 
-    const userData = JSON.parse(localStorage.getItem('userData'));  
+    const userData = localStorage.getItem('userData') ? JSON.parse(localStorage.getItem('userData')) : null;
+ 
 
     const handleCardClick = (group) => {
         setSelectedGroup(group);
@@ -23,20 +24,21 @@ const GroupsPage = ({ groupId }) => {
     // Function to handle joining a group
     const handleJoinGroup = () => {
         if (selectedGroup) {
-            fetch(`${process.env.REACT_APP_API_URL}/groups/${selectedGroup.group_id}/addMember/${userData.userId}`, {
+            fetch(`${process.env.REACT_APP_API_URL}/groups/${selectedGroup.group_id}/apply`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({ 
-                    membershipId: "member"
-                 }),
+                    groupId : selectedGroup.group_id,
+                    userId : userData.userId
+                 })
             })
                 .then((response) => {
                     if (response.ok) {
-                        alert(`Successfully joined group: ${selectedGroup.name}`);
+                        alert(`Sent application request to: ${selectedGroup.name}. Good luck!`);
                     } else {
-                        alert('Failed to join group');
+                        alert('You have already sent an applicantion.');
                     }
                 })
                 .catch((error) => {
@@ -55,6 +57,7 @@ const GroupsPage = ({ groupId }) => {
     }, [groupId]);
 
     if (!group) return <div>Loading...</div>;
+    console.log(group);
 
     return (
         <div>
