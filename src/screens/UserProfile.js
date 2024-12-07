@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import './UserProfile.css';
 
 const UserProfile = () => {
     // State to store the user data fetched from the API
