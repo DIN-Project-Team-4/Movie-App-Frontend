@@ -128,7 +128,7 @@ const GroupPage = () => {
                 </Row>
                 <Row>
                     <Col>
-                        <GroupManagement groupId={groupId} />
+                        <GroupManagement groupId={groupId} owner={owner} currentUser={userData} />
                     </Col>
                 </Row>
             </Container>
