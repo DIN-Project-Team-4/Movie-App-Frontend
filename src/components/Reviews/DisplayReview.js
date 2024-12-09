@@ -80,7 +80,8 @@ function DisplayReview({ movieId }) {
 											</span>
 										))}
 									</div>
-									<strong>Reviewed By:</strong> {r.username}
+									<strong>Reviewed By:</strong> {r.username}<br />
+									<strong>Review At: </strong>{r.reviewed_at}
 									<p>{r.description}</p>
 								</div>
 							</div>
