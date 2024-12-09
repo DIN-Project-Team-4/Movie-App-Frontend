@@ -1,21 +1,19 @@
-import React from 'react';
-import { Modal, Button } from 'react-bootstrap';
+import React, { useState } from 'react';
+import { Modal } from 'react-bootstrap';
 import SignIn from './SignIn.js';
 
 const SignInModal = ({ show, handleClose }) => {
+    const [isSignUp, setIsSignUp] = useState(false);
+
     return (
         <Modal show={show} onHide={handleClose} centered>
-            <Modal.Header closeButton>
-                <Modal.Title>Sign In</Modal.Title>
-            </Modal.Header>
             <Modal.Body>
-                <SignIn setSignInOpen={handleClose} />
+                <SignIn
+                    setSignInOpen={handleClose}
+                    isSignUp={isSignUp}
+                    setIsSignUp={setIsSignUp}
+                />
             </Modal.Body>
-            <Modal.Footer>
-                <Button variant="secondary" onClick={handleClose}>
-                    Close
-                </Button>
-            </Modal.Footer>
         </Modal>
     );
 };

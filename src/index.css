@@ -43,3 +43,12 @@ img {
   font-size: 3rem;
   font-weight: bold;
 }
+
+/* TOAST SETTINGS */
+.custom-toast-body {
+  font-size: 1rem;
+  font-weight: bold;
+  text-align: center;
+  color: #f8f9fa !important;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 1);
+}

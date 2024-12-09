@@ -111,4 +111,15 @@ async function getTrendingCelebrities() {
   }
 }
 
-export { getGenreName, searchByTitle, searchByYear, searchByGenre, getTrendingMovies, getTrendingCelebrities }
+// Function to fetch favorites list for a shared user ID
+async function fetchFavoritesBySharedUserId(userId) {
+  try {
+    const response = await axios.get(`${url}/api/favourites/share/${userId}`);
+    return response.data;
+  } catch (error) {
+    console.error(`Error fetching favorites for user ${userId}:`, error.message);
+    return null;
+  }
+}
+
+export { getGenreName, searchByTitle, searchByYear, searchByGenre, getTrendingMovies, getTrendingCelebrities, fetchFavoritesBySharedUserId  }

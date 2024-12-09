@@ -1,7 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ToastMessage } from '../toast/ToastMessage.js';
+import ToastMessage from '../Common/ToastMessage.js';
 import "./DisplayReview.css";
 
 function DisplayReview({ movieId }) {
@@ -90,8 +90,13 @@ function DisplayReview({ movieId }) {
 				)}
 			</div>
 
-			{/* TOAST MESSAGE */}
-			{isToastVisible && <ToastMessage toastMessage={toastMessage} toastType={toastType} />}
+			{/* TOAST MESSAGE EDITED TO BOOTSTRAP//WOON */}
+			<ToastMessage
+				show={isToastVisible}
+				onClose={() => setIsToastVisible(false)} 
+				message={toastMessage} 
+				toastType={toastType} 
+			/>
 		</>
 	);
 }

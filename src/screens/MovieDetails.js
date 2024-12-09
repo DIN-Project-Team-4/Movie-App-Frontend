@@ -19,7 +19,7 @@ const MovieDetails = () => {
     const [error, setError] = useState(null);
     const [videos, setVideos] = useState([]);
     const [activeTab, setActiveTab] = useState('details');
-    const [isFavourite, setIsFavourite] = useState(false); // Track if the movie is a favorite
+    const [isFavourite, setIsFavourite] = useState(false); // CHECK IF MOVIE IS ALREADY FAVOURITED BY USER
 
     useEffect(() => {
         const fetchMovieDetails = async () => {
@@ -47,11 +47,11 @@ const MovieDetails = () => {
             try {
                 const response = await axios.get(`${backendUrl}/favourites`, { withCredentials: true });
                 const favourites = response.data;
-                console.log("Favourites array:", favourites); // Log fetched favourites
+                //console.log("Favourites array:", favourites); // DEBUGGING
 
                 const isMovieFavourite = favourites.some((fav) => fav.movie_id === parseInt(id));
                 setIsFavourite(isMovieFavourite);
-                console.log("Is current movie a favourite?", isMovieFavourite); // Log result
+                //console.log("Is current movie a favourite?", isMovieFavourite); // DEBUGGING
             } catch (error) {
                 console.error('Error fetching favorites:', error.message);
             }

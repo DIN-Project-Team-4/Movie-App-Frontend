@@ -1,10 +1,10 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { useState } from 'react';
-import { ToastMessage } from '../toast/ToastMessage.js';
+import ToastMessage from '../Common/ToastMessage.js';
 
-function MovieReviewForm({movieId, movieTitle, moviePosterUrl}) {
+function MovieReviewForm({ movieId, movieTitle, moviePosterUrl }) {
   const baseUrl = process.env.REACT_APP_API_URL; //for the URL
-  
+
   const [rating, setRating] = useState(0); // Default no rating
   const [review, setReview] = useState('');
   const [error, setError] = useState('');
@@ -22,29 +22,48 @@ function MovieReviewForm({movieId, movieTitle, moviePosterUrl}) {
     setReview(event.target.value);
   };
 
-  const handleSubmit = async(event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
-    if (rating === 0) {      
+    if (rating === 0) {
       showToast('Please provide a rating.', 'warning', false);
       return;
     }
 
     //check review is written
-    if (review === "") {      
+    if (review === "") {
       showToast('Please provide a review.', 'warning', false);
       return;
     }
     //Review backend connection
     const userData = JSON.parse(localStorage.getItem('userData'));
-    if (!userData || !userData.userId ){
-      showToast('Please Login before you enter review.' ,'warning', false);
+    if (!userData || !userData.userId) {
+      showToast('Please Login before you enter review.', 'warning', false);
       return;
-    }   
-    
+    }
+
     //send the data to backend
-    try { 
-        const saveDate = {
+    try {
+      const saveDate = {
+        movieId: movieId,
+        description: review,
+        rating: rating,
+        reviewedAt: new Date(),
+        movieTitle: movieTitle,
+        moviePosterUrl: moviePosterUrl,
+        userId: userData.userId
+      }
+
+      console.log(saveDate)
+      // Send POST request to the backend
+      const response = await fetch(`${baseUrl}/movie/createReview`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        credentials: 'include', // Ensure credentials (cookies) are sent
+        body: JSON.stringify({
           movieId: movieId,
           description: review,
           rating: rating,
@@ -52,45 +71,27 @@ function MovieReviewForm({movieId, movieTitle, moviePosterUrl}) {
           movieTitle: movieTitle,
           moviePosterUrl: moviePosterUrl,
           userId: userData.userId
-        }
-
-        console.log(saveDate)
-        // Send POST request to the backend
-        const response = await fetch(`${baseUrl}/movie/createReview`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-          },
-          credentials: 'include', // Ensure credentials (cookies) are sent
-          body: JSON.stringify({
-            movieId: movieId,
-            description: review,
-            rating: rating,
-            reviewedAt: new Date(),
-            movieTitle: movieTitle,
-            moviePosterUrl: moviePosterUrl,
-            userId: userData.userId
-          })
-        });
-        console.log(response.status);
-        // Parse the response
+        })
+      });
+      console.log(response.status);
+      // Parse the response
       const data = await response.json();
 
-      
-      if (response.status === 200) {          
-          showToast('Reviews successfully submited', 'success', true);
-          setRating(0); // Reset the form
-          setReview('');
+
+      if (response.status === 200) {
+        showToast('Review successfully submited', 'success', true);
+        setRating(0); // Reset the form
+        setReview('');
       } else {
-          showToast(data.error || 'An error occurred ().', 'warning', false);          
+        showToast(data.error || 'An error occurred ().', 'warning', false);
       }
-  } catch (error) {
-      showToast(error.message ||'Error, please try again!', 'warning', false);}      
+    } catch (error) {
+      showToast(error.message || 'Error, please try again!', 'warning', false);
+    }
   };
 
-  //Show toast
-  const showToast = (message, type,) => {
+  {/* TOAST MESSAGE EDITED TO BOOTSTRAP//WOON */ }
+  const showToast = (message, type) => {
     setToastMessage(message);
     setToastType(type);
     setIsToastVisible(true);
@@ -99,7 +100,8 @@ function MovieReviewForm({movieId, movieTitle, moviePosterUrl}) {
         setIsToastVisible(false);
         setToastMessage('');        
     }, 3000);
-};
+  };
+
   return (
     <div className="container mt-5">
       <form onSubmit={handleSubmit}>
@@ -119,8 +121,8 @@ function MovieReviewForm({movieId, movieTitle, moviePosterUrl}) {
                   color: num <= rating ? '#FFD700' : '#ccc',
                 }}
                 onClick={() => handleRatingChange(num)}
-                onKeyDown={(e) => e.key === 'Enter' && handleRatingChange(num)} 
-                tabIndex={0} 
+                onKeyDown={(e) => e.key === 'Enter' && handleRatingChange(num)}
+                tabIndex={0}
               >
                 {num <= rating ? '★' : '☆'}
               </span>
@@ -153,8 +155,13 @@ function MovieReviewForm({movieId, movieTitle, moviePosterUrl}) {
           </button>
         </div>
       </form>
-       {/* TOAST MESSAGE */}
-       {isToastVisible && <ToastMessage toastMessage={toastMessage} toastType={toastType} />}
+      {/* TOAST MESSAGE EDITED TO BOOTSTRAP//WOON */}
+      <ToastMessage
+        show={isToastVisible} 
+        onClose={() => setIsToastVisible(false)} 
+        message={toastMessage} 
+        toastType={toastType}
+      />
     </div>
   );
 }

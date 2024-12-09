@@ -7,6 +7,7 @@ import { useMovieSearchContext } from '../context/MovieSearchContext.js';
 import './Header.css';
 import Search from './Search/Search.js';
 import SignInModal from './Sign-In/SignInModal.js';
+import ToastMessage from "./Common/ToastMessage.js";
 
 const Header = ({ showSearchBox = true, showDropdownMenu = true }) => {
   const navigate = useNavigate(); // Initialize navigate hook
@@ -21,7 +22,15 @@ const Header = ({ showSearchBox = true, showDropdownMenu = true }) => {
   const [showSignInModal, setShowSignInModal] = useState(false);
   const handleSignInShow = () => setShowSignInModal(true);
   const handleSignInClose = () => setShowSignInModal(false);
-  const [loginstatus,setLoginstatus] = useState(true);
+  const [loginstatus, setLoginstatus] = useState(true);
+
+  // LOG OUT STATES
+  const [showToast, setShowToast] = useState(false);
+  const [toastMessage, setToastMessage] = useState("");
+  const [toastType, setToastType] = useState("success");
+
+  //Shared favourites link
+  const [sharedFavorites, setSharedFavorites] = useState([]);
 
   const navLinks = [
     { href: '/', label: 'Home' },
@@ -32,27 +41,60 @@ const Header = ({ showSearchBox = true, showDropdownMenu = true }) => {
   const dropdownItems = [
     { href: 'groups/mygroups', label: 'My Groups' },
     { href: '/profile', label: 'My Profile' },
-    { href: '/settings', label: 'Settings' },
+    // Removed "Settings" and replaced with "Share List"
   ];
 
-  //handle LogOut.
+  // Handle Logout
   const handleLogout = () => {
-    // Clear local storage
     localStorage.clear();
     setLoginstatus(true);
-     // Delete all cookies
-    // Delete all cookies
-  document.cookie.split(";").forEach(cookie => {
-    const tokens = cookie.split("=")[0].trim();
-    document.cookie = `${tokens}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;    
-   
-  });
-      // Redirect to the home page
-      navigate('/');
+    document.cookie.split(";").forEach((cookie) => {
+      const tokens = cookie.split("=")[0].trim();
+      document.cookie = `${tokens}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+    });
+
+    setToastMessage("You have successfully logged out.");
+    setToastType("success");
+    setShowToast(true);
+    navigate("/");
   };
 
-  // Retrieve user data from local storage
-  const userData = JSON.parse(localStorage.getItem('userData'));
+  // Retrieve user data
+  const userData = JSON.parse(localStorage.getItem("userData"));
+
+  // Copy the shareable link
+  const handleShareList = async () => {
+    if (!userData || !userData.userId) {
+      setToastMessage('You must be logged in to share your list.');
+      setToastType('warning');
+      setShowToast(true);
+      return;
+    }
+
+    // Copy the share link
+    const shareUrl = `http://localhost:3000/share-favourites/${userData.userId}`;
+    navigator.clipboard.writeText(shareUrl);
+    setToastMessage('Share link copied to clipboard!');
+    setToastType('success');
+    setShowToast(true);
+
+    // Fetch the user's favorites
+    try {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/favourites`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('authToken')}`,
+        },
+      });
+      const data = await response.json();
+      setSharedFavorites(data); // Store the favorites
+    } catch (error) {
+      console.error('Error fetching favorites:', error);
+      setToastMessage('Failed to fetch favorites.');
+      setToastType('danger');
+      setShowToast(true);
+    }
+  };
+
 
   return (
     <>
@@ -86,31 +128,34 @@ const Header = ({ showSearchBox = true, showDropdownMenu = true }) => {
               </Nav>
             )}
             <Nav className="ms-auto">
-            {userData ? (
-                <Nav.Item>
-                  {/* Display welcome message */}
-                  <span>Welcome,<br /> {userData.username}!</span>
-                </Nav.Item>                
-              ) : (                
+              {userData ? (
+                <>
+                  <Nav.Item>
+                    <span>Welcome, {userData.username}!</span>
+                  </Nav.Item>
+                  {showDropdownMenu && (
+                    <NavDropdown align="end" title={<i className="bi bi-person-circle" />}>
+                      {dropdownItems.map((item) => (
+                        <NavDropdown.Item href={item.href} key={item.href}>
+                          {item.label}
+                        </NavDropdown.Item>
+                      ))}
+                      <NavDropdown.Item onClick={handleShareList}>
+                        Share List
+                      </NavDropdown.Item>
+                      <NavDropdown.Divider />
+                      <NavDropdown.Item onClick={handleLogout}>
+                        Logout
+                      </NavDropdown.Item>
+                    </NavDropdown>
+                  )}
+                </>
+              ) : (
                 loginstatus && (
                   <Nav.Item>
-                    {/* Display Sign In link */}
-                    <Nav.Link onClick={handleSignInShow}>Sign In</Nav.Link>
+                    <Nav.Link onClick={handleSignInShow}>Sign In!</Nav.Link>
                   </Nav.Item>
                 )
-              )}
-              {showDropdownMenu && (
-                <NavDropdown align="end" title={<i className="bi bi-person-circle" />}>
-                  {dropdownItems.map((item) => (
-                    <NavDropdown.Item href={item.href} key={item.href}>
-                      {item.label}
-                    </NavDropdown.Item>
-                  ))}
-                  <NavDropdown.Divider />
-                  <NavDropdown.Item  onClick={handleLogout}>
-                    Logout
-                  </NavDropdown.Item>
-                </NavDropdown>
               )}
             </Nav>
           </Nav>
@@ -118,6 +163,13 @@ const Header = ({ showSearchBox = true, showDropdownMenu = true }) => {
       </Navbar>
 
       <SignInModal show={showSignInModal} handleClose={handleSignInClose} />
+
+      <ToastMessage
+        show={showToast}
+        onClose={() => setShowToast(false)}
+        message={toastMessage}
+        toastType={toastType}
+      />
     </>
   );
 };

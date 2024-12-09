@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { ToastMessage } from '../toast/ToastMessage.js'; 
+import ToastMessage from '../Common/ToastMessage.js';
 
 const DeleteAccount = ({ userId, token, onAccountDeleted }) => {
     const [isDeleting, setIsDeleting] = useState(false);
@@ -54,16 +54,21 @@ const DeleteAccount = ({ userId, token, onAccountDeleted }) => {
         <div className="delete-account-container">
             <h3>Delete Account</h3>
             <p>Deleting your account will erase all data permanently. Are you sure?</p>
-            <button 
-                onClick={handleDeleteAccount} 
-                disabled={isDeleting} 
+            <button
+                onClick={handleDeleteAccount}
+                disabled={isDeleting}
                 className="btn btn-danger"
             >
                 {isDeleting ? 'Deleting...' : 'Delete Account'}
             </button>
 
-            {/* Render ToastMessage when toast is visible */}
-            {isToastVisible && <ToastMessage toastMessage={toastMessage} toastType={toastType} />}
+            {/* TOAST MESSAGE EDITED TO BOOTSTRAP//WOON */}
+            <ToastMessage
+                show={isToastVisible}
+                onClose={() => setIsToastVisible(false)}
+                message={toastMessage}
+                toastType={toastType}
+            />
         </div>
     );
 };

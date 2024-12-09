@@ -5,6 +5,7 @@ import './bootstrap.min.css';
 import './index.css';
 import reportWebVitals from './reportWebVitals.js';
 
+import SharedFavorites from './components/Favourites/SharedFavourites.js';
 import DisplayReview from './components/Reviews/DisplayReview.js';
 import { MovieSearchProvider } from './context/MovieSearchContext.js';
 import IndexLayout from './IndexLayout.js';
@@ -67,6 +68,10 @@ const router = createBrowserRouter([
       {
         path: '/profile',
         element: <UserProfile />,
+      },
+      {
+        path: '/share-favourites/:userId',
+        element: <SharedFavorites />,
       },
       
     ],
