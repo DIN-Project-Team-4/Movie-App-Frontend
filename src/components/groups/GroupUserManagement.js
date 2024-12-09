@@ -91,9 +91,7 @@ const GroupUserManagement = ({ groupId, owner, currentUser }) => {
     if (!owner || !currentUser || owner.user_id !== currentUser.userId) {
         return (
             <Container className="mt-5">
-                <Alert variant="warning">
-                    <strong>Warning:</strong> You do not have permission to manage applications.
-                </Alert>
+
             </Container>
         );
     }

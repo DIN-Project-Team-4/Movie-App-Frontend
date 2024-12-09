@@ -1,42 +1,35 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Container, Row, Col, Card, ListGroup } from 'react-bootstrap';
+import { Container, Row, Col, Card } from 'react-bootstrap';
 import './MyGroupsPage.css';
 import GroupCreation from '../components/groups/GroupCreation.js';
 
 const MyGroupsPage = ({ groupId }) => {
     const [joinedGroups, setJoinedGroups] = useState([]);
-    const [members, setMembers] = useState([]);
-    const [movie, setMovie] = useState('');
-    const [showtime, setShowtime] = useState('');
-    const [posts, setPosts] = useState([]);
-    const userData = JSON.parse(localStorage.getItem('userData'));  
+    const userData = JSON.parse(localStorage.getItem('userData'));
     const navigate = useNavigate();
 
-    //Function to direct the page when click on the joined group card
+    // Function to direct the page when click on the joined group card
     const handleGroupClick = (group) => {
         navigate(`/groups/${group.group_id}`);
     };
-
 
     useEffect(() => {
         // Fetch joined groups from the backend
         fetch(`${process.env.REACT_APP_API_URL}/groups/users/${userData.userId}/yourgroups`)
             .then((response) => response.json())
-            .then((data) => setJoinedGroups(data));
-    }, [groupId]);
-
-    const handlePost = () => {
-        if (movie.trim() && showtime.trim()) {
-            const newPost = { movie, showtime };
-            setPosts([...posts, newPost]);
-            setMovie('');
-            setShowtime('');
-            // Optionally, send the new post to the backend
-        }
-    };
-
-    //if (!group) return <div>Loading...</div>;
+            .then((data) => {
+                if (Array.isArray(data)) {
+                    setJoinedGroups(data);
+                } else {
+                    setJoinedGroups([]);
+                }
+            })
+            .catch((error) => {
+                console.error('Error fetching joined groups:', error);
+                setJoinedGroups([]);
+            });
+    }, [groupId, userData.userId]);
 
     return (
         <div>
@@ -51,16 +44,22 @@ const MyGroupsPage = ({ groupId }) => {
                 </Row>
 
                 <Row>
-                    {joinedGroups.map((group) => (
-                        <Col md={4} key={group.id} className="mb-4">
-                            <Card onClick={() =>handleGroupClick(group)} style={{ cursor: 'pointer' }}>
-                                <Card.Body>
-                                    <Card.Title>{group.name}</Card.Title>
-                                    <Card.Text>{group.group_description}</Card.Text>
-                                </Card.Body>
-                            </Card>
+                    {joinedGroups.length === 0 ? (
+                        <Col>
+                            <p>You have not joined any groups yet.</p>
                         </Col>
-                    ))}
+                    ) : (
+                        joinedGroups.map((group) => (
+                            <Col md={4} key={group.group_id} className="mb-4">
+                                <Card onClick={() => handleGroupClick(group)} style={{ cursor: 'pointer' }}>
+                                    <Card.Body>
+                                        <Card.Title>{group.name}</Card.Title>
+                                        <Card.Text>{group.group_description}</Card.Text>
+                                    </Card.Body>
+                                </Card>
+                            </Col>
+                        ))
+                    )}
                 </Row>
             </Container>
         </div>

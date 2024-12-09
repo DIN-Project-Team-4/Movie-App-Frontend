@@ -89,7 +89,7 @@ function GroupCreation() {
               <Form.Label>Group Description</Form.Label>
               <Form.Control
                 type="text"
-                placeholder="Enter group dwescription"
+                placeholder="Enter group description"
                 value={groupDescription}
                 onChange={(e) => setGroupDescription(e.target.value)}
                 required

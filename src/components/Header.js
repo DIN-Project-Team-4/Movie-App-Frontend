@@ -49,7 +49,7 @@ const Header = ({ showSearchBox = true, showDropdownMenu = true }) => {
   ];
 
   const dropdownItems = [
-    { href: 'groups/mygroups', label: 'My Groups' },
+    { href: '/groups/mygroups', label: 'My Groups' },
     { href: '/profile', label: 'My Profile' },
     { href: '/settings', label: 'Settings' },
   ];
