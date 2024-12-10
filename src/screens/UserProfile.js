@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './UserProfile.css';
 import { Modal, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import axios from "axios";
 
 const UserProfile = () => {
     const userData = JSON.parse(localStorage.getItem('userData'));
@@ -59,7 +60,7 @@ const UserProfile = () => {
 
       // Callback after account deletion
   const handleAccountDeleted = async () => {
-    const response = await fetch(`http://localhost:3001/api/v1/delete/${userId}`,
+    const response = await axios.get(`http://localhost:3001/api/v1/delete/${userId}`,
         { withCredentials: true }
     );
     localStorage.clear();
@@ -110,8 +111,8 @@ const UserProfile = () => {
                     </Button>
                     <Button
                         variant="danger"
-                        onClick={() => {
-                            handleAccountDeleted();
+                        onClick={async () => {
+                            await handleAccountDeleted();
                             setShowDeleteAccount(false);
                         }}
                     >
