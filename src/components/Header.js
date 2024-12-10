@@ -21,7 +21,7 @@ const Header = ({ showSearchBox = true, showDropdownMenu = true }) => {
   const [showSignInModal, setShowSignInModal] = useState(false);
   const handleSignInShow = () => setShowSignInModal(true);
   const handleSignInClose = () => setShowSignInModal(false);
-  const [showDeleteAccount, setShowDeleteAccount] = useState(false); 
+
 
   // Handle LogOut
   const handleLogout = () => {
@@ -33,11 +33,7 @@ const Header = ({ showSearchBox = true, showDropdownMenu = true }) => {
     navigate('/');
   };
 
-  // Callback after account deletion
-  const handleAccountDeleted = () => {
-    localStorage.clear();
-    navigate('/'); // Redirect to the home page
-  };
+
 
   // Retrieve user data from local storage
   const userData = JSON.parse(localStorage.getItem('userData'));
@@ -101,13 +97,6 @@ const Header = ({ showSearchBox = true, showDropdownMenu = true }) => {
                           {item.label}
                         </NavDropdown.Item>
                       ))}
-                      {/* Delete Account button only appears when user is logged in */}
-                      <NavDropdown.Item
-                        onClick={() => setShowDeleteAccount(true)}
-                        style={{ color: 'red' }}
-                      >
-                        Delete Account
-                      </NavDropdown.Item>
                       <NavDropdown.Divider />
                       <NavDropdown.Item onClick={handleLogout}>Logout</NavDropdown.Item>
                     </NavDropdown>
@@ -122,30 +111,6 @@ const Header = ({ showSearchBox = true, showDropdownMenu = true }) => {
           </Nav>
         </Container>
       </Navbar>
-
-      {/* Delete Account Confirmation Modal */}
-      <Modal show={showDeleteAccount} onHide={() => setShowDeleteAccount(false)}>
-        <Modal.Header closeButton>
-          <Modal.Title>Confirm Account Deletion</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          Are you sure you want to delete your account? This action is irreversible.
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={() => setShowDeleteAccount(false)}>
-            Cancel
-          </Button>
-          <Button
-            variant="danger"
-            onClick={() => {
-              handleAccountDeleted();
-              setShowDeleteAccount(false);
-            }}
-          >
-            Delete Account
-          </Button>
-        </Modal.Footer>
-      </Modal>
 
       {/* SignIn modal */}
       <SignInModal show={showSignInModal} handleClose={handleSignInClose} />

@@ -1,20 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import './UserProfile.css';
+import { Modal, Button } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 
 const UserProfile = () => {
+    const userData = JSON.parse(localStorage.getItem('userData'));
+    const { userId } = userData
     // State to store the user data fetched from the API
     const [user, setUser] = useState(null);
 
     // State to store any errors during data fetching
     const [error, setError] = useState('');
 
+    // DELETE LOGIC
+    const [showDeleteAccount, setShowDeleteAccount] = useState(false); 
+    const navigate = useNavigate();
+
     useEffect(() => {
         // Function to fetch user data from the backend
         const fetchUserData = async () => {
             try {
                 // Make a GET request to the API endpoint
-                const response = await fetch('http://localhost:3001/api/test-findOneUser');
-                
+                const response = await fetch(`http://localhost:3001/api/user/${userId}`);
+
                 // Check if the response is successful
                 if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);
@@ -44,12 +52,30 @@ const UserProfile = () => {
         return <div className="user-profile-loading">Loading...</div>;
     }
 
+    /* DELETE ACCOUNT LOGIC */
+
+
+
+
+      // Callback after account deletion
+  const handleAccountDeleted = async () => {
+    const response = await fetch(`http://localhost:3001/api/v1/delete/${userId}`,
+        { withCredentials: true }
+    );
+    localStorage.clear();
+    navigate('/'); // Redirect to the home page
+  };
+
+
+
+
+
     // Render the user's profile information once data is fetched
     return (
         <div className="user-profile-container">
             {/* Header displaying the username */}
             <h1 className="user-profile-header">{user.username}'s Profile</h1>
-            
+
             {/* Section containing user information */}
             <div className="user-profile-info">
                 {/* Display user email */}
@@ -67,6 +93,32 @@ const UserProfile = () => {
                     <strong className="user-profile-label">Last Login:</strong> {new Date(user.lastLoginDate).toLocaleDateString()}
                 </p>
             </div>
+
+            <Button onClick={() => setShowDeleteAccount(true)} style={{ color: 'red' }}>Delete User</Button>
+
+            {/* Delete Account Confirmation Modal */}
+            <Modal show={showDeleteAccount} onHide={() => setShowDeleteAccount(false)}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Confirm Account Deletion</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    Are you sure you want to delete your account? This action is irreversible.
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={() => setShowDeleteAccount(false)}>
+                        Cancel
+                    </Button>
+                    <Button
+                        variant="danger"
+                        onClick={() => {
+                            handleAccountDeleted();
+                            setShowDeleteAccount(false);
+                        }}
+                    >
+                        Delete Account
+                    </Button>
+                </Modal.Footer>
+            </Modal>
         </div>
     );
 };
