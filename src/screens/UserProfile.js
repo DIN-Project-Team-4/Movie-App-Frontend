@@ -22,7 +22,7 @@ const UserProfile = () => {
         const fetchUserData = async () => {
             try {
                 // Make a GET request to the API endpoint
-                const response = await fetch(`http://localhost:3001/api/user/${userId}`);
+                const response = await fetch(`${process.env.REACT_APP_API_URL}/api/user/${userId}`);
 
                 // Check if the response is successful
                 if (!response.ok) {
@@ -60,7 +60,7 @@ const UserProfile = () => {
 
       // Callback after account deletion
   const handleAccountDeleted = async () => {
-    const response = await axios.get(`http://localhost:3001/api/v1/delete/${userId}`,
+    const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/v1/delete/${userId}`,
         { withCredentials: true }
     );
     localStorage.clear();

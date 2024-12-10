@@ -18,7 +18,7 @@ const Chat = ({ groupId }) => {
 
     const fetchMessages = async () => {
         try {
-            const response = await fetch(`http://localhost:3001/groups/${groupId}/messages`);
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/groups/${groupId}/messages`);
             const contentType = response.headers.get('content-type');
             if (!contentType || !contentType.includes('application/json')) {
                 throw new Error(`Expected JSON, but received: ${contentType}`);
@@ -42,7 +42,7 @@ const Chat = ({ groupId }) => {
             console.log('Sending message payload:', messagePayload);
 
             try {
-                const response = await fetch(`http://localhost:3001/groups/${groupId}/messages`, {
+                const response = await fetch(`${process.env.REACT_APP_API_URL}/groups/${groupId}/messages`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(messagePayload),
@@ -93,7 +93,7 @@ const Chat = ({ groupId }) => {
         };
 
         try {
-            const response = await fetch(`http://localhost:3001/groups/${groupId}/movies`, {
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/groups/${groupId}/movies`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(movieSuggestion),
@@ -116,7 +116,7 @@ const Chat = ({ groupId }) => {
     const voteForMessage = async (messageId, currentVote) => {
         const newVote = currentVote === 1 ? 0 : 1; // Toggle vote
         try {
-            const response = await fetch(`http://localhost:3001/groups/${groupId}/messages/update`, {
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/groups/${groupId}/messages/update`, {
                 method: 'PATCH',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ groupId, messageId, userId: userData.userId, vote: newVote }),

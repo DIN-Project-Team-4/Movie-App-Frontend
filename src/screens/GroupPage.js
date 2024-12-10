@@ -25,7 +25,7 @@ const GroupPage = () => {
         }
 
         // Fetch group members and check if user is in the group
-        fetch(`http://localhost:3001/groups/${groupId}/members`)
+        fetch(`${process.env.REACT_APP_API_URL}/groups/${groupId}/members`)
             .then((response) => response.json())
             .then((data) => {
                 const isMember = data.some(member => member.user_id === userData.userId);
@@ -41,13 +41,13 @@ const GroupPage = () => {
             .catch((error) => console.error('Error fetching group members:', error));
 
         // Fetch group name
-        fetch(`http://localhost:3001/groups/${groupId}/name`)
+        fetch(`${process.env.REACT_APP_API_URL}/groups/${groupId}/name`)
             .then((response) => response.json())
             .then((data) => setGroupName(data.name))
             .catch((error) => console.error('Error fetching group details:', error));
 
         // Fetch group messages
-        fetch(`http://localhost:3001/groups/${groupId}/messages`)
+        fetch(`${process.env.REACT_APP_API_URL}/${groupId}/messages`)
             .then((response) => response.json())
             .then((data) => setMessages(data))
             .catch((error) => console.error('Error fetching group messages:', error));
@@ -55,7 +55,7 @@ const GroupPage = () => {
 
     const handleDeleteGroup = async () => {
         try {
-            const response = await fetch(`http://localhost:3001/groups/delete/${groupId}`, {
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/groups/delete/${groupId}`, {
                 method: 'DELETE',
             });
             if (response.ok) {
@@ -70,7 +70,7 @@ const GroupPage = () => {
 
     const handleLeaveGroup = async () => {
         try {
-            const response = await fetch(`http://localhost:3001/groups/${groupId}/leave/${userData.userId}`, {
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/${groupId}/leave/${userData.userId}`, {
                 method: 'DELETE',
             });
             if (response.ok) {
@@ -85,7 +85,7 @@ const GroupPage = () => {
 
     const handleRemoveMember = async (memberId) => {
         try {
-            const response = await fetch(`http://localhost:3001/groups/${groupId}/leave/${memberId}`, {
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/${groupId}/leave/${memberId}`, {
                 method: 'DELETE',
             });
             if (response.ok) {

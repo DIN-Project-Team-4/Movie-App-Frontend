@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Row, Col, Card, Modal, Form, Button, ListGroup } from 'react-bootstrap';
+import { Container, Row, Col, Card, Modal, Button } from 'react-bootstrap';
 import './GroupsPage.css';
 
 const GroupsPage = ({ groupId }) => {
