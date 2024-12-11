@@ -114,7 +114,7 @@ async function getTrendingCelebrities() {
 // Function to fetch favorites list for a shared user ID
 async function fetchFavoritesBySharedUserId(userId) {
   try {
-    const response = await axios.get(`${url}/api/favourites/share/${userId}`);
+    const response = await axios.get(`${url}/favourites/share/${userId}`);
     return response.data;
   } catch (error) {
     console.error(`Error fetching favorites for user ${userId}:`, error.message);

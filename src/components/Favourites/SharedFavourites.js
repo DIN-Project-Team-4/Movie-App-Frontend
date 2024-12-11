@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import SearchResults from '../Search/SearchResults.js';
 import { fetchFavoritesBySharedUserId } from '../Search/searchApi.js';
+import MovieListCard from "../Search/MovieListCard.js";
+import MovieCard from "../Search/MovieCard.js";
 
 const SharedFavorites = () => {
   const { userId } = useParams();
@@ -27,18 +29,15 @@ const SharedFavorites = () => {
     <div>
       <h2>Shared Favorites</h2>
       {hasFetched ? (
-        <SearchResults
-          searchText=""
-          results={results}
-          genres={genres}
-          hasSearched={true}
-          prevPage={() => {}}
-          nextPage={() => {}}
-          page={1}
-          totalPages={1}
-        />
+          <div className='main-movieCard'>
+            <ul>
+              {results.map(movie => <MovieCard movieId={movie.id} movieName={movie.title}
+                                                    poster={movie.poster_path} date={movie.release_date}
+                                                    commonGenres={genres} movieGenres={movie.genre_ids}/>)}
+            </ul>
+          </div>
       ) : (
-        <p>Loading shared favorites...</p>
+          <p>Loading shared favorites...</p>
       )}
     </div>
   );

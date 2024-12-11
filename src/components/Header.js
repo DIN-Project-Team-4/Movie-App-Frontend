@@ -1,6 +1,6 @@
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import React, { useState } from 'react';
-import { Container, Nav, Navbar, NavDropdown, Modal, Button } from 'react-bootstrap';
+import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import Logo from '../assets/logo_full.png';
 import { useMovieSearchContext } from '../context/MovieSearchContext.js';
@@ -34,7 +34,6 @@ const Header = ({ showSearchBox = true, showDropdownMenu = true }) => {
   };
 
 
-
   // Retrieve user data from local storage
   const userData = JSON.parse(localStorage.getItem('userData'));
 
@@ -45,9 +44,9 @@ const Header = ({ showSearchBox = true, showDropdownMenu = true }) => {
   ];
 
   const dropdownItems = [
-    { href: '/groups/mygroups', label: 'My Groups' },
     { href: '/profile', label: 'My Profile' },
-    { href: '/settings', label: 'Settings' },
+    { href: '/groups/mygroups', label: 'My Groups' },
+    { href: `/share-favourites/${userData.userId}`, label: 'My Favorites' },
   ];
 
   return (

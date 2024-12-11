@@ -8,7 +8,7 @@ export default function MovieCard({ movieName, poster, date, commonGenres, movie
 
   useEffect(() => {
     // Map genre IDs to names once when `commonGenres` or `movieGenres` change
-    const names = movieGenres.map(id => {
+    const names = (movieGenres || []).map(id => {
       const genre = commonGenres.find(item => item.id === id);
       return genre ? genre.name : null;
     }).filter(Boolean); // filter out null values
