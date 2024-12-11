@@ -49,7 +49,7 @@ const MovieDetails = () => {
                 const favourites = response.data;
                 //console.log("Favourites array:", favourites); // DEBUGGING
 
-                const isMovieFavourite = favourites.some((fav) => fav.movie_id === parseInt(id));
+                const isMovieFavourite = favourites.some((fav) => String(fav.id) === String(id));
                 setIsFavourite(isMovieFavourite);
                 //console.log("Is current movie a favourite?", isMovieFavourite); // DEBUGGING
             } catch (error) {
