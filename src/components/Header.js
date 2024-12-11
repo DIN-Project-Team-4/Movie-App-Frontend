@@ -43,11 +43,11 @@ const Header = ({ showSearchBox = true, showDropdownMenu = true }) => {
     { href: '/groups', label: 'Groups' },
   ];
 
-  const dropdownItems = [
+  const dropdownItems = userData ? [
     { href: '/profile', label: 'My Profile' },
     { href: '/groups/mygroups', label: 'My Groups' },
     { href: `/share-favourites/${userData.userId}`, label: 'My Favorites' },
-  ];
+  ] : [];
 
   return (
     <>
