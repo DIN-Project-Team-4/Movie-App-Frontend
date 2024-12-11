@@ -94,6 +94,10 @@
   margin: 0.2rem 0;
 }
 
+.movie-list li {
+  list-style: none;
+}
+
 /* Media Query for tablets and below (max-width: 1200px) */
 @media (max-width: 1200px) {
   .advanced-search-container {
