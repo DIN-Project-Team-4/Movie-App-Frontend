@@ -1,4 +1,16 @@
-.container {
+.group-item {
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+}
+
+.group-item:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+}
+
+
+/* NONE OF THIS IS USED? */
+/* .container {
     margin-top: 20px;
 }
 
@@ -34,3 +46,4 @@ button {
     max-height: 300px;
     overflow-y: auto;
 }
+ */

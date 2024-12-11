@@ -18,3 +18,7 @@
   .review-item div {
     flex-grow: 1; 
   }
+
+  .review-text {
+    font-style: italic;
+  }

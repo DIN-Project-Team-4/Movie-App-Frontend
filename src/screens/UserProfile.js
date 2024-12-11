@@ -14,7 +14,7 @@ const UserProfile = () => {
     const [error, setError] = useState('');
 
     // DELETE LOGIC
-    const [showDeleteAccount, setShowDeleteAccount] = useState(false); 
+    const [showDeleteAccount, setShowDeleteAccount] = useState(false);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -58,14 +58,14 @@ const UserProfile = () => {
 
 
 
-      // Callback after account deletion
-  const handleAccountDeleted = async () => {
-    const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/v1/delete/${userId}`,
-        { withCredentials: true }
-    );
-    localStorage.clear();
-    navigate('/'); // Redirect to the home page
-  };
+    // Callback after account deletion
+    const handleAccountDeleted = async () => {
+        const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/v1/delete/${userId}`,
+            { withCredentials: true }
+        );
+        localStorage.clear();
+        navigate('/'); // Redirect to the home page
+    };
 
 
 
@@ -73,9 +73,8 @@ const UserProfile = () => {
 
     // Render the user's profile information once data is fetched
     return (
-        <div className="user-profile-container">
-            {/* Header displaying the username */}
-            <h1 className="user-profile-header">{user.username}'s Profile</h1>
+        <div className="main-div">
+            <div className='div-title'>{user.username}'s Profile</div>
 
             {/* Section containing user information */}
             <div className="user-profile-info">
@@ -95,30 +94,30 @@ const UserProfile = () => {
                 </p>
             </div>
 
-            <Button onClick={() => setShowDeleteAccount(true)} style={{ color: 'red' }}>Delete User</Button>
+            <Button onClick={() => setShowDeleteAccount(true)} variant="danger">Delete User</Button>
 
             {/* Delete Account Confirmation Modal */}
-            <Modal show={showDeleteAccount} onHide={() => setShowDeleteAccount(false)}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Confirm Account Deletion</Modal.Title>
-                </Modal.Header>
+            <Modal show={showDeleteAccount} onHide={() => setShowDeleteAccount(false)} className='delete-user-modal'>
                 <Modal.Body>
-                    Are you sure you want to delete your account? This action is irreversible.
+                    <div className='custom-modal'>
+                        <div className='div-title'>Confirm Deletion</div>
+                        <div>Are you sure you want to delete your account? {<br />} This action is irreversible.</div>
+                        <div className='delete-account-buttons'>
+                         <Button variant="outline-dark" onClick={() => setShowDeleteAccount(false)}>
+                            Cancel
+                        </Button>
+                        <Button
+                            variant="danger"
+                            onClick={async () => {
+                                await handleAccountDeleted();
+                                setShowDeleteAccount(false);
+                            }}
+                        >
+                            Delete Account
+                        </Button>
+                        </div>
+                    </div>
                 </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={() => setShowDeleteAccount(false)}>
-                        Cancel
-                    </Button>
-                    <Button
-                        variant="danger"
-                        onClick={async () => {
-                            await handleAccountDeleted();
-                            setShowDeleteAccount(false);
-                        }}
-                    >
-                        Delete Account
-                    </Button>
-                </Modal.Footer>
             </Modal>
         </div>
     );

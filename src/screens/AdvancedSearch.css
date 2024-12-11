@@ -1,28 +1,28 @@
 /* Main Container Styling */
 .advanced-search-container {
   display: flex;
-  flex-direction: row; /* Side by side for larger screens */
-  gap: 20px; /* Space between form and results */
-  border-style: solid;
-  border-color: rgb(102, 102, 39);
-  box-shadow: 
-      2px 2px 5px rgba(194, 194, 33, 0.3), /* light shadow for the top-left */
-      -2px -2px 5px rgba(255, 255, 255, 0.5); /* highlight shadow for bottom-right */
+  flex-direction: row;
+  /* Side by side for larger screens */
+  gap: 1rem;
+  /* Space between form and results */
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
   border-radius: 15px;
   padding: 2%;
-  margin-top: 5%;
+  margin-top: 1%;
   width: 100%;
 }
 
 /* Form Section Styling (takes 40% minimum width on large screens) */
 .form-section {
-  flex: 0 0 40%; /* Form takes at least 40% of the width */
+  flex: 0 0 40%;
+  /* Form takes at least 40% of the width */
   padding: 20px;
   display: flex;
   flex-direction: column;
-  gap: 15px;
-  background-color: #37352b;
-  overflow-y: auto; /* Allows scrolling if form content overflows */
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 15px;
+  overflow-y: auto;
+  /* Allows scrolling if form content overflows */
 }
 
 /* Styling for the No Results Message */
@@ -31,13 +31,15 @@
   font-size: 1.2rem;
   font-weight: bold;
   color: #fff;
-  margin-bottom: 20px; /* Space between message and popcorn image */
+  margin-bottom: 20px;
+  /* Space between message and popcorn image */
   padding-top: 2%;
 }
 
 /* Results Section Styling (occupies the remaining space) */
 .results-section {
-  flex: 1; /* Takes the remaining space */
+  flex: 1;
+  /* Takes the remaining space */
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -48,10 +50,13 @@
 .image-section {
   flex: 1;
   display: flex;
-  flex-direction: column; /* Stack message and image vertically */
+  flex-direction: column;
+  /* Stack message and image vertically */
   justify-content: center;
   align-items: center;
-  background-color: #37352b;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 15px;
+  padding: 1rem;
 }
 
 /* Styling for the Popcorn image */
@@ -59,17 +64,18 @@
   max-width: 90%;
   height: auto;
   border-radius: 8px;
-  object-fit: contain;
+  margin-bottom: 1rem;
 }
 
 /* Movie Card Styles */
 .movie-card {
   display: flex;
-  border: 1px solid #ddd;
+  border: 1px solid #bf9b30;
   border-radius: 8px;
   overflow: hidden;
   margin: 1rem 0;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 2%;
 }
 
 .movie-image {
@@ -92,6 +98,7 @@
 .movie-description {
   font-size: 0.9rem;
   margin: 0.2rem 0;
+  opacity: 0.8;
 }
 
 .movie-list li {
@@ -101,39 +108,48 @@
 /* Media Query for tablets and below (max-width: 1200px) */
 @media (max-width: 1200px) {
   .advanced-search-container {
-      flex-direction: column; /* Stack form and image */
+    flex-direction: column;
+    /* Stack form and image */
   }
 
   .form-section,
   .results-section {
-      width: 100%; /* Take full width on smaller screens */
+    width: 100%;
+    /* Take full width on smaller screens */
   }
 }
 
 /* Media Query for mobile screens (max-width: 768px) */
 @media (max-width: 768px) {
   .advanced-search-container {
-      flex-direction: column; /* Stack form and results */
-      gap: 10px; /* Reduce gap between sections */
+    flex-direction: column;
+    /* Stack form and results */
+    gap: 10px;
+    /* Reduce gap between sections */
   }
 
   .form-section {
-      padding: 10px; /* Reduce padding on mobile */
+    padding: 10px;
+    /* Reduce padding on mobile */
   }
 
   .image-section img {
-      max-width: 100%; /* Allow image to take full width */
-      margin-top: 20px; /* Add space between the form and image */
+    max-width: 100%;
+    /* Allow image to take full width */
+    margin-top: 20px;
+    /* Add space between the form and image */
   }
 }
 
 /* Media Query for small mobile screens (max-width: 480px) */
 @media (max-width: 480px) {
   .advanced-search-container {
-      gap: 5px; /* Even smaller gap on small mobile devices */
+    gap: 5px;
+    /* Even smaller gap on small mobile devices */
   }
 
   .form-section {
-      padding: 5px; /* Minimized padding */
+    padding: 5px;
+    /* Minimized padding */
   }
 }

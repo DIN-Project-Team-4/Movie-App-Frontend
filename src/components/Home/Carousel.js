@@ -36,17 +36,22 @@ export default function ImageCarousel() {
                         trendingMovies.map((movie) => (
                             <Carousel.Item key={movie.id}>
                                 <Link to={`/movie/${movie.id}`}>
-                                    {/* Image Section */}
-                                    <img
-                                        src={`https://image.tmdb.org/t/p/w500${movie.backdrop_path}`}
-                                        alt={movie.title}
-                                    />
+                                    <div className="carousel-item-container">
+                                        {/* Image Section */}
+                                        <div className="carousel-image-container">
+                                            <img
+                                                src={`https://image.tmdb.org/t/p/w500${movie.backdrop_path}`}
+                                                alt={movie.title}
+                                            />
+                                        </div>
 
-                                    {/* Description Section */}
-                                    <Carousel.Caption>
-                                        <h3>{movie.title}</h3> <h6 className="release-date">({new Date(movie.release_date).getFullYear()})</h6>
-                                        <p className="carousel-summary">{movie.overview}</p>
-                                    </Carousel.Caption>
+                                        {/* Text Section */}
+                                        <div className="carousel-text-container">
+                                            <h3>{movie.title}</h3>
+                                            <h6 className="release-date">({new Date(movie.release_date).getFullYear()})</h6>
+                                            <p className="carousel-summary">{movie.overview}</p>
+                                        </div>
+                                    </div>
                                 </Link>
                             </Carousel.Item>
                         ))

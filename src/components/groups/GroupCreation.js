@@ -64,7 +64,7 @@ function GroupCreation() {
   return (
     <div>
       {/* Button to trigger the modal */}
-      <Button variant="outline-light" onClick={handleShow}>
+      <Button variant="dark" onClick={handleShow}>
         Create Group
       </Button>
 

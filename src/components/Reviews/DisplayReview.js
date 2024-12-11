@@ -57,20 +57,21 @@ function DisplayReview({ movieId }) {
 		handleDisplayReview();
 	}, [movieId]);
 
-	
+
 	return (
 		<>
 			{/* Display reviews */}
 			<div className="mt-3">
 				{enteredReviews.length > 0 ? (
-					enteredReviews.map((r) => (					
+					enteredReviews.map((r) => (
+						<Link to={`/movie/${r.movie_id}`} className="review-item">
 							<div key={r.id} className="review-item">
-								<Link to={`/movie/${r.movie_id}`} className="review-item">								
-								{!movieId && ( <img
+
+								{!movieId && (<img
 									className="movie-poster"
 									src={`https://image.tmdb.org/t/p/w500${r.movie_poster_url}`}
 									alt={r.movie_title}
-								/>)}</Link>
+								/>)}
 								<div>
 									<div className="star-rating" style={{ fontSize: '1.5rem', color: '#FFD700' }}>
 										{!movieId && r.movie_title + " "}
@@ -82,9 +83,10 @@ function DisplayReview({ movieId }) {
 									</div>
 									<strong>Reviewed By:</strong> {r.username}<br />
 									<strong>Review At: </strong>{r.reviewed_at}
-									<p>{r.description}</p>
+									<p className='review-text'>"{r.description}"</p>
 								</div>
 							</div>
+						</Link>
 					))
 				) : (
 					<p>No reviews available.</p>
@@ -94,9 +96,9 @@ function DisplayReview({ movieId }) {
 			{/* TOAST MESSAGE EDITED TO BOOTSTRAP//WOON */}
 			<ToastMessage
 				show={isToastVisible}
-				onClose={() => setIsToastVisible(false)} 
-				message={toastMessage} 
-				toastType={toastType} 
+				onClose={() => setIsToastVisible(false)}
+				message={toastMessage}
+				toastType={toastType}
 			/>
 		</>
 	);

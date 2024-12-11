@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Container, Row, Col, Card } from 'react-bootstrap';
-import './MyGroupsPage.css';
+import './GroupsPage.css';
 import GroupCreation from '../components/groups/GroupCreation.js';
 
 const MyGroupsPage = ({ groupId }) => {
@@ -32,11 +32,11 @@ const MyGroupsPage = ({ groupId }) => {
     }, [groupId, userData.userId]);
 
     return (
-        <div>
+        <div className='main-div'>
             <Container fluid>
                 <Row className="d-flex justify-content-between align-items-center">
                     <Col>
-                        <h2 className="my-4">Your Groups</h2>
+                        <div className='div-title'>Your Groups</div>
                     </Col>
                     <Col className="text-end">
                         <GroupCreation />
@@ -51,7 +51,7 @@ const MyGroupsPage = ({ groupId }) => {
                     ) : (
                         joinedGroups.map((group) => (
                             <Col md={4} key={group.group_id} className="mb-4">
-                                <Card onClick={() => handleGroupClick(group)} style={{ cursor: 'pointer' }}>
+                                <Card bg="dark" onClick={() => handleGroupClick(group)} style={{ cursor: 'pointer' }} className='group-item'>
                                     <Card.Body>
                                         <Card.Title>{group.name}</Card.Title>
                                         <Card.Text>{group.group_description}</Card.Text>

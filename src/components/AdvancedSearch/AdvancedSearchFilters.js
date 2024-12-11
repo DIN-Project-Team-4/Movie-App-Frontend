@@ -141,8 +141,8 @@ const AdvancedSearchFilters = () => {
             </div>
           </div>
 
-          <button type="submit" style={{ marginTop: '20px', width: '100%' }}>
-            Submit
+          <button className="btn btn-dark w-100 mt-3" type="submit">
+            Search
           </button>
         </form>
       </div>

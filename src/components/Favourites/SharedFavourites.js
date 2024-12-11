@@ -1,15 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import SearchResults from '../Search/SearchResults.js';
 import { fetchFavoritesBySharedUserId } from '../Search/searchApi.js';
-import MovieListCard from "../Search/MovieListCard.js";
 import MovieCard from "../Search/MovieCard.js";
+import { Button } from "react-bootstrap";
+import ToastMessage from "../Common/ToastMessage.js";
 
 const SharedFavorites = () => {
   const { userId } = useParams();
   const [results, setResults] = useState([]);
   const [genres, setGenres] = useState([]);
   const [hasFetched, setHasFetched] = useState(false);
+  const [message, setMessage] = useState("");
+  const [toastType, setToastType] = useState("");
+  const [showToast, setShowToast] = useState(false);
+
+  function handleShareClick() {
+    const currentUrl = window.location.href;
+    navigator.clipboard.writeText(currentUrl)
+    setShowToast(true)
+    setMessage("Link for sharing copied to clipboard");
+    setToastType("success");
+  }
 
   useEffect(() => {
     const fetchFavorites = async () => {
@@ -27,18 +38,24 @@ const SharedFavorites = () => {
 
   return (
     <div>
-      <h2>Shared Favorites</h2>
+      <div className='div-title'>Favourite Movies! <Button variant="outline-secondary" style={{ margin: 10}} onClick={handleShareClick}>Share</Button></div>
       {hasFetched ? (
-          <div className='main-movieCard'>
-            <ul>
-              {results.map(movie => <MovieCard movieId={movie.id} movieName={movie.title}
-                                                    poster={movie.poster_path} date={movie.release_date}
-                                                    commonGenres={genres} movieGenres={movie.genre_ids}/>)}
-            </ul>
-          </div>
+        <div className='main-movieCard'>
+          <ul>
+            {results.map(movie => <MovieCard movieId={movie.id} movieName={movie.title}
+              poster={movie.poster_path} date={movie.release_date}
+              commonGenres={genres} movieGenres={movie.genre_ids} />)}
+          </ul>
+        </div>
       ) : (
-          <p>Loading shared favorites...</p>
+        <p>Loading shared favorites...</p>
       )}
+      <ToastMessage
+        show={showToast}
+        onClose={() => setShowToast(false)}
+        message={message}
+        toastType={toastType}
+      />
     </div>
   );
 };

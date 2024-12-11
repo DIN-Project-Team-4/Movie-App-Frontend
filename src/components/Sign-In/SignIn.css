@@ -1,0 +1,17 @@
+.signin-modal-dialog .modal-content {
+    background-color: #313131;
+}
+
+.custom-modal {
+    font-size: 1.2rem;
+}
+
+.custom-modal Button{
+    margin: 1rem;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.custom-signin-signup {
+    text-align: end;
+}

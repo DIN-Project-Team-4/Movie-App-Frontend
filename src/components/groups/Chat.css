@@ -4,7 +4,7 @@
     height: 100%;
     max-height: 600px; /* Maximale Höhe für den gesamten Chatbereich */
     border: 1px solid #444;
-    border-radius: 5px;
+    border-radius: 15px;
     background-color: #000; /* Schwarzer Hintergrund */
     padding: 10px;
     color: #fff; /* Weiße Schrift */
@@ -19,7 +19,7 @@
     padding: 10px;
     margin-bottom: 10px;
     background-color: #111;
-    border-radius: 5px;
+    border-radius: 15px;
 }
 
 .chat-messages::-webkit-scrollbar {
@@ -28,7 +28,7 @@
 
 .chat-messages::-webkit-scrollbar-thumb {
     background-color: #444;
-    border-radius: 5px;
+    border-radius: 15px;
 }
 
 .chat-messages::-webkit-scrollbar-track {

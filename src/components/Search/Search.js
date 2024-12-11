@@ -1,6 +1,7 @@
 import React from 'react';
 import { Form, FormControl, Button, InputGroup, Dropdown, DropdownButton } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import '../../index.css'
 
 
 export default function Search({ filterMethod, setFilterMethod, searchText, setSearchText, newSearch }) {
@@ -19,37 +20,27 @@ export default function Search({ filterMethod, setFilterMethod, searchText, setS
   };
 
   //Handle advanced search dropdown option
-  const handleAdvancedSearch = () => {    
+  const handleAdvancedSearch = () => {
     navigate('/advanced-search');// Navigate to the advanced search page
   };
 
   return (
-    <Form onSubmit={handleSearch}>
+    <Form onSubmit={handleSearch} className='search-form'>
       <InputGroup>
         <DropdownButton
-          as={InputGroup.Prepend}
           title={filterMethod === "title" ? "Title" : filterMethod === "release_year" ? "Year" : "Genre"}
           id="filter_methods"
           onSelect={(eventKey) => setFilterMethod(eventKey)}
-          variant="outline-*"
+          variant="outline-dark"
+          menuVariant="dark"
         >
-          <Dropdown.Item eventKey="title">
-            <i className="fas fa-film" style={{ marginRight: '9px' }}></i>
-            Title
-          </Dropdown.Item>
-          <Dropdown.Item eventKey="release_year">
-            <i className="fas fa-calendar-alt" style={{ marginRight: '9px' }}></i>
-            Year
-          </Dropdown.Item>
-          <Dropdown.Item eventKey="genre">
-            <i className="fas fa-theater-masks" style={{ marginRight: '8px' }}></i>
-            Genre
-          </Dropdown.Item>
+          <Dropdown.Item eventKey="title">Title</Dropdown.Item>
+          <Dropdown.Item eventKey="release_year">Year</Dropdown.Item>
+          <Dropdown.Item eventKey="genre">Genre</Dropdown.Item>
           <Dropdown.Item onClick={handleAdvancedSearch}>
-            <i className="fas fa-search" style={{ marginRight: '9px' }}></i>
-            Advanced Search 
+            Advanced Search
             <span className="arrow" style={{ marginLeft: '8px' }}>›</span>
-          </Dropdown.Item> 
+          </Dropdown.Item>
         </DropdownButton>
 
         <FormControl
@@ -57,10 +48,12 @@ export default function Search({ filterMethod, setFilterMethod, searchText, setS
           value={searchText}
           onChange={(e) => setSearchText(e.target.value)}
           placeholder="Search here"
+          className="custom-formcontrol"
         />
 
-        <Button type="submit" variant="outline-*">Search</Button>
+        <Button type="submit" variant="outline-dark">Search</Button>
       </InputGroup>
-    </Form>
+
+    </Form >
   );
 }

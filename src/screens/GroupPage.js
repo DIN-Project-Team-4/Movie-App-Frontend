@@ -99,12 +99,12 @@ const GroupPage = () => {
     };
 
     return (
-        <div>
+        <div className='main-div'>
             <Container fluid>
                 <Row className="align-items-center">
                     <Col>
                         <div className="group-header">
-                            <h2 className="group-name">{groupName}</h2>
+                            <div className='div-title'>{groupName}</div>
                             {owner && owner.user_id === userData.userId && (
                                 <Button variant="danger" onClick={() => setShowDeleteModal(true)}>
                                     Delete Group

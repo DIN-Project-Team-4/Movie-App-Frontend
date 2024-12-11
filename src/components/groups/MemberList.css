@@ -1,7 +1,7 @@
 .member-list-container {
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    padding: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    border-radius: 15px;
+    padding: 1rem;
     margin-top: 20px;
     width: 100%;
     margin-bottom: 20px;
@@ -14,12 +14,10 @@
 
 .member-list-container .list-group-item {
     font-size: 1rem;
-    color: #fff;
-    background-color: #333;
+    background-color: inherit;
+    border-color: #bf9b30;
 }
 
 .owner-item {
-    background-color: #f0f8ff; /* Light blue background */
-    font-weight: bold; /* Bold text */
-    color: #000; /* Black text color */
+ font-weight: bold; /* Bold text */
 }

@@ -6,7 +6,7 @@ const SignInModal = ({ show, handleClose }) => {
     const [isSignUp, setIsSignUp] = useState(false);
 
     return (
-        <Modal show={show} onHide={handleClose} centered>
+        <Modal show={show} onHide={handleClose} centered dialogClassName="signin-modal-dialog">
             <Modal.Body>
                 <SignIn
                     setSignInOpen={handleClose}

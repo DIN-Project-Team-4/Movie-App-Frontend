@@ -15,30 +15,48 @@
     margin-bottom: -2rem;
 }
 
-.carousel-item img {
-    max-width: 50%;
+.carousel-item-container {
+    display: flex; 
+    align-items: center; 
+    gap: 1rem; 
+    padding: 1rem;
+}
+
+.carousel-image-container {
+    flex: 1; 
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+}
+
+.carousel-image-container img {
+    max-width: 100%; 
     height: auto;
-    object-fit: cover;
 }
 
-.carousel-item .carousel-caption {
-    max-width: 50%;
-    height: stretch;
-    text-align: left;
-    margin: 0% 0% 0% 25%;
+.carousel-text-container {
+    flex: 1;
+    padding: 1rem;
+    margin-right: 5%;
+    overflow: auto;
 }
 
-.carousel-caption h3 {
+.carousel-text-container h3 {
     display: inline;
     margin-right: 10px;
 }
 
-.carousel-caption h6.release-date {
+.carousel-text-container h6.release-date {
     display: inline;
     opacity: 0.5;
 }
 
-.carousel-caption p.carousel-summary {
+.carousel-text-container p.carousel-summary {
     text-align: left;
     opacity: 0.6;
+}
+
+.carousel-text-container {
+    max-height: 13rem;
+    overflow: hidden;
 }

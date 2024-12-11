@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Card, Modal, Button } from 'react-bootstrap';
+import '../index.css'
 import './GroupsPage.css';
 
 const GroupsPage = ({ groupId }) => {
@@ -61,19 +62,19 @@ const GroupsPage = ({ groupId }) => {
 
     return (
         <div>
-            <Container fluid>
+            <Container fluid className='main-div'>
 
                 <Row className="d-flex justify-content-between align-items-center">
 
                     <Col>
-                        <h2 className="my-4">All Groups</h2>
+                        <div className='div-title'>All Groups</div>
                     </Col>
                 </Row>
 
                 <Row>
                     {group.map((group) => (
                         <Col md={4} key={group.id} className="mb-4">
-                            <Card onClick={() => handleCardClick(group)} style={{ cursor: 'pointer' }}>
+                            <Card bg="dark" onClick={() => handleCardClick(group)} style={{ cursor: 'pointer' }} className='group-item'>
                                 <Card.Body>
                                     <Card.Title>{group.name}</Card.Title>
                                     <Card.Text>{group.group_description}</Card.Text>
@@ -91,7 +92,7 @@ const GroupsPage = ({ groupId }) => {
                     </Modal.Header>
                     <Modal.Body className='bg-dark text-white'>
                         <p>{selectedGroup.group_description}</p>
-                        <Button variant="outline-light" onClick={handleJoinGroup}>
+                        <Button variant="outline-secondary" onClick={handleJoinGroup}>
                             Join Group
                         </Button>
                     </Modal.Body>

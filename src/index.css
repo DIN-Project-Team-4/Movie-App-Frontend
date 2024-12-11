@@ -52,3 +52,25 @@ img {
   color: #f8f9fa !important;
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 1);
 }
+
+/* CUSTOM FORMS */
+input, select{
+  background-color: rgb(67, 67, 67) !important;
+  border-radius: 6px;
+  border-color: black !important;
+  box-shadow: none !important;
+}
+
+input:focus {
+  background-color: rgb(67, 67, 67) !important;
+  border-color: none !important;
+  box-shadow: none !important;
+}
+
+.input-group .btn,
+.input-group .dropdown-toggle,
+.input-group .form-control {
+  padding: 0.375rem 0.75rem;
+  margin: 0;
+  
+}

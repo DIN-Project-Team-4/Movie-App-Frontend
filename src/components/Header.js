@@ -22,7 +22,6 @@ const Header = ({ showSearchBox = true, showDropdownMenu = true }) => {
   const handleSignInShow = () => setShowSignInModal(true);
   const handleSignInClose = () => setShowSignInModal(false);
 
-
   // Handle LogOut
   const handleLogout = () => {
     localStorage.clear();
@@ -33,7 +32,6 @@ const Header = ({ showSearchBox = true, showDropdownMenu = true }) => {
     navigate('/');
   };
 
-
   // Retrieve user data from local storage
   const userData = JSON.parse(localStorage.getItem('userData'));
 
@@ -43,54 +41,47 @@ const Header = ({ showSearchBox = true, showDropdownMenu = true }) => {
     { href: '/groups', label: 'Groups' },
   ];
 
-  const dropdownItems = userData ? [
-    { href: '/profile', label: 'My Profile' },
-    { href: '/groups/mygroups', label: 'My Groups' },
-    { href: `/share-favourites/${userData.userId}`, label: 'My Favorites' },
-  ] : [];
+  const dropdownItems = userData
+    ? [
+        { href: '/profile', label: 'My Profile' },
+        { href: '/groups/mygroups', label: 'My Groups' },
+        { href: `/share-favourites/${userData.userId}`, label: 'My Favorites' },
+      ]
+    : [];
 
   return (
     <>
-      <Navbar className="navbar-style" fixed="top" expand="md" style={{ fontSize: '1.2rem' }}>
+      <Navbar className="custom-navbar" fixed="top">
         <Container fluid>
           <Navbar.Brand href="/">
             <img src={Logo} alt="logo" className="navbar-logo" />
           </Navbar.Brand>
-          <Nav variant="underline" className="w-100">
-            <Navbar.Toggle aria-controls="cinescope-navbar" />
-            <Nav className="me-auto">
-              <Navbar.Collapse id="cinescope-navbar">
-                {navLinks.map((link) => (
-                  <Nav.Link href={link.href} key={link.href}>
-                    {link.label}
-                  </Nav.Link>
-                ))}
-              </Navbar.Collapse>
-            </Nav>
+          <Nav variant="underline" className="w-100 d-flex align-items-center">
+            {navLinks.map((link) => (
+              <Nav.Link href={link.href} key={link.href}>
+                {link.label}
+              </Nav.Link>
+            ))}
             {showSearchBox && (
-              <Nav className="mx-auto">
-                <Nav.Item>
-                  <Search
-                    filterMethod={filterMethod}
-                    setFilterMethod={setFilterMethod}
-                    searchText={searchText}
-                    setSearchText={setSearchText}
-                    newSearch={newSearch}
-                  />
-                </Nav.Item>
-              </Nav>
+              <div className="ms-auto custom-searchbox">
+                <Search
+                  filterMethod={filterMethod}
+                  setFilterMethod={setFilterMethod}
+                  searchText={searchText}
+                  setSearchText={setSearchText}
+                  newSearch={newSearch}
+                />
+              </div>
             )}
-            <Nav className="ms-auto">
+            <div className="ms-auto d-flex align-items-center">
               {userData ? (
                 <>
-                  <Nav.Item>
-                    <span>
-                      Welcome,
-                      <br /> {userData.username}!
-                    </span>
-                  </Nav.Item>
+                  <span className="me-3">
+                    Welcome,
+                    <br /> {userData.username}!
+                  </span>
                   {showDropdownMenu && (
-                    <NavDropdown align="end" title={<i className="bi bi-person-circle" />}>
+                    <NavDropdown align="end" title={<i className="bi bi-person-circle" />} menuVariant="dark">
                       {dropdownItems.map((item) => (
                         <NavDropdown.Item href={item.href} key={item.href}>
                           {item.label}
@@ -102,11 +93,9 @@ const Header = ({ showSearchBox = true, showDropdownMenu = true }) => {
                   )}
                 </>
               ) : (
-                <Nav.Item>
-                  <Nav.Link onClick={handleSignInShow}>Sign In</Nav.Link>
-                </Nav.Item>
+                <Nav.Link onClick={handleSignInShow}>Sign In</Nav.Link>
               )}
-            </Nav>
+            </div>
           </Nav>
         </Container>
       </Navbar>

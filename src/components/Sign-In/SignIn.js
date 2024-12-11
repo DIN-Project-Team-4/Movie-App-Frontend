@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import ToastMessage from '../Common/ToastMessage.js';
+import '../../index.css'
 import './SignIn.css';
+import { Button } from 'react-bootstrap';
 
 const SignIn = ({ setSignInOpen, isSignUp, setIsSignUp }) => {
     const baseUrl = process.env.REACT_APP_API_BASE_URL;
@@ -88,12 +90,13 @@ const SignIn = ({ setSignInOpen, isSignUp, setIsSignUp }) => {
     };
 
     return (
-        <div>
-            <h2>{isSignUp ? 'Sign Up' : 'Sign In'}</h2>
+        <div className='custom-modal'>
+            <div className='div-title'>{isSignUp ? 'Sign Up' : 'Sign In'}</div>
+
             {isSignUp ? (
                 <form onSubmit={handleSignUp}>
                     <div className="form-group">
-                        <label>Email</label>
+                        <label>E-mail</label>
                         <input
                             type="email"
                             className="form-control"
@@ -136,24 +139,27 @@ const SignIn = ({ setSignInOpen, isSignUp, setIsSignUp }) => {
                             required
                         />
                     </div>
-                    <button type="submit" className="btn btn-primary" disabled={signDisabled}>
+                    <Button type="submit" variant="dark" disabled={signDisabled}>
                         Sign Up
-                    </button>
-                    <p className="text-right">
-                        Already have an account?{' '}
-                        <button
-                            type="button"
-                            className="btn btn-link"
-                            onClick={() => setIsSignUp(false)}
-                        >
+                    </Button>
+                    <Button
+                        variant="outline-dark"
+                        onClick={() => setSignInOpen(false)}
+                        className="ms-2"
+                    >
+                        Close
+                    </Button>
+                    <div className='custom-signin-signup'>
+                        Already have an account?{<br />}
+                        <Button variant="dark" onClick={() => setIsSignUp(false)}>
                             Sign In
-                        </button>
-                    </p>
+                        </Button>
+                    </div>
                 </form>
             ) : (
                 <form onSubmit={handleSignIn}>
                     <div className="form-group">
-                        <label>Email</label>
+                        <label>E-mail</label>
                         <input
                             type="email"
                             className="form-control"
@@ -174,19 +180,26 @@ const SignIn = ({ setSignInOpen, isSignUp, setIsSignUp }) => {
                             required
                         />
                     </div>
-                    <button type="submit" className="btn btn-primary" disabled={signDisabled}>
+                    <Button type="submit" variant="dark" disabled={signDisabled}>
                         Sign In
-                    </button>
-                    <p className="text-right">
-                        Don't have an account?{' '}
-                        <button
-                            type="button"
-                            className="btn btn-link"
+                    </Button>
+                    <Button
+                        variant="outline-dark"
+                        onClick={() => setSignInOpen(false)}
+                        className="ms-2"
+                    >
+                        Close
+                    </Button>
+                    <div className='custom-signin-signup'>
+                        Don't have an account?{<br />}
+                        <Button
+                            type="Button"
+                            variant="dark"
                             onClick={() => setIsSignUp(true)}
                         >
                             Sign Up
-                        </button>
-                    </p>
+                        </Button>
+                    </div>
                 </form>
             )}
             <ToastMessage
