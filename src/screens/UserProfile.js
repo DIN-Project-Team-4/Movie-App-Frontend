@@ -24,7 +24,7 @@ const UserProfile = () => {
         const fetchUserData = async () => {
             try {
                 // Make a GET request to the API endpoint
-                const response = await fetch(`${process.env.REACT_APP_API_URL}/api/user/${userId}`);
+                const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/user/${userId}`);
 
                 // Check if the response is successful
                 if (!response.ok) {
