@@ -22,7 +22,7 @@ export const SignIn = ({ setSignInOpen }) => {
         e.preventDefault();
         setSignDisabled(true);
         try {
-            const baseUrl = process.env.REACT_APP_API_BASE_URL;
+            const baseUrl = process.env.REACT_APP_API_URL + "/api/v1";
             const response = await axios.post(`${baseUrl}/sign-in`, { "userEmail": email, "password": password }, { withCredentials: true });
             if (response.status === 200) {
                 await addToLocalStore(response.data);
