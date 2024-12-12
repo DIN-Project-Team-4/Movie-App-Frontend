@@ -25,15 +25,7 @@ const UserProfile = () => {
             try {
                 // Make a GET request to the API endpoint
                 const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/user/${userId}`);
-
-                // Check if the response is successful
-                if (!response.ok) {
-                    throw new Error(`HTTP error! Status: ${response.status}`);
-                }
-
-                // Parse the response JSON and update the user state
-                const data = await response.json();
-                setUser(data);
+                setUser(response.data);
             } catch (err) {
                 // Handle errors and update the error state
                 setError('Failed to load user data');
