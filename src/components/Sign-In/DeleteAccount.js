@@ -7,7 +7,7 @@ const DeleteAccount = ({ userId, token, onAccountDeleted }) => {
     const [toastMessage, setToastMessage] = useState('');
     const [toastType, setToastType] = useState('');
     const [isToastVisible, setIsToastVisible] = useState(false);
-    const baseUrl = process.env.REACT_APP_API_BASE_URL;
+    const baseUrl = process.env.REACT_APP_API_URL + "/api/v1";
 
     // Function to display Toast messages
     const showToast = (message, type) => {

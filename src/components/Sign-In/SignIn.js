@@ -6,7 +6,7 @@ import './SignIn.css';
 import { Button } from 'react-bootstrap';
 
 const SignIn = ({ setSignInOpen, isSignUp, setIsSignUp }) => {
-    const baseUrl = process.env.REACT_APP_API_BASE_URL;
+    const baseUrl = process.env.REACT_APP_API_URL + "/api/v1";
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
