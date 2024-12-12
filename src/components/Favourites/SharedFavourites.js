@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { fetchFavoritesBySharedUserId } from '../Search/searchApi.js';
+import React, {useEffect, useState} from 'react';
+import {useParams} from 'react-router-dom';
+import {fetchFavoritesBySharedUserId} from '../Search/searchApi.js';
 import MovieCard from "../Search/MovieCard.js";
-import { Button } from "react-bootstrap";
+import {Button} from "react-bootstrap";
 import ToastMessage from "../Common/ToastMessage.js";
 
-const SharedFavorites = () => {
-  const { userId } = useParams();
+const SharedFavorites = (props) => {
+  const params = useParams();
+  const userId= props.userId ?? params.userId
   const [results, setResults] = useState([]);
   const [genres, setGenres] = useState([]);
   const [hasFetched, setHasFetched] = useState(false);
@@ -15,8 +16,8 @@ const SharedFavorites = () => {
   const [showToast, setShowToast] = useState(false);
 
   function handleShareClick() {
-    const currentUrl = window.location.href;
-    navigator.clipboard.writeText(currentUrl)
+    const url = window.location.origin + "/share-favourites/" + userId
+    navigator.clipboard.writeText(url)
     setShowToast(true)
     setMessage("Link for sharing copied to clipboard");
     setToastType("success");

@@ -2,7 +2,39 @@
   background-color: #313131;
 }
 
-.user-profile-info {
+.user-profile-div {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.user-information-div {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+  flex: 1;
+  font-size: 1.2rem;
+  padding: 2rem;
+  align-self: flex-start; 
+}
+
+.user-favourite-div {
+  opacity: 0.8;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+  flex: 1;
+  padding: 2rem;
+  overflow: auto;
+  max-height: 40rem;
+}
+
+.user-favourite-div .div-title {
+  font-size: 2rem;
+}
+
+.user-favourite-div h3 {
   font-size: 1.2rem;
 }
 

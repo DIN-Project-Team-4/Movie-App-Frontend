@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import '../index.css'
 import './UserProfile.css';
 import { Modal, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import axios from "axios";
+import SharedFavorites from "../components/Favourites/SharedFavourites.js";
 
 const UserProfile = () => {
     const userData = JSON.parse(localStorage.getItem('userData'));
@@ -77,21 +79,27 @@ const UserProfile = () => {
             <div className='div-title'>{user.username}'s Profile</div>
 
             {/* Section containing user information */}
-            <div className="user-profile-info">
-                {/* Display user email */}
-                <p className="user-profile-info-item">
-                    <strong className="user-profile-label">Email:</strong> {user.userEmail}
-                </p>
+            <div className="user-profile-div d-flex">
+                <div className='user-information-div'>
+                    {/* Display user email */}
+                    <p className="user-profile-info-item">
+                        <strong className="user-profile-label">Email:</strong> {user.userEmail}
+                    </p>
 
-                {/* Display when the user account was created */}
-                <p className="user-profile-info-item">
-                    <strong className="user-profile-label">Member Since:</strong> {new Date(user.createDate).toLocaleDateString()}
-                </p>
+                    {/* Display when the user account was created */}
+                    <p className="user-profile-info-item">
+                        <strong className="user-profile-label">Member Since:</strong> {new Date(user.createDate).toLocaleDateString()}
+                    </p>
 
-                {/* Display the user's last login date */}
-                <p className="user-profile-info-item">
-                    <strong className="user-profile-label">Last Login:</strong> {new Date(user.lastLoginDate).toLocaleDateString()}
-                </p>
+                    {/* Display the user's last login date */}
+                    <p className="user-profile-info-item">
+                        <strong className="user-profile-label">Last Login:</strong> {new Date(user.lastLoginDate).toLocaleDateString()}
+                    </p>
+                </div>
+
+                <div className='user-favourite-div'>
+                    <SharedFavorites userId={userId} />
+                </div>
             </div>
 
             <Button onClick={() => setShowDeleteAccount(true)} variant="danger">Delete User</Button>
@@ -103,18 +111,18 @@ const UserProfile = () => {
                         <div className='div-title'>Confirm Deletion</div>
                         <div>Are you sure you want to delete your account? {<br />} This action is irreversible.</div>
                         <div className='delete-account-buttons'>
-                         <Button variant="outline-dark" onClick={() => setShowDeleteAccount(false)}>
-                            Cancel
-                        </Button>
-                        <Button
-                            variant="danger"
-                            onClick={async () => {
-                                await handleAccountDeleted();
-                                setShowDeleteAccount(false);
-                            }}
-                        >
-                            Delete Account
-                        </Button>
+                            <Button variant="outline-dark" onClick={() => setShowDeleteAccount(false)}>
+                                Cancel
+                            </Button>
+                            <Button
+                                variant="danger"
+                                onClick={async () => {
+                                    await handleAccountDeleted();
+                                    setShowDeleteAccount(false);
+                                }}
+                            >
+                                Delete Account
+                            </Button>
                         </div>
                     </div>
                 </Modal.Body>
