@@ -1,4 +1,4 @@
-# Movie App Project
+# Movie App Project（cinescope）
 This project is a web application designed for **movie enthusiasts**. It provides features such as browsing movie data, viewing showtimes, managing user accounts, reviewing movies, and more. The app integrates open-source data from **TMDB (The Movie Database)** and **Finnkino** for movie and theater information.  
 
 ---
@@ -76,6 +76,12 @@ The app is fully responsive, seamlessly scaling to different screen sizes to pro
   *(By Marco Jochim)*  
 
 ---
+## **Setup and Installation**  
 
+### 1. Clone the Repository:  
+```bash
+git clone https://github.com/DIN-Project-Team-4/Movie-App-Frontend.git  
+git clone https://github.com/DIN-Project-Team-4/Movie-App-Backend.git
+---
 ## **Thank You!** 🎉
 We hope you enjoy using our **Movie App**! 
